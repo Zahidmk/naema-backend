@@ -730,8 +730,7 @@ const BrandsPage = () => {
     mutationFn: (brandData: any) =>
       sdk.client.fetch("/admin/brands", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(brandData),
+        body: brandData,
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["brands"] })
@@ -744,8 +743,7 @@ const BrandsPage = () => {
     mutationFn: (brandData: any) =>
       sdk.client.fetch(`/admin/brands/${brandData.id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(brandData),
+        body: brandData,
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["brands"] })

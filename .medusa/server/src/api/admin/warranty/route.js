@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AUTHENTICATE = void 0;
+exports.GET = GET;
+const warranty_1 = require("../../../modules/warranty");
+exports.AUTHENTICATE = true;
+// GET /admin/warranty
+async function GET(req, res) {
+    const svc = req.scope.resolve(warranty_1.WARRANTY_MODULE);
+    const q = {};
+    if (req.query?.email)
+        q.customer_email = req.query.email.toString().trim();
+    if (req.query?.product_id)
+        q.product_id = req.query.product_id.toString().trim();
+    const [items, count] = await svc.listAndCountWarranties(q, { take: 200 });
+    res.json({ warranties: items, count });
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm91dGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi9zcmMvYXBpL2FkbWluL3dhcnJhbnR5L3JvdXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQU1BLGtCQU9DO0FBWkQsd0RBQTJEO0FBRTlDLFFBQUEsWUFBWSxHQUFHLElBQUksQ0FBQTtBQUVoQyxzQkFBc0I7QUFDZixLQUFLLFVBQVUsR0FBRyxDQUFDLEdBQWtCLEVBQUUsR0FBbUI7SUFDL0QsTUFBTSxHQUFHLEdBQUcsR0FBRyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsMEJBQWUsQ0FBUSxDQUFBO0lBQ3JELE1BQU0sQ0FBQyxHQUFRLEVBQUUsQ0FBQTtJQUNqQixJQUFJLEdBQUcsQ0FBQyxLQUFLLEVBQUUsS0FBSztRQUFFLENBQUMsQ0FBQyxjQUFjLEdBQUksR0FBRyxDQUFDLEtBQUssQ0FBQyxLQUFnQixDQUFDLFFBQVEsRUFBRSxDQUFDLElBQUksRUFBRSxDQUFBO0lBQ3RGLElBQUksR0FBRyxDQUFDLEtBQUssRUFBRSxVQUFVO1FBQUUsQ0FBQyxDQUFDLFVBQVUsR0FBSSxHQUFHLENBQUMsS0FBSyxDQUFDLFVBQXFCLENBQUMsUUFBUSxFQUFFLENBQUMsSUFBSSxFQUFFLENBQUE7SUFDNUYsTUFBTSxDQUFDLEtBQUssRUFBRSxLQUFLLENBQUMsR0FBRyxNQUFNLEdBQUcsQ0FBQyxzQkFBc0IsQ0FBQyxDQUFDLEVBQUUsRUFBRSxJQUFJLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQTtJQUN6RSxHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUUsVUFBVSxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUUsQ0FBQyxDQUFBO0FBQ3hDLENBQUMifQ==

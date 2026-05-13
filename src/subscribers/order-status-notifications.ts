@@ -12,7 +12,7 @@ import { sendOrderStatusEmail, OrderEmailType } from "../lib/email";
  *   - order.completed          → "Order Delivered" email
  *   - order.cancelled          → "Order Cancelled" email
  *
- * Also triggered by Odoo webhook updates stored in order metadata.
+ * Also triggered by External ERP webhook updates stored in order metadata.
  */
 
 // ─── Shared Helper ────────────────────────────────────────────────────────────
@@ -52,7 +52,7 @@ async function resolveOrderAndSend(
           .join(", ")
       : undefined;
 
-    // Pull tracking info from order metadata (set by Odoo webhook)
+    // Pull tracking info from order metadata (set by External ERP webhook)
     const metadata: Record<string, any> = (order as any).metadata || {};
 
     // Calculate totals from items (Medusa v2 order.total/subtotal are not populated on retrieveOrder)

@@ -3,7 +3,7 @@ import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
 
 /**
  * POST /admin/inventory/batch-update
- * Batch update inventory stock quantities from Odoo
+ * Batch update inventory stock quantities from External ERP
  */
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   const { updates } = req.body as {

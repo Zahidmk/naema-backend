@@ -14,7 +14,7 @@ import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
  * - min_price, max_price
  * - brand
  * - in_stock: true/false
- * - currency (default: aed)
+ * - currency (default: kwd)
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const pgConnection = req.scope.resolve(ContainerRegistrationKeys.PG_CONNECTION)
@@ -25,10 +25,11 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const sort = (req.query.sort as string) || "newest"
   const minPrice = req.query.min_price ? parseFloat(req.query.min_price as string) : null
   const maxPrice = req.query.max_price ? parseFloat(req.query.max_price as string) : null
-  const brand = req.query.brand as string       // filter by odoo_brand in metadata
+  const brand = req.query.brand as string       // filter by erp_brand in metadata
   const color = req.query.color as string       // filter by color option value
   const inStock = req.query.in_stock as string
-  const currency = (req.query.currency as string) || "aed"
+  // Always use KWD — this is a Kuwait-only store
+  const currency = (req.query.currency as string) || "kwd"
 
   try {
     // Find category by handle and get all child category IDs
@@ -78,11 +79,11 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       params.push(maxPrice)
     }
     if (brand) {
-      // Match against odoo_brand or brand_name in metadata, fallback to title starts-with
+      // Match against erp_brand or brand_name in metadata, fallback to title starts-with
       conditions.push(`(
-        LOWER(COALESCE(NULLIF(TRIM(p.metadata->>'odoo_brand'), ''), NULLIF(TRIM(p.metadata->>'brand_name'), ''))) = LOWER(?)
+        LOWER(COALESCE(NULLIF(TRIM(p.metadata->>'erp_brand'), ''), NULLIF(TRIM(p.metadata->>'brand_name'), ''))) = LOWER(?)
         OR (
-          COALESCE(NULLIF(TRIM(p.metadata->>'odoo_brand'), ''), NULLIF(TRIM(p.metadata->>'brand_name'), '')) IS NULL
+          COALESCE(NULLIF(TRIM(p.metadata->>'erp_brand'), ''), NULLIF(TRIM(p.metadata->>'brand_name'), '')) IS NULL
           AND LOWER(p.title) LIKE LOWER(? || '%')
         )
       )`)
@@ -158,8 +159,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         subtitle: p.subtitle,
         price: p.price ? parseFloat(p.price) : null,
         currency_code: p.currency_code || currency,
-        in_stock: (meta.odoo_qty || meta.stock_qty || 0) > 0,
-        brand: meta.odoo_brand || extractBrand(p.title),
+        in_stock: (meta.erp_qty || meta.stock_qty || 0) > 0,
+        brand: meta.erp_brand || extractBrand(p.title),
         created_at: p.created_at,
       }
     })

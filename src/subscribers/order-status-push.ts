@@ -7,9 +7,9 @@ import { sendPushNotification } from "../lib/firebase";
 
 /**
  * Order Status Push Notification Subscriber
- * Fires when Odoo webhook updates order metadata (shipped/delivered/cancelled)
+ * Fires when External ERP webhook updates order metadata (shipped/delivered/cancelled)
  * 
- * The Odoo webhook at POST /odoo/webhooks/order-status emits this custom event
+ * The External ERP webhook at POST /External ERP/webhooks/order-status emits this custom event
  * after updating order metadata.
  */
 export default async function orderStatusPushHandler({

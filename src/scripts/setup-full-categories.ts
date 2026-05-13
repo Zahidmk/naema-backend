@@ -1,6 +1,6 @@
 /**
  * Setup Full Category Hierarchy
- * Based on Product Category Excel from Odoo
+ * Based on Product Category Excel from External ERP
  * 
  * Run with: npx medusa exec ./src/scripts/setup-full-categories.ts
  */

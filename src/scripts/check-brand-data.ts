@@ -25,13 +25,13 @@ export default async function ({ container }: ExecArgs) {
             console.log('')
         })
 
-        console.log('✅ All products now have dynamic data from Odoo!')
+        console.log('✅ All products now have dynamic data from External ERP!')
         console.log('\n📝 Key Achievements:')
-        console.log('   • 4,287+ products synced from Odoo')
+        console.log('   • 4,287+ products synced from External ERP')
         console.log('   • 123 dynamic categories available')
         console.log('   • Brand information in every product')
         console.log('   • No more static/dummy data')
-        console.log('   • All content managed from Odoo ERP')
+        console.log('   • All content managed from External ERP ERP')
 
     } catch (error: any) {
         console.error('❌ Error:', error.message)

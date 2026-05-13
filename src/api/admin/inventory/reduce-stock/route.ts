@@ -3,7 +3,7 @@ import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
 
 /**
  * POST /admin/inventory/reduce-stock
- * Reduce stock when order is fulfilled (called by Odoo)
+ * Reduce stock when order is fulfilled (called by External ERP)
  */
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   const { items, order_id, reason } = req.body as {
