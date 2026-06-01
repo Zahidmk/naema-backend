@@ -114,8 +114,62 @@ function fixDoubleStringifiedBody(
   next()
 }
 
+// Recursive helper to multiply KWD prices by 1000 when submitted by the Admin UI
+function multiplyKwdPrices(obj: any) {
+  if (!obj || typeof obj !== "object") return
+
+  if (Array.isArray(obj)) {
+    for (const item of obj) {
+      multiplyKwdPrices(item)
+    }
+  } else {
+    for (const key of Object.keys(obj)) {
+      const val = obj[key]
+
+      if (
+        val &&
+        typeof val === "object" &&
+        typeof val.currency_code === "string" &&
+        val.currency_code.toLowerCase() === "kwd" &&
+        typeof val.amount === "number"
+      ) {
+        if (val.amount < 10000) {
+          val.amount = Math.round(val.amount * 1000)
+        }
+      } else if (key === "prices" && Array.isArray(val)) {
+        for (const price of val) {
+          if (
+            price &&
+            typeof price.currency_code === "string" &&
+            price.currency_code.toLowerCase() === "kwd" &&
+            typeof price.amount === "number"
+          ) {
+            if (price.amount < 10000) {
+              price.amount = Math.round(price.amount * 1000)
+            }
+          }
+        }
+      } else if (val && typeof val === "object") {
+        multiplyKwdPrices(val)
+      }
+    }
+  }
+}
+
 export default defineMiddlewares({
   routes: [
+    {
+      matcher: "/admin/*",
+      method: ["POST", "PUT", "PATCH"],
+      middlewares: [
+        (req: MedusaRequest, res: MedusaResponse, next: MedusaNextFunction) => {
+          if (req.body) {
+            multiplyKwdPrices(req.body)
+          }
+          next()
+        },
+      ],
+    },
     {
       // Disable default body parser for admin brand routes to handle double-stringified JSON
       matcher: "/admin/brands",
