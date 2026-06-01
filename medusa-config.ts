@@ -3,11 +3,15 @@ import { defineConfig, loadEnv } from "@medusajs/framework/utils"
 loadEnv(process.env.NODE_ENV || "development", process.cwd())
 
 const httpConfig = {
-  storeCors: process.env.STORE_CORS || "http://localhost:3000",
-  adminCors: process.env.ADMIN_CORS || "http://localhost:7001",
-  authCors: process.env.AUTH_CORS || "http://localhost:3000,http://localhost:7001",
+  storeCors: process.env.STORE_CORS || "*",
+  adminCors: process.env.ADMIN_CORS || "*",
+  authCors: process.env.AUTH_CORS || "*",
   jwtSecret: process.env.JWT_SECRET || "supersecret",
   cookieSecret: process.env.COOKIE_SECRET || "supersecret",
+  cookieOptions: {
+    secure: (process.env.BACKEND_URL || "").startsWith("https://"),
+    sameSite: "lax",
+  },
 }
 
 export default defineConfig({
@@ -17,6 +21,11 @@ export default defineConfig({
   },
 
   admin: {
+    vite: () => ({
+      server: {
+        allowedHosts: ["admin.markasouqs.com", "localhost", "127.0.0.1"],
+      },
+    }),
     path: "/app",
   },
 
@@ -40,7 +49,7 @@ export default defineConfig({
                     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
                     callbackUrl:
                       process.env.GOOGLE_CALLBACK_URL ||
-                      "http://localhost:9001/auth/customer/google/callback",
+                      "http://localhost:9000/auth/customer/google/callback",
                   },
                 },
               ]
@@ -93,7 +102,7 @@ export default defineConfig({
                   options: {
                     channels: ["email"],
                     api_key: process.env.SENDGRID_API_KEY,
-                    from: process.env.SENDGRID_FROM || "noreply@example.com",
+                    from: process.env.SENDGRID_FROM || "noreply@markasouq.com",
                   },
                 },
               ]

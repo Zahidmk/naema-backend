@@ -1,7 +1,7 @@
 "use strict";
 /**
  * Assign Products to Categories and Brands
- * Based on product names and Odoo data
+ * Based on product names and External ERP data
  *
  * Run with: npx medusa exec ./src/scripts/assign-products-to-categories.ts
  */

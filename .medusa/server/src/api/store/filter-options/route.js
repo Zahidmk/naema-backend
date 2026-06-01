@@ -71,7 +71,7 @@ async function GET(req, res) {
             brandParams.push(category_id);
         }
         const brandResult = await pgConnection.raw(`SELECT DISTINCT COALESCE(
-          NULLIF(TRIM(p.metadata->>'odoo_brand'), ''),
+          NULLIF(TRIM(p.metadata->>'erp_brand'), ''),
           NULLIF(TRIM(p.metadata->>'brand_name'), ''),
           split_part(TRIM(p.title), ' ', 1)
         ) as brand

@@ -5,7 +5,7 @@ exports.GET = GET;
 exports.AUTHENTICATE = false;
 /**
  * GET /store/brands
- * Returns active brands synced from Odoo.
+ * Returns active brands synced from External ERP.
  * Logo URLs point to files in the frontend's /public/brands/ folder.
  */
 async function GET(req, res) {

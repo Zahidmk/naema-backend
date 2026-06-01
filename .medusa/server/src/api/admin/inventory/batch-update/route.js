@@ -4,7 +4,7 @@ exports.POST = void 0;
 const utils_1 = require("@medusajs/framework/utils");
 /**
  * POST /admin/inventory/batch-update
- * Batch update inventory stock quantities from Odoo
+ * Batch update inventory stock quantities from External ERP
  */
 const POST = async (req, res) => {
     const { updates } = req.body;

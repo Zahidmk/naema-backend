@@ -4,7 +4,7 @@ exports.POST = void 0;
 const utils_1 = require("@medusajs/framework/utils");
 /**
  * POST /admin/inventory/reduce-stock
- * Reduce stock when order is fulfilled (called by Odoo)
+ * Reduce stock when order is fulfilled (called by External ERP)
  */
 const POST = async (req, res) => {
     const { items, order_id, reason } = req.body;
