@@ -130,11 +130,6 @@ export default defineMiddlewares({
       middlewares: [fixDoubleStringifiedBody],
     },
     {
-      // Match the admin upload endpoints (adjust as needed)
-      matcher: "/admin/uploads",
-      middlewares: [adminMultipartGuard],
-    },
-    {
       matcher: "/admin/media/upload",
       // Disable Medusa's built-in body parser so multer can read the raw multipart stream
       bodyParser: false,
