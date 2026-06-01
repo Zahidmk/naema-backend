@@ -72,7 +72,7 @@ export default defineConfig({
     sellers: { resolve: "./src/modules/sellers" },
     warranty: { resolve: "./src/modules/warranty" },
     blog: { resolve: "./src/modules/blog" },
-    "odoo-sync": { resolve: "./src/modules/odoo-sync" },
+    odoo_sync: { resolve: "./src/modules/odoo-sync" },
 
     file: {
       resolve: "@medusajs/file",
