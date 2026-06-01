@@ -63,6 +63,23 @@ export default defineConfig({
     sellers: { resolve: "./src/modules/sellers" },
     warranty: { resolve: "./src/modules/warranty" },
     blog: { resolve: "./src/modules/blog" },
+    "odoo-sync": { resolve: "./src/modules/odoo-sync" },
+
+    file: {
+      resolve: "@medusajs/file",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/file-local",
+            id: "local",
+            options: {
+              upload_dir: "static/uploads",
+              backend_url: process.env.MEDUSA_BACKEND_URL || "http://localhost:9000",
+            },
+          },
+        ],
+      },
+    },
 
     notification: {
       resolve: "@medusajs/notification",
