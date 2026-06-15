@@ -13,17 +13,11 @@ export default async function authNotificationHandler({
   const authModule = container.resolve(Modules.AUTH);
 
   try {
-    const authIdentity = await authModule.retrieveAuthIdentity(data.entity_id);
-    
-    // The email is stored in the provider_identities array (entity_id field) for emailpass
-    const emailpassProvider = authIdentity.provider_identities?.find(
-      (p) => p.provider === "emailpass"
-    );
-    
-    const email = emailpassProvider?.entity_id;
+    // For emailpass, data.entity_id is actually the email identifier!
+    const email = data.entity_id;
     
     if (!email) {
-      logger.error(`Could not find email for auth identity ${data.entity_id}`);
+      logger.error(`Could not find email for password reset`);
       return;
     }
 
