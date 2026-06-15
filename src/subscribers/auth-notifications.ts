@@ -3,64 +3,68 @@ import {
   SubscriberConfig,
 } from "@medusajs/framework";
 import { Modules } from "@medusajs/framework/utils";
+import nodemailer from "nodemailer";
 
-/**
- * Auth Notification Subscriber
- * Listen for auth events and send emails
- */
 export default async function authNotificationHandler({
   event: { data },
   container,
 }: SubscriberArgs<{ entity_id: string; token: string; actor_type: string }>) {
-  const notificationService = container.resolve(Modules.NOTIFICATION);
   const logger = container.resolve("logger");
+  const authModule = container.resolve(Modules.AUTH);
 
-  // We need to fetch the customer email. 
-  // Since the event data might be limited, we'll try to resolve the user/customer.
-  // For password reset, the event from @medusajs/auth is usually 'auth.password_reset_request' 
-  // and contains the entity_id (which is the auth_identity id), and the token.
-  
   try {
-    // In a real scenario, we would need to look up the email associated with the auth identity.
-    // However, the event payload for 'auth.password_reset_request' in Medusa v2 
-    // typically includes { entity_id: string, token: string, actor_type: string }.
-    // It DOES NOT include the email directly. 
-    // We need to use the Auth Module to retrieve the identity, but that might be complex here.
+    const authIdentity = await authModule.retrieveAuthIdentity(data.entity_id);
     
-    // WORKAROUND / TODO: 
-    // Ensure that we pass the email in the event payload or look it up.
-    // Since we are mocking this or this is a fresh implementation, 
-    // we might need to adjust how we trigger this or use a custom event.
+    // The email is stored in the provider_identities array (entity_id field) for emailpass
+    const emailpassProvider = authIdentity.provider_identities?.find(
+      (p) => p.provider === "emailpass"
+    );
     
-    // For now, let's assume we can get the email. 
-    // If the standard event doesn't provide it, we might need a custom step in the workflow.
+    const email = emailpassProvider?.entity_id;
     
-    logger.info(`Password reset requested for identity: ${data.entity_id}. Token: ${data.token}`);
+    if (!email) {
+      logger.error(`Could not find email for auth identity ${data.entity_id}`);
+      return;
+    }
 
-    // Since we can't easily get the email from just the auth identity ID without more context in this subscriber 
-    // (and we don't want to overcomplicate with module links right now),
-    // we will log the TOKEN plainly so the developer (User) can use it for testing.
-    
-    // In a Production App: You would fetch the identity, get the provider metadata or user email, 
-    // and then send the email.
-    
-    console.log("=================================================================");
-    console.log("PASSWORD RESET TOKEN (For Testing):");
-    console.log(data.token);
-    console.log("=================================================================");
-    
-    // If we had the email, we would call:
-    /*
-    await notificationService.createNotifications({
-      to: email, // we need to find this
-      channel: "email",
-      template: "password-reset",
-      data: {
-        token: data.token,
-        // ...
-      }
+    logger.info(`Sending password reset email to ${email}`);
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: "vashakir245@gmail.com",
+        pass: "bxbi keec bkzm gthg",
+      },
     });
-    */
+
+    // We assume the frontend is running on the same domain
+    const resetLink = `https://naemafoodstuff.com/en/reset-password?token=${data.token}&email=${encodeURIComponent(email)}`;
+
+    const mailOptions = {
+      from: `"Naema Store" <vashakir245@gmail.com>`,
+      to: email,
+      subject: `Reset Your Password - Naema Foodstuff`,
+      html: `
+        <div style="font-family: sans-serif; padding: 20px; line-height: 1.6; color: #333;">
+          <h2 style="color: #0b1a30; border-bottom: 2px solid #ccba78; padding-bottom: 8px;">Password Reset Request</h2>
+          <p>We received a request to reset the password for your Naema Foodstuff account.</p>
+          <p>Click the button below to set a new password:</p>
+          <div style="margin: 30px 0;">
+            <a href="${resetLink}" style="background-color: #0b1a30; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: bold;">Reset Password</a>
+          </div>
+          <p>If you didn't request this, you can safely ignore this email.</p>
+          <p style="margin-top: 40px; font-size: 12px; color: #666;">
+            Button not working? Copy and paste this link into your browser:<br>
+            <a href="${resetLink}">${resetLink}</a>
+          </p>
+        </div>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    logger.info(`Password reset email successfully sent to ${email}`);
 
   } catch (error) {
     logger.error(`Failed to handle password reset for ${data.entity_id}:`, error as Error);
