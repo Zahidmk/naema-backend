@@ -72,5 +72,5 @@ export default async function authNotificationHandler({
 }
 
 export const config: SubscriberConfig = {
-  event: "auth.password_reset_request", 
+  event: "auth.password_reset", 
 };
