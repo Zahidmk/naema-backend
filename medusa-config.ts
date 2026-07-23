@@ -65,7 +65,13 @@ export default defineConfig({
     payment: {
       resolve: "@medusajs/payment",
       options: {
-        providers: [],
+        providers: [
+          {
+            resolve: "./src/modules/myfatoorah",
+            id: "myfatoorah",
+            options: {},
+          },
+        ],
       },
     },
 
