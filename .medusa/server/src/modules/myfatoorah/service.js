@@ -6,15 +6,13 @@ const client_1 = require("./client");
 const constants_1 = require("./constants");
 class MyFatoorahProviderService extends utils_1.AbstractPaymentProvider {
     constructor(container) {
-        // In Medusa v2, dependencies are resolved from the container. 
-        // For MyFatoorah, we instantiate the client here.
         super(container);
         this.client = new client_1.MyFatoorahClient();
     }
-    async getPaymentStatus(paymentSessionData) {
-        const invoiceId = paymentSessionData.invoiceId;
+    async getPaymentStatus(input) {
+        const invoiceId = input.data?.invoice_id || input.data?.invoiceId;
         if (!invoiceId) {
-            return utils_1.PaymentSessionStatus.PENDING;
+            return { status: utils_1.PaymentSessionStatus.PENDING };
         }
         try {
             const statusData = await this.client.getPaymentStatus({
@@ -23,76 +21,70 @@ class MyFatoorahProviderService extends utils_1.AbstractPaymentProvider {
             });
             switch (statusData.InvoiceStatus) {
                 case "Paid":
-                    return utils_1.PaymentSessionStatus.AUTHORIZED;
+                    return { status: utils_1.PaymentSessionStatus.AUTHORIZED };
                 case "Canceled":
                 case "Failed":
-                    return utils_1.PaymentSessionStatus.ERROR;
+                    return { status: utils_1.PaymentSessionStatus.ERROR };
                 default:
-                    return utils_1.PaymentSessionStatus.PENDING;
+                    return { status: utils_1.PaymentSessionStatus.PENDING };
             }
         }
         catch (error) {
-            return utils_1.PaymentSessionStatus.ERROR;
+            return { status: utils_1.PaymentSessionStatus.ERROR };
         }
     }
-    async initiatePayment(context) {
-        const { amount, currency_code, context: customerContext } = context;
+    async initiatePayment(input) {
+        const { amount, currency_code, context } = input;
         try {
-            // MyFatoorah expects amount to be the correct decimal value depending on currency. 
-            // Medusa stores amounts in the smallest unit (e.g. cents). 
-            // Assuming a generic 2 decimal places for this implementation (e.g., KWD is 3, others are 2, etc.)
-            // We will just pass the raw value for now, but a real implementation would use a utility to convert from smallest unit.
-            const invoiceValue = amount;
+            // Medusa sends amount in smallest units. KWD has 3 decimals.
+            const is3Decimals = ["kwd", "bhd", "omr"].includes(currency_code?.toLowerCase());
+            const divisor = is3Decimals ? 1000 : 100;
+            const invoiceValue = Number(amount) / divisor;
             const payload = {
                 InvoiceValue: invoiceValue,
-                DisplayCurrencyIso: currency_code.toUpperCase(),
-                CallBackUrl: customerContext?.callback_url || "http://localhost:9000/api/payment/myfatoorah/callback",
-                ErrorUrl: customerContext?.error_url || "http://localhost:9000/api/payment/myfatoorah/callback",
-                CustomerName: customerContext?.customer?.first_name
-                    ? `${customerContext.customer.first_name} ${customerContext.customer.last_name || ''}`.trim()
+                DisplayCurrencyIso: currency_code?.toUpperCase() || "USD",
+                CallBackUrl: context?.callback_url || "http://localhost:9000/api/payment/myfatoorah/callback",
+                ErrorUrl: context?.error_url || "http://localhost:9000/api/payment/myfatoorah/callback",
+                CustomerName: context?.customer?.first_name
+                    ? `${context.customer.first_name} ${context.customer.last_name || ''}`.trim()
                     : "Guest",
-                CustomerEmail: customerContext?.customer?.email || customerContext?.email || "guest@example.com",
-                UserDefinedField: context.resource_id || customerContext?.cart_id || context.cart_id || context.id || "",
+                CustomerEmail: context?.customer?.email || context?.email || "guest@example.com",
+                UserDefinedField: context?.resource_id || context?.cart_id || context?.id || "",
             };
             const response = await this.client.executePayment(payload);
             return {
                 data: {
                     invoice_id: response.InvoiceId,
                     payment_url: response.PaymentURL,
-                    // keeping camelCase versions just in case existing code relies on it
                     invoiceId: response.InvoiceId,
                     paymentUrl: response.PaymentURL,
                 }
             };
         }
         catch (error) {
-            return {
-                error: error.message || "Failed to initiate payment",
-                code: "MYFATOORAH_INIT_FAILED"
-            };
+            console.error("[MyFatoorah Error] Failed to initiate payment:", error.message || error);
+            throw new Error(error.message || "Failed to initiate MyFatoorah payment");
         }
     }
-    async authorizePayment(paymentSessionData, context) {
-        const status = await this.getPaymentStatus(paymentSessionData);
+    async authorizePayment(input) {
+        const statusResult = await this.getPaymentStatus(input);
         return {
-            status,
-            data: paymentSessionData
+            status: statusResult.status,
+            data: input.data
         };
     }
-    async cancelPayment(paymentSessionData) {
-        // MyFatoorah doesn't have a direct "cancel" API for an unpaid invoice in the standard flow, 
-        // it just expires. We simply return the data back to Medusa.
-        return paymentSessionData;
+    async cancelPayment(input) {
+        return { data: input.data };
     }
-    async capturePayment(paymentSessionData) {
-        // In MyFatoorah, "Paid" status means it's already captured.
-        return paymentSessionData;
+    async capturePayment(input) {
+        return { data: input.data };
     }
-    async deletePayment(paymentSessionData) {
-        return paymentSessionData;
+    async deletePayment(input) {
+        return { data: input.data };
     }
-    async refundPayment(paymentSessionData, refundAmount) {
-        const invoiceId = paymentSessionData.invoiceId;
+    async refundPayment(input) {
+        const invoiceId = input.data?.invoice_id || input.data?.invoiceId;
+        const refundAmount = input.amount;
         if (!invoiceId) {
             return { error: "No invoice ID found for refund", code: "MYFATOORAH_REFUND_ERROR" };
         }
@@ -106,7 +98,7 @@ class MyFatoorahProviderService extends utils_1.AbstractPaymentProvider {
                 Comment: "Refund from Medusa Admin",
                 AmountDeductedFromSupplier: refundAmount
             });
-            return paymentSessionData;
+            return { data: input.data };
         }
         catch (error) {
             return {
@@ -115,13 +107,13 @@ class MyFatoorahProviderService extends utils_1.AbstractPaymentProvider {
             };
         }
     }
-    async updatePayment(context) {
-        // When the cart is updated, we typically need to generate a new invoice.
-        // For simplicity, we just initiate a new payment.
-        return this.initiatePayment(context);
+    async updatePayment(input) {
+        return this.initiatePayment(input);
+    }
+    async retrievePayment(input) {
+        return { data: input.data };
     }
     async getWebhookActionAndData(payload) {
-        // To be implemented in the webhook phase
         return {
             action: "not_supported",
             data: payload
@@ -130,4 +122,4 @@ class MyFatoorahProviderService extends utils_1.AbstractPaymentProvider {
 }
 exports.MyFatoorahProviderService = MyFatoorahProviderService;
 MyFatoorahProviderService.identifier = constants_1.MYFATOORAH_PROVIDER_ID;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NyYy9tb2R1bGVzL215ZmF0b29yYWgvc2VydmljZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxxREFLa0M7QUFDbEMscUNBQTJDO0FBQzNDLDJDQUFvRDtBQUVwRCxNQUFhLHlCQUEwQixTQUFRLCtCQUE0QjtJQUt6RSxZQUFZLFNBQWM7UUFDeEIsK0RBQStEO1FBQy9ELGtEQUFrRDtRQUNsRCxLQUFLLENBQUMsU0FBUyxDQUFDLENBQUE7UUFDaEIsSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLHlCQUFnQixFQUFFLENBQUE7SUFDdEMsQ0FBQztJQUVELEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxrQkFBMkM7UUFDaEUsTUFBTSxTQUFTLEdBQUcsa0JBQWtCLENBQUMsU0FBbUIsQ0FBQTtRQUN4RCxJQUFJLENBQUMsU0FBUyxFQUFFLENBQUM7WUFDZixPQUFPLDRCQUFvQixDQUFDLE9BQU8sQ0FBQTtRQUNyQyxDQUFDO1FBRUQsSUFBSSxDQUFDO1lBQ0gsTUFBTSxVQUFVLEdBQUcsTUFBTSxJQUFJLENBQUMsTUFBTSxDQUFDLGdCQUFnQixDQUFDO2dCQUNwRCxHQUFHLEVBQUUsU0FBUyxDQUFDLFFBQVEsRUFBRTtnQkFDekIsT0FBTyxFQUFFLFdBQVc7YUFDckIsQ0FBQyxDQUFBO1lBRUYsUUFBUSxVQUFVLENBQUMsYUFBYSxFQUFFLENBQUM7Z0JBQ2pDLEtBQUssTUFBTTtvQkFDVCxPQUFPLDRCQUFvQixDQUFDLFVBQVUsQ0FBQTtnQkFDeEMsS0FBSyxVQUFVLENBQUM7Z0JBQ2hCLEtBQUssUUFBUTtvQkFDWCxPQUFPLDRCQUFvQixDQUFDLEtBQUssQ0FBQTtnQkFDbkM7b0JBQ0UsT0FBTyw0QkFBb0IsQ0FBQyxPQUFPLENBQUE7WUFDdkMsQ0FBQztRQUNILENBQUM7UUFBQyxPQUFPLEtBQUssRUFBRSxDQUFDO1lBQ2YsT0FBTyw0QkFBb0IsQ0FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NyYy9tb2R1bGVzL215ZmF0b29yYWgvc2VydmljZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxxREFHa0M7QUFDbEMscUNBQTJDO0FBQzNDLDJDQUFvRDtBQUVwRCxNQUFhLHlCQUEwQixTQUFRLCtCQUE0QjtJQUt6RSxZQUFZLFNBQWM7UUFDeEIsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFBO1FBQ2hCLElBQUksQ0FBQyxNQUFNLEdBQUcsSUFBSSx5QkFBZ0IsRUFBRSxDQUFBO0lBQ3RDLENBQUM7SUFFRCxLQUFLLENBQUMsZ0JBQWdCLENBQUMsS0FBVTtRQUMvQixNQUFNLFNBQVMsR0FBRyxLQUFLLENBQUMsSUFBSSxFQUFFLFVBQVUsSUFBSSxLQUFLLENBQUMsSUFBSSxFQUFFLFNBQVMsQ0FBQTtRQUNqRSxJQUFJLENBQUMsU0FBUyxFQUFFLENBQUM7WUFDZixPQUFPLEVBQUUsTUFBTSxFQUFFLDRCQUFvQixDQUFDLE9BQU8sRUFBRSxDQUFBO1FBQ2pELENBQUM7UUFFRCxJQUFJLENBQUM7WUFDSCxNQUFNLFVBQVUsR0FBRyxNQUFNLElBQUksQ0FBQyxNQUFNLENBQUMsZ0JBQWdCLENBQUM7Z0JBQ3BELEdBQUcsRUFBRSxTQUFTLENBQUMsUUFBUSxFQUFFO2dCQUN6QixPQUFPLEVBQUUsV0FBVzthQUNyQixDQUFDLENBQUE7WUFFRixRQUFRLFVBQVUsQ0FBQyxhQUFhLEVBQUUsQ0FBQztnQkFDakMsS0FBSyxNQUFNO29CQUNULE9BQU8sRUFBRSxNQUFNLEVBQUUsNEJBQW9CLENBQUMsVUFBVSxFQUFFLENBQUE7Z0JBQ3BELEtBQUssVUFBVSxDQUFDO2dCQUNoQixLQUFLLFFBQVE7b0JBQ1gsT0FBTyxFQUFFLE1BQU0sRUFBRSw0QkFBb0IsQ0FBQyxLQUFLLEVBQUUsQ0FBQTtnQkFDL0M7b0JBQ0UsT0FBTyxFQUFFLE1BQU0sRUFBRSw0QkFB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

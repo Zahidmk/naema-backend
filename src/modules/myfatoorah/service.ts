@@ -1,7 +1,6 @@
 import { 
   AbstractPaymentProvider, 
-  PaymentSessionStatus,
-  PaymentProviderError
+  PaymentSessionStatus
 } from "@medusajs/framework/utils"
 import { MyFatoorahClient } from "./client"
 import { MYFATOORAH_PROVIDER_ID } from "./constants"
@@ -75,7 +74,7 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
       }
     } catch (error: any) {
       console.error("[MyFatoorah Error] Failed to initiate payment:", error.message || error)
-      throw new PaymentProviderError(error.message || "Failed to initiate MyFatoorah payment")
+      throw new Error(error.message || "Failed to initiate MyFatoorah payment")
     }
   }
 
