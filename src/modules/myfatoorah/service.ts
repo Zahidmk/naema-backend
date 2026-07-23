@@ -1,6 +1,7 @@
 import { 
   AbstractPaymentProvider, 
-  PaymentSessionStatus 
+  PaymentSessionStatus,
+  PaymentProviderError
 } from "@medusajs/framework/utils"
 import { MyFatoorahClient } from "./client"
 import { MYFATOORAH_PROVIDER_ID } from "./constants"
@@ -45,7 +46,10 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
     const { amount, currency_code, context } = input
 
     try {
-      const invoiceValue = amount 
+      // Medusa sends amount in smallest units. KWD has 3 decimals.
+      const is3Decimals = ["kwd", "bhd", "omr"].includes(currency_code?.toLowerCase())
+      const divisor = is3Decimals ? 1000 : 100
+      const invoiceValue = Number(amount) / divisor
 
       const payload = {
         InvoiceValue: invoiceValue,
@@ -70,10 +74,8 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
         }
       }
     } catch (error: any) {
-      return {
-        error: error.message || "Failed to initiate payment",
-        code: "MYFATOORAH_INIT_FAILED"
-      }
+      console.error("[MyFatoorah Error] Failed to initiate payment:", error.message || error)
+      throw new PaymentProviderError(error.message || "Failed to initiate MyFatoorah payment")
     }
   }
 
