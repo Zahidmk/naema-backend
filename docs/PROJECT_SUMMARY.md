@@ -1,4 +1,4 @@
-# 📋 PROJECT SUMMARY - Marqa Souq RunBazaar Marketplace
+# 📋 PROJECT SUMMARY - naema RunBazaar Marketplace
 
 **Date:** November 17, 2025  
 **Project Manager:** [Your Name]  
@@ -70,16 +70,16 @@ Open 3 terminal windows and run:
 
 ```bash
 # Terminal 1 - Backend
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 yarn dev
 
 # Terminal 2 - Storefront  
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store-storefront
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store-storefront
 yarn dev
 
 # Terminal 3 - Admin Setup
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
-yarn medusa user --email admin@marqasouq.com --password admin123
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
+yarn medusa user --email admin@naema.com --password admin123
 yarn seed
 ```
 
@@ -371,7 +371,7 @@ If you need clarification on any part of the plan:
 
 **Good luck with your RunBazaar marketplace! 🚀🇴🇲**
 
-**Project:** Marqa Souq  
+**Project:** naema  
 **Target:** Production-ready multi-vendor marketplace  
 **Timeline:** 15 weeks  
 **Status:** 🟢 Ready to Start  

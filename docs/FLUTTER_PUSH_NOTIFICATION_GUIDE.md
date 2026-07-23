@@ -1,6 +1,6 @@
 # 🔔 Push Notification (FCM) — Quick Guide
 
-**Project:** Marqa Souq | **Date:** 18 March 2026 | **Status:** ✅ Backend Ready
+**Project:** naema | **Date:** 18 March 2026 | **Status:** ✅ Backend Ready
 
 ---
 

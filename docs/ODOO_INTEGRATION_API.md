@@ -1,8 +1,8 @@
-# MarqaSouq - Odoo Integration API Documentation
+# naema - Odoo Integration API Documentation
 
 **Version:** 1.0.0  
 **Last Updated:** January 30, 2026  
-**Base URL:** `https://api.marqasouq.com` (Production) | `http://localhost:9000` (Development)
+**Base URL:** `https://api.naema.com` (Production) | `http://localhost:9000` (Development)
 
 ---
 
@@ -31,7 +31,7 @@ POST /auth/user/emailpass
 **Request Body:**
 ```json
 {
-  "email": "admin@marqasouq.com",
+  "email": "admin@naema.com",
   "password": "your_admin_password"
 }
 ```
@@ -912,7 +912,7 @@ class MedusaAPI:
 # Usage Example
 api = MedusaAPI(
     base_url='http://localhost:9000',
-    admin_email='admin@marqasouq.com',
+    admin_email='admin@naema.com',
     admin_password='admin_password'
 )
 
@@ -951,7 +951,7 @@ for customer in new_customers:
 
 ## Contact
 
-**API Base URL (Production):** `https://api.marqasouq.com`  
+**API Base URL (Production):** `https://api.naema.com`  
 **API Base URL (Development):** `http://localhost:9000`
 
 For webhook configuration or API access, contact the development team.
@@ -1325,7 +1325,7 @@ class OdooMedusaAPI:
 if __name__ == '__main__':
     api = OdooMedusaAPI(
         base_url='http://localhost:9000',
-        admin_email='admin@marqasouq.com',
+        admin_email='admin@naema.com',
         admin_password='your_password'
     )
     

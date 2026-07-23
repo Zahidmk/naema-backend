@@ -1,8 +1,8 @@
-# Marqa Souq - Complete Mobile API Documentation
+# naema - Complete Mobile API Documentation
 
 **Version:** 1.0.0  
 **Last Updated:** January 7, 2026  
-**Base URL:** `https://api.marqasouq.com` (Production) | `http://localhost:9000` (Development)
+**Base URL:** `https://api.naema.com` (Production) | `http://localhost:9000` (Development)
 
 > **Important Note:** Products and inventory are synced from the client's Odoo ERP system. This API provides real-time data from the integrated backend.
 
@@ -193,7 +193,7 @@ GET /store/homepage
           "id": "banner_01KABC123",
           "title": "Winter Sale - Up to 50% Off",
           "link": "/collections/winter-sale",
-          "image_url": "https://api.marqasouq.com/static/uploads/hero-1.avif"
+          "image_url": "https://api.naema.com/static/uploads/hero-1.avif"
         }
       ]
     },
@@ -300,7 +300,7 @@ x-publishable-api-key: {your_key}
       "handle": "iphone-15-pro-max-256gb",
       "is_giftcard": false,
       "status": "published",
-      "thumbnail": "https://api.marqasouq.com/static/uploads/iphone-15.jpg",
+      "thumbnail": "https://api.naema.com/static/uploads/iphone-15.jpg",
       "weight": 221,
       "length": 160,
       "height": 78,
@@ -323,7 +323,7 @@ x-publishable-api-key: {your_key}
       "images": [
         {
           "id": "img_01KABC...",
-          "url": "https://api.marqasouq.com/static/uploads/iphone-15-1.jpg"
+          "url": "https://api.naema.com/static/uploads/iphone-15-1.jpg"
         }
       ],
       "options": [
@@ -593,7 +593,7 @@ GET /store/brands
       "logo_url": "/brands/apple.svg",
       "banner_url": "https://...",
       "is_active": true,
-      "meta_title": "Apple Products - Marqa Souq",
+      "meta_title": "Apple Products - naema",
       "meta_description": "Shop the latest Apple products",
       "display_order": 1,
       "product_count": 45
@@ -631,7 +631,7 @@ GET /store/brands/{slug}
     "logo_url": "/brands/apple.svg",
     "banner_url": "https://...",
     "is_active": true,
-    "meta_title": "Apple Products - Marqa Souq",
+    "meta_title": "Apple Products - naema",
     "meta_description": "Shop the latest Apple products",
     "display_order": 1
   },
@@ -662,7 +662,7 @@ POST /store/carts
   "sales_channel_id": "sc_01KABC...",
   "context": {
     "ip": "192.168.1.1",
-    "user_agent": "Marqa Souq Mobile App/1.0"
+    "user_agent": "naema Mobile App/1.0"
   }
 }
 ```
@@ -1246,9 +1246,9 @@ GET /store/media/banners
       "id": "banner_01KABC...",
       "link": "/collections/winter-sale",
       "position": "hero",
-      "image_url": "https://api.marqasouq.com/static/uploads/hero-1.avif",
+      "image_url": "https://api.naema.com/static/uploads/hero-1.avif",
       "media": {
-        "url": "https://api.marqasouq.com/static/uploads/hero-1.avif"
+        "url": "https://api.naema.com/static/uploads/hero-1.avif"
       },
       "title": "Winter Sale - Up to 50% Off"
     }
@@ -1275,15 +1275,15 @@ GET /store/media/videos
   "videos": [
     {
       "id": "media_01KABC...",
-      "url": "https://api.marqasouq.com/static/uploads/promo-video.mp4",
-      "videoUrl": "https://api.marqasouq.com/static/uploads/promo-video.mp4",
+      "url": "https://api.naema.com/static/uploads/promo-video.mp4",
+      "videoUrl": "https://api.naema.com/static/uploads/promo-video.mp4",
       "mime_type": "video/mp4",
       "title": "New iPhone 15 Pro Max",
       "title_ar": "آيفون 15 برو ماكس الجديد",
       "titleAr": "آيفون 15 برو ماكس الجديد",
       "alt_text": "iPhone 15 promotional video",
-      "thumbnail": "https://api.marqasouq.com/static/uploads/promo-thumb.jpg",
-      "thumbnail_url": "https://api.marqasouq.com/static/uploads/promo-thumb.jpg",
+      "thumbnail": "https://api.naema.com/static/uploads/promo-thumb.jpg",
+      "thumbnail_url": "https://api.naema.com/static/uploads/promo-thumb.jpg",
       "brand": "Apple",
       "views": 1523,
       "display_order": 1,
@@ -1311,11 +1311,11 @@ GET /store/media
   "media": [
     {
       "id": "media_01KABC...",
-      "url": "https://api.marqasouq.com/static/uploads/image.jpg",
+      "url": "https://api.naema.com/static/uploads/image.jpg",
       "mime_type": "image/jpeg",
       "title": "Product Showcase",
       "alt_text": "Product showcase image",
-      "thumbnail_url": "https://api.marqasouq.com/static/uploads/image-thumb.jpg",
+      "thumbnail_url": "https://api.naema.com/static/uploads/image-thumb.jpg",
       "metadata": null
     }
   ],
@@ -1416,7 +1416,7 @@ POST /store/seller-register
   "email": "newseller@example.com",
   "phone": "+96812345678",
   "store_name": "My Store",
-  "message": "I would like to become a seller on Marqa Souq",
+  "message": "I would like to become a seller on naema",
   "documents_urls": [
     "https://example.com/documents/license.pdf"
   ]
@@ -1432,7 +1432,7 @@ POST /store/seller-register
     "email": "newseller@example.com",
     "phone": "+96812345678",
     "status": "pending",
-    "notes": "I would like to become a seller on Marqa Souq",
+    "notes": "I would like to become a seller on naema",
     "documents_urls": ["https://example.com/documents/license.pdf"],
     "metadata": {
       "store_name": "My Store"
@@ -2024,14 +2024,14 @@ dependencies:
 ```dart
 import 'package:dio/dio.dart';
 
-class MarqaSouqApi {
-  static const String baseUrl = 'https://api.marqasouq.com';
+class naemaApi {
+  static const String baseUrl = 'https://api.naema.com';
   static const String publishableKey = 'pk_your_key';
   
   late final Dio _dio;
   String? _authToken;
   
-  MarqaSouqApi() {
+  naemaApi() {
     _dio = Dio(BaseOptions(
       baseUrl: baseUrl,
       headers: {
@@ -2093,9 +2093,9 @@ class MarqaSouqApi {
 ## Contact & Support
 
 For API-related questions or issues:
-- **Email**: api-support@marqasouq.com
-- **Documentation**: https://docs.marqasouq.com
-- **Status Page**: https://status.marqasouq.com
+- **Email**: api-support@naema.com
+- **Documentation**: https://docs.naema.com
+- **Status Page**: https://status.naema.com
 
 ---
 

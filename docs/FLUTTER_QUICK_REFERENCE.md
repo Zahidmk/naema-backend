@@ -1,4 +1,4 @@
-# Marqa Souq - Flutter Developer Quick Reference Guide
+# naema - Flutter Developer Quick Reference Guide
 
 > Quick reference for Flutter mobile app development
 
@@ -16,7 +16,7 @@ class ApiConfig {
   static const String devBaseUrl = 'http://localhost:9000';
   
   // Production
-  static const String prodBaseUrl = 'https://api.marqasouq.com';
+  static const String prodBaseUrl = 'https://api.naema.com';
   
   // Publishable API Key (safe for client-side)
   static const String publishableKey = 'pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b';

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Marqa Souq - Install Prerequisites
+# naema - Install Prerequisites
 # This script installs all required tools for development
 
 set -e  # Exit on error
 
-echo "🔧 Installing Prerequisites for Marqa Souq"
+echo "🔧 Installing Prerequisites for naema"
 echo "=========================================="
 echo ""
 

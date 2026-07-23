@@ -1,7 +1,7 @@
 # Quick Start Script for Windows
 # Run this script to quickly start your development environment
 
-Write-Host "🚀 Starting Marqa Souq Development Environment..." -ForegroundColor Green
+Write-Host "🚀 Starting naema Development Environment..." -ForegroundColor Green
 
 # Function to check if a port is in use
 function Test-Port($port) {

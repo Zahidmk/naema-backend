@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ============================================
-# MarqaSouq QUICK Backend Deployment Script
+# naema QUICK Backend Deployment Script
 # VPS: 72.61.240.40 (Hostinger)
 # Date: February 25, 2026
 # 
@@ -20,11 +20,11 @@ NC='\033[0m'
 
 echo ""
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║        MarqaSouq Quick Backend Deployment                  ║${NC}"
+echo -e "${BLUE}║        naema Quick Backend Deployment                  ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-BACKEND_DIR="/var/www/marqa-souq/backend/backend-medusa"
+BACKEND_DIR="/var/www/naema/backend/backend-medusa"
 
 if [ ! -d "$BACKEND_DIR" ]; then
     echo -e "${RED}✗ Backend directory not found: $BACKEND_DIR${NC}"
@@ -89,6 +89,6 @@ echo -e "${GREEN}║        Backend Deployment Complete!                        
 echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 echo "URLs:"
-echo "  API:   https://admin.markasouqs.com"
-echo "  Admin: https://admin.markasouqs.com/app"
+echo "  API:   https://admin.naemafoodstuff.com"
+echo "  Admin: https://admin.naemafoodstuff.com/app"
 echo ""

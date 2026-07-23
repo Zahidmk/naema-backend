@@ -1,6 +1,6 @@
 {
   "info": {
-    "name": "Marqa Souq - Custom APIs",
+    "name": "naema - Custom APIs",
     "description": "Complete API collection for RunBazaar-style marketplace",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -61,7 +61,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"admin@marqasouq.com\",\n  \"password\": \"admin123\"\n}"
+              "raw": "{\n  \"email\": \"admin@naema.com\",\n  \"password\": \"admin123\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/admin/auth",
@@ -200,7 +200,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Apple\",\n  \"slug\": \"apple\",\n  \"description\": \"Premium electronics and innovative technology\",\n  \"logo_url\": \"https://example.com/brands/apple-logo.png\",\n  \"banner_url\": \"https://example.com/brands/apple-banner.jpg\",\n  \"meta_title\": \"Apple Products - Marqa Souq\",\n  \"meta_description\": \"Shop the latest Apple products including iPhone, iPad, MacBook, and more\",\n  \"display_order\": 1\n}"
+              "raw": "{\n  \"name\": \"Apple\",\n  \"slug\": \"apple\",\n  \"description\": \"Premium electronics and innovative technology\",\n  \"logo_url\": \"https://example.com/brands/apple-logo.png\",\n  \"banner_url\": \"https://example.com/brands/apple-banner.jpg\",\n  \"meta_title\": \"Apple Products - naema\",\n  \"meta_description\": \"Shop the latest Apple products including iPhone, iPad, MacBook, and more\",\n  \"display_order\": 1\n}"
             },
             "url": {
               "raw": "{{base_url}}/admin/brands",

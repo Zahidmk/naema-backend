@@ -1,4 +1,4 @@
-# 🚀 3-Day Delivery Plan — MarqaSouq Launch
+# 🚀 3-Day Delivery Plan — naema Launch
 
 ## Day 1: Fix Critical Bugs
 | Time | Task | Details |

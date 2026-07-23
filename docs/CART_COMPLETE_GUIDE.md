@@ -1,5 +1,5 @@
 # 🛒 Cart Guide
-> MarqaSouq · MedusaJS v2 · March 10, 2026
+> naema · MedusaJS v2 · March 10, 2026
 
 ---
 
@@ -63,7 +63,7 @@ Response:
 
 ## All Endpoints
 
-### Base URL: `https://markasouqs.com`
+### Base URL: `https://naemafoodstuff.com`
 ### Region ID: `reg_01KAARY0EYGZY423VSZV7DVX25`
 
 | # | Method | Endpoint | Auth | Purpose |
@@ -105,7 +105,7 @@ Response:
 ```dart
 class CartManager {
   final Dio _dio;
-  final String base = 'https://markasouqs.com';
+  final String base = 'https://naemafoodstuff.com';
   final String regionId = 'reg_01KAARY0EYGZY423VSZV7DVX25';
 
   CartManager(this._dio);

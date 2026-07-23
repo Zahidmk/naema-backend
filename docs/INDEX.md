@@ -1,4 +1,4 @@
-# 📚 Documentation Index - Marqa Souq RunBazaar Project
+# 📚 Documentation Index - naema RunBazaar Project
 
 **Complete Guide to All Project Documentation**
 

@@ -3,7 +3,7 @@
 
 | Environment | URL |
 |-------------|-----|
-| **Production** | `https://admin.markasouqs.com` |
+| **Production** | `https://admin.naemafoodstuff.com` |
 | **Development** | `http://localhost:9000` |
 
 ---
@@ -23,7 +23,7 @@ No API key required for now (we'll add it later if needed).
 
 ### 1️⃣ Product Sync (When product is created/updated in Odoo)
 
-**Endpoint:** `POST https://admin.markasouqs.com/odoo/webhooks/products`
+**Endpoint:** `POST https://admin.naemafoodstuff.com/odoo/webhooks/products`
 
 **When to Call:**
 - Product created in Odoo
@@ -55,7 +55,7 @@ No API key required for now (we'll add it later if needed).
 
 ### 2️⃣ Inventory Sync (When stock changes in Odoo)
 
-**Endpoint:** `POST https://admin.markasouqs.com/odoo/webhooks/inventory`
+**Endpoint:** `POST https://admin.naemafoodstuff.com/odoo/webhooks/inventory`
 
 **When to Call:**
 - Stock received from supplier
@@ -89,7 +89,7 @@ No API key required for now (we'll add it later if needed).
 
 ### 3️⃣ Order Status Update (When order ships/delivers in Odoo)
 
-**Endpoint:** `POST https://admin.markasouqs.com/odoo/webhooks/order-status`
+**Endpoint:** `POST https://admin.naemafoodstuff.com/odoo/webhooks/order-status`
 
 **When to Call:**
 - Order confirmed
@@ -119,7 +119,7 @@ No API key required for now (we'll add it later if needed).
 
 ### Get Orders (Pull new orders to Odoo)
 
-**Endpoint:** `GET https://admin.markasouqs.com/odoo/orders`
+**Endpoint:** `GET https://admin.naemafoodstuff.com/odoo/orders`
 
 **Query Parameters:**
 - `status=pending` - Filter by status
@@ -128,25 +128,25 @@ No API key required for now (we'll add it later if needed).
 
 **Example:**
 ```bash
-curl "https://admin.markasouqs.com/odoo/orders?status=pending&limit=20"
+curl "https://admin.naemafoodstuff.com/odoo/orders?status=pending&limit=20"
 ```
 
 ---
 
 ### Get Customers (Pull customers to Odoo)
 
-**Endpoint:** `GET https://admin.markasouqs.com/odoo/customers`
+**Endpoint:** `GET https://admin.naemafoodstuff.com/odoo/customers`
 
 **Example:**
 ```bash
-curl "https://admin.markasouqs.com/odoo/customers?limit=50"
+curl "https://admin.naemafoodstuff.com/odoo/customers?limit=50"
 ```
 
 ---
 
 ### Get Inventory (Pull current stock levels)
 
-**Endpoint:** `GET https://admin.markasouqs.com/odoo/inventory`
+**Endpoint:** `GET https://admin.naemafoodstuff.com/odoo/inventory`
 
 **Query Parameters:**
 - `sku=PHONE` - Filter by SKU
@@ -154,7 +154,7 @@ curl "https://admin.markasouqs.com/odoo/customers?limit=50"
 
 **Example:**
 ```bash
-curl "https://admin.markasouqs.com/odoo/inventory?low_stock=true"
+curl "https://admin.naemafoodstuff.com/odoo/inventory?low_stock=true"
 ```
 
 ---
@@ -191,17 +191,17 @@ curl "https://admin.markasouqs.com/odoo/inventory?low_stock=true"
 
 ```bash
 # Test product webhook
-curl -X POST "https://admin.markasouqs.com/odoo/webhooks/products" \
+curl -X POST "https://admin.naemafoodstuff.com/odoo/webhooks/products" \
   -H "Content-Type: application/json" \
   -d '{"event_type":"product.updated","product":{"sku":"TEST-001","name":"Test Product","qty_available":10}}'
 
 # Test inventory webhook
-curl -X POST "https://admin.markasouqs.com/odoo/webhooks/inventory" \
+curl -X POST "https://admin.naemafoodstuff.com/odoo/webhooks/inventory" \
   -H "Content-Type: application/json" \
   -d '{"event_type":"inventory.updated","items":[{"sku":"TEST-001","quantity":50,"adjustment_type":"absolute"}]}'
 
 # Test get orders
-curl "https://admin.markasouqs.com/odoo/orders?limit=5"
+curl "https://admin.naemafoodstuff.com/odoo/orders?limit=5"
 ```
 
 ---

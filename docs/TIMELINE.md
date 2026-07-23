@@ -1,4 +1,4 @@
-# 📅 Development Timeline - Marqa Souq RunBazaar Marketplace
+# 📅 Development Timeline - naema RunBazaar Marketplace
 
 **Project Duration:** 15 Weeks (November 17, 2025 - March 2, 2026)  
 **Working Days:** 75 days (5 days/week)
@@ -9,7 +9,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    MARQA SOUQ - 15 WEEK TIMELINE                             │
+│                    naema - 15 WEEK TIMELINE                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 
 PHASE 1: FOUNDATION (Week 1)
@@ -84,7 +84,7 @@ PHASE 7: DEPLOYMENT & GO-LIVE (Week 15)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Week 15 [████████████████] Production Deployment + Launch
         Feb 23 - Mar 2
-        Deliverable: 🎉 LIVE on marqasouq.com
+        Deliverable: 🎉 LIVE on naema.com
 ```
 
 ---
@@ -427,7 +427,7 @@ Week 15 [████████████████] Production Deployment
 - Address any issues
 - Celebrate success! 🎊
 
-**Deliverable:** LIVE ON MARQASOUQ.COM! 🎉
+**Deliverable:** LIVE ON naema.COM! 🎉
 
 ---
 

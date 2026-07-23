@@ -26,7 +26,7 @@ export default async function updateAllBanners({ container }: ExecArgs) {
     console.log("⚠️  Could not delete existing banners")
   }
 
-  // ALL BANNERS - Professional e-commerce images for MarkaSouq
+  // ALL BANNERS - Professional e-commerce images for Naema
   const allBanners = [
     // ============ HERO BANNERS (Top Slider) ============
     {

@@ -1,6 +1,6 @@
 /**
  * Post-build script to copy custom admin client files
- * This ensures marqasouq branding persists after Medusa rebuilds
+ * This ensures naema branding persists after Medusa rebuilds
  */
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +10,7 @@ const destDir = path.join(__dirname, '..', '.medusa', 'client');
 
 const filesToCopy = ['index.html', 'index.css'];
 
-console.log('📦 Applying marqasouq branding to admin...');
+console.log('📦 Applying naema branding to admin...');
 
 if (!fs.existsSync(destDir)) {
   fs.mkdirSync(destDir, { recursive: true });
@@ -33,7 +33,7 @@ filesToCopy.forEach(file => {
   }
 });
 
-console.log('✨ marqasouq branding applied!\n');
+console.log('✨ naema branding applied!\n');
 
 // Also copy the built admin to public/ so it is served correctly
 const adminSrc = path.join(__dirname, '..', '.medusa', 'server', 'public', 'admin');

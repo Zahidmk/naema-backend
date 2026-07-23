@@ -102,7 +102,7 @@ git add .
 git commit -m "Initial project structure and documentation"
 
 # Set up remote repository (optional - replace with your GitHub repo)
-# git remote add origin https://github.com/yourusername/marqa-souq-ecommerce.git
+# git remote add origin https://github.com/yourusername/naema-ecommerce.git
 # git push -u origin main
 ```
 
@@ -210,7 +210,7 @@ module.exports = {
 #### Task 4.2: Create Admin User
 ```powershell
 # Create admin user
-npx medusa user --email admin@marqasouq.com --password admin123456
+npx medusa user --email admin@naema.com --password admin123456
 
 # Start the server
 npm run dev
@@ -220,7 +220,7 @@ npm run dev
 
 #### Task 4.3: Test Admin Dashboard
 1. Open http://localhost:7001
-2. Login with admin@marqasouq.com / admin123456
+2. Login with admin@naema.com / admin123456
 3. Explore the dashboard
 4. Create a test product category
 5. Add a sample product
@@ -299,7 +299,7 @@ export default medusa
 Create `frontend/.env.local`:
 ```env
 NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://localhost:9000
-NEXT_PUBLIC_STORE_NAME=Marqa Souq
+NEXT_PUBLIC_STORE_NAME=naema
 ```
 
 ---
@@ -410,7 +410,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="text-xl font-bold text-gray-900">
-              Marqa Souq
+              naema
             </Link>
           </div>
           
@@ -450,7 +450,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Marqa Souq</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">naema</h3>
             <p className="text-gray-600">Your trusted e-commerce platform for quality products.</p>
           </div>
           
@@ -483,7 +483,7 @@ export default function Footer() {
         </div>
         
         <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-600">
-          © 2024 Marqa Souq. All rights reserved.
+          © 2024 naema. All rights reserved.
         </div>
       </div>
     </footer>
@@ -507,7 +507,7 @@ import { queryClient } from '@/lib/query-client';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Marqa Souq - E-Commerce Platform',
+  title: 'naema - E-Commerce Platform',
   description: 'Modern e-commerce platform built with MedusaJS and Next.js',
 };
 
@@ -547,7 +547,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Welcome to Marqa Souq
+              Welcome to naema
             </h1>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Discover amazing products at unbeatable prices. Your one-stop shop for everything you need.

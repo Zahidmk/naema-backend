@@ -1,4 +1,4 @@
-# Odoo → MarqaSouq Complete Product Field Mapping
+# Odoo → naema Complete Product Field Mapping
 
 > **Document Version**: 1.0 | **Date**: March 3, 2026  
 > **Purpose**: Map every Odoo `product.template` field to MedusaJS storage location  
@@ -234,7 +234,7 @@
                                      │
                                      ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│              NEXT.JS FRONTEND (markasouq-web)                   │
+│              NEXT.JS FRONTEND (Naema-web)                   │
 │                                                                 │
 │  Product Detail Page:                                           │
 │  • Brand logo + name (from metadata.brand)                      │

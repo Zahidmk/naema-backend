@@ -38,7 +38,7 @@ export default async function createPublishableKey({ container }: ExecArgs) {
       const backendLine = `MEDUSA_PUBLISHABLE_KEY=${key.token}\n`
       try { fs.appendFileSync(backendEnv, backendLine) } catch { /* ignore write errors */ }
 
-      const frontendEnv = path.join(repoRoot, '..', '..', 'frontend', 'markasouq-web', '.env.local')
+      const frontendEnv = path.join(repoRoot, '..', '..', 'frontend', 'Naema-web', '.env.local')
       const frontLine = `NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=${key.token}\n`
       try { fs.appendFileSync(frontendEnv, frontLine) } catch { /* ignore write errors */ }
     } catch (err) {

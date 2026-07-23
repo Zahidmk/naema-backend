@@ -1,4 +1,4 @@
-# MarqaSouq VPS Maintenance & Protection Guide
+# naema VPS Maintenance & Protection Guide
 
 **Server:** srv1196947.hstgr.cloud (72.61.240.40)  
 **Provider:** Hostinger VPS  
@@ -22,7 +22,7 @@
 
 ### 1. Memory Limits (PM2 Ecosystem)
 ```javascript
-// /var/www/marqa-souq/ecosystem.config.js
+// /var/www/naema/ecosystem.config.js
 max_memory_restart: "1500M"  // Backend: auto-restart if exceeds 1.5GB
 max_memory_restart: "1000M"  // Frontend: auto-restart if exceeds 1GB
 ```
@@ -73,7 +73,7 @@ pm2 monit  # Press Ctrl+C to exit
 df -h
 
 # 4. Check recent logs
-tail -50 /var/log/marqasouq-health.log
+tail -50 /var/log/naema-health.log
 
 # 5. Check fail2ban status
 fail2ban-client status sshd
@@ -171,7 +171,7 @@ systemctl restart nginx
 
 ### How to Update Frontend:
 ```bash
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 git pull origin main
 npm install
 npm audit fix
@@ -181,7 +181,7 @@ pm2 restart nextjs-storefront
 
 ### How to Update Backend:
 ```bash
-cd /var/www/marqa-souq/backend/backend-medusa
+cd /var/www/naema/backend/backend-medusa
 git pull origin main
 npm install
 npm run build
@@ -258,9 +258,9 @@ ufw allow <port>/tcp         # Open a port
 - **Ticket System:** For suspension issues
 
 ### Important URLs:
-- **Website:** https://website.markasouqs.com
-- **Admin:** https://admin.markasouqs.com/app
-- **API Health:** https://admin.markasouqs.com/health
+- **Website:** https://website.naemafoodstuff.com
+- **Admin:** https://admin.naemafoodstuff.com/app
+- **API Health:** https://admin.naemafoodstuff.com/health
 - **Hostinger hPanel:** https://hpanel.hostinger.com
 
 ---

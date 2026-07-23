@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Marqa Souq - Environment Setup Script
+# naema - Environment Setup Script
 # This script will set up everything needed for development
 
 set -e  # Exit on error
 
-echo "🚀 Marqa Souq - Environment Setup"
+echo "🚀 naema - Environment Setup"
 echo "=================================="
 echo ""
 
@@ -17,7 +17,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Project paths
-PROJECT_ROOT="/Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa"
+PROJECT_ROOT="/Users/muhammedshakirva/Sygmetiv-works/naema/medusa"
 BACKEND_PATH="$PROJECT_ROOT/backend/my-medusa-store"
 STOREFRONT_PATH="$PROJECT_ROOT/backend/my-medusa-store-storefront"
 
@@ -148,8 +148,8 @@ echo ""
 echo -e "${BLUE}📋 Step 4: Creating admin user...${NC}"
 
 # Create admin user
-echo "Creating admin user (admin@marqasouq.com)..."
-yarn medusa user --email admin@marqasouq.com --password admin123 2>/dev/null || {
+echo "Creating admin user (admin@naema.com)..."
+yarn medusa user --email admin@naema.com --password admin123 2>/dev/null || {
     echo -e "${YELLOW}⚠️  Admin user might already exist${NC}"
 }
 echo -e "${GREEN}✅ Admin user ready${NC}"
@@ -208,7 +208,7 @@ echo -e "   Admin:      ${GREEN}http://localhost:9000/app${NC}"
 echo -e "   Storefront: ${GREEN}http://localhost:8000${NC}"
 echo ""
 echo "4. Login Credentials:"
-echo -e "   Email:    ${GREEN}admin@marqasouq.com${NC}"
+echo -e "   Email:    ${GREEN}admin@naema.com${NC}"
 echo -e "   Password: ${GREEN}admin123${NC}"
 echo ""
 echo "5. Test API:"

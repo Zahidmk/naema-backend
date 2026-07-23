@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # ============================================
-# MarqaSouq FAST Deployment Script
+# naema FAST Deployment Script
 # VPS: 72.61.240.40 (Hostinger)
 # Date: February 3, 2026
 # ============================================
 
 set -e
 
-echo "🚀 MarqaSouq Fast Deployment Starting..."
+echo "🚀 naema Fast Deployment Starting..."
 echo "=========================================="
 
 # Colors for output
@@ -109,12 +109,12 @@ pm2 startup 2>/dev/null || true
 echo -e "${GREEN}✓ PM2 ready${NC}"
 
 # ============================================
-# STEP 6: DEPLOY MARQASOUQ BACKEND
+# STEP 6: DEPLOY naema BACKEND
 # ============================================
 echo -e "${YELLOW}[6/8] Deploying Medusa Backend...${NC}"
 
 # Navigate to backend directory
-BACKEND_DIR="/var/www/marqasouq/backend/my-medusa-store"
+BACKEND_DIR="/var/www/naema/backend/my-medusa-store"
 
 if [ -d "$BACKEND_DIR" ]; then
     cd $BACKEND_DIR
@@ -144,11 +144,11 @@ else
 fi
 
 # ============================================
-# STEP 7: DEPLOY MARQASOUQ FRONTEND
+# STEP 7: DEPLOY naema FRONTEND
 # ============================================
 echo -e "${YELLOW}[7/8] Deploying Next.js Frontend...${NC}"
 
-FRONTEND_DIR="/var/www/marqasouq/frontend/markasouq-web"
+FRONTEND_DIR="/var/www/naema/frontend/Naema-web"
 
 if [ -d "$FRONTEND_DIR" ]; then
     cd $FRONTEND_DIR
@@ -166,10 +166,10 @@ if [ -d "$FRONTEND_DIR" ]; then
     fi
     
     # Stop existing process
-    pm2 delete markasouq-frontend 2>/dev/null || true
+    pm2 delete Naema-frontend 2>/dev/null || true
     
     # Start with PM2
-    pm2 start npm --name "markasouq-frontend" -- run start
+    pm2 start npm --name "Naema-frontend" -- run start
     
     echo -e "${GREEN}✓ Frontend deployed${NC}"
 else
@@ -183,8 +183,8 @@ fi
 echo -e "${YELLOW}[8/8] Configuring Nginx...${NC}"
 
 # Create Nginx config
-cat > /etc/nginx/sites-available/marqasouq << 'NGINX'
-# MarqaSouq Nginx Configuration
+cat > /etc/nginx/sites-available/naema << 'NGINX'
+# naema Nginx Configuration
 
 # Rate limiting
 limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
@@ -192,7 +192,7 @@ limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
 # Backend API
 server {
     listen 80;
-    server_name api.marqasouq.com;
+    server_name api.naema.com;
 
     location / {
         limit_req zone=api_limit burst=20 nodelay;
@@ -220,7 +220,7 @@ server {
 # Frontend
 server {
     listen 80;
-    server_name marqasouq.com www.marqasouq.com;
+    server_name naema.com www.naema.com;
 
     location / {
         proxy_pass http://127.0.0.1:3000;
@@ -251,7 +251,7 @@ server {
 # Admin Dashboard
 server {
     listen 80;
-    server_name admin.marqasouq.com;
+    server_name admin.naema.com;
 
     location / {
         proxy_pass http://127.0.0.1:9000/app;
@@ -266,7 +266,7 @@ server {
 NGINX
 
 # Enable site
-ln -sf /etc/nginx/sites-available/marqasouq /etc/nginx/sites-enabled/
+ln -sf /etc/nginx/sites-available/naema /etc/nginx/sites-enabled/
 rm -f /etc/nginx/sites-enabled/default 2>/dev/null || true
 
 # Test and reload nginx
@@ -333,13 +333,13 @@ fi
 echo ""
 echo "URLs:"
 echo "-----"
-echo "Frontend:  http://marqasouq.com"
-echo "API:       http://api.marqasouq.com"
-echo "Admin:     http://admin.marqasouq.com"
+echo "Frontend:  http://naema.com"
+echo "API:       http://api.naema.com"
+echo "Admin:     http://admin.naema.com"
 echo ""
 echo "Next Steps:"
 echo "-----------"
-echo "1. Configure SSL with: certbot --nginx -d marqasouq.com -d www.marqasouq.com -d api.marqasouq.com -d admin.marqasouq.com"
+echo "1. Configure SSL with: certbot --nginx -d naema.com -d www.naema.com -d api.naema.com -d admin.naema.com"
 echo "2. Update DNS records to point to: 72.61.240.40"
 echo "3. Test the site!"
 echo ""

@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # ============================================
-# MarqaSouq VPS Recovery Script
+# naema VPS Recovery Script
 # Run this after starting VPS from Hostinger
 # ============================================
 
 echo "=========================================="
-echo "MarqaSouq VPS Recovery - Starting..."
+echo "naema VPS Recovery - Starting..."
 echo "=========================================="
 
 # 1. Check system status
@@ -86,17 +86,17 @@ echo ""
 echo "=== DOCKER STATUS ==="
 docker ps -a 2>/dev/null || echo "Docker not running"
 
-# 10. Check if MarqaSouq services are running
+# 10. Check if naema services are running
 echo ""
-echo "=== MARQASOUQ SERVICES ==="
+echo "=== naema SERVICES ==="
 # Check PM2 processes
 pm2 list 2>/dev/null || echo "PM2 not running"
 
-# 11. Restart MarqaSouq applications
+# 11. Restart naema applications
 echo ""
-echo "=== RESTARTING MARQASOUQ APPS ==="
-cd /var/www/marqasouq/backend 2>/dev/null && pm2 restart all 2>/dev/null
-cd /var/www/marqasouq/frontend 2>/dev/null && pm2 restart all 2>/dev/null
+echo "=== RESTARTING naema APPS ==="
+cd /var/www/naema/backend 2>/dev/null && pm2 restart all 2>/dev/null
+cd /var/www/naema/frontend 2>/dev/null && pm2 restart all 2>/dev/null
 
 # Alternative: If using ecosystem.config.js
 pm2 start ecosystem.config.js 2>/dev/null
@@ -123,5 +123,5 @@ echo "2. If services aren't starting, check logs:"
 echo "   - pm2 logs"
 echo "   - journalctl -u nginx -f"
 echo "   - docker logs <container_name>"
-echo "3. Access your site: https://marqasouq.com"
+echo "3. Access your site: https://naema.com"
 echo ""

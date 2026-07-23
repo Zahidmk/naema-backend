@@ -1,6 +1,6 @@
-# Marqa Souq - Soft Launch Status Report
+# naema - Soft Launch Status Report
 **Date:** January 27, 2026  
-**Project:** Marqa Souq E-Commerce Platform  
+**Project:** naema E-Commerce Platform  
 **Platform:** MedusaJS v2 + Next.js 14  
 **Target Market:** Kuwait
 
@@ -8,7 +8,7 @@
 
 ## 📊 Executive Summary
 
-The Marqa Souq e-commerce platform is **90% ready for soft launch**. Core purchasing flow is fully functional with Kuwait region support, KWD currency, and Odoo ERP integration for inventory and order management.
+The naema e-commerce platform is **90% ready for soft launch**. Core purchasing flow is fully functional with Kuwait region support, KWD currency, and Odoo ERP integration for inventory and order management.
 
 ---
 
@@ -74,7 +74,7 @@ The Marqa Souq e-commerce platform is **90% ready for soft launch**. Core purcha
 | **Order Management** | ✅ Complete | View/process orders |
 | **Customer Management** | ✅ Complete | View customer data |
 | **Inventory Management** | ✅ Complete | Stock levels visible |
-| **Branding Applied** | ✅ Complete | Marqa Souq logo & colors |
+| **Branding Applied** | ✅ Complete | naema logo & colors |
 
 ### 7. API & Integration
 
@@ -131,7 +131,7 @@ The Marqa Souq e-commerce platform is **90% ready for soft launch**. Core purcha
 
 | Field | Value |
 |-------|-------|
-| Email | admin@markasouq.com |
+| Email | admin@naemafoodstuff.com |
 | Password | admin123 |
 
 ### Odoo Integration
@@ -230,7 +230,7 @@ The Marqa Souq e-commerce platform is **90% ready for soft launch**. Core purcha
 ```bash
 # Start development servers
 cd backend/my-medusa-store && npm run dev   # Backend on :9000
-cd frontend/markasouq-web && npm run dev    # Frontend on :3000
+cd frontend/Naema-web && npm run dev    # Frontend on :3000
 
 # Sync commands
 npm run sync:odoo        # Sync products from Odoo

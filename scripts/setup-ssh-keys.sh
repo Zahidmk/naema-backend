@@ -1,12 +1,12 @@
 #!/bin/bash
-# MarqaSouq VPS - SSH Key Setup Script
+# naema VPS - SSH Key Setup Script
 # Run this on your LOCAL Mac to set up passwordless SSH authentication
 
 VPS_IP="72.61.240.40"
 VPS_USER="root"
 
 echo "=============================================="
-echo "  MarqaSouq VPS - SSH Key Setup"
+echo "  naema VPS - SSH Key Setup"
 echo "=============================================="
 echo ""
 

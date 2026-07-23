@@ -1,6 +1,6 @@
 # RunBazaar Project - Implementation Checklist
 
-**Project:** Marqa Souq E-Commerce Platform  
+**Project:** naema E-Commerce Platform  
 **Updated:** November 17, 2025
 
 This checklist tracks all development tasks for the complete project. Mark items as complete as you finish them.

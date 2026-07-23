@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ============================================
-# MarqaSouq FULL Deployment Script
+# naema FULL Deployment Script
 # VPS: 72.61.240.40 (Hostinger)
 # Date: February 25, 2026
 # 
@@ -20,15 +20,15 @@ NC='\033[0m'
 
 echo ""
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║        MarqaSouq Full Stack Deployment                     ║${NC}"
+echo -e "${BLUE}║        naema Full Stack Deployment                     ║${NC}"
 echo -e "${BLUE}╠════════════════════════════════════════════════════════════╣${NC}"
 echo -e "${BLUE}║  Backend:  Medusa v2.10.3                                  ║${NC}"
 echo -e "${BLUE}║  Frontend: Next.js 16.1.6                                  ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-BACKEND_DIR="/var/www/marqa-souq/backend/backend-medusa"
-FRONTEND_DIR="/var/www/marqa-souq/frontend/markasouq-web"
+BACKEND_DIR="/var/www/naema/backend/backend-medusa"
+FRONTEND_DIR="/var/www/naema/frontend/Naema-web"
 
 # ============================================
 # STEP 1: STOP ALL SERVICES
@@ -146,8 +146,8 @@ echo ""
 echo -e "${GREEN}╔════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${GREEN}║             🎉 DEPLOYMENT COMPLETE! 🎉                     ║${NC}"
 echo -e "${GREEN}╠════════════════════════════════════════════════════════════╣${NC}"
-echo -e "${GREEN}║  Website: https://website.markasouqs.com                   ║${NC}"
-echo -e "${GREEN}║  API:     https://admin.markasouqs.com                     ║${NC}"
-echo -e "${GREEN}║  Admin:   https://admin.markasouqs.com/app                 ║${NC}"
+echo -e "${GREEN}║  Website: https://website.naemafoodstuff.com                   ║${NC}"
+echo -e "${GREEN}║  API:     https://admin.naemafoodstuff.com                     ║${NC}"
+echo -e "${GREEN}║  Admin:   https://admin.naemafoodstuff.com/app                 ║${NC}"
 echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""

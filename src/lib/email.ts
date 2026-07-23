@@ -23,14 +23,14 @@ function createTransporter() {
 // ─── Brand Config ────────────────────────────────────────────────────────────
 
 const BRAND = {
-  name: "MarkaSouq",
+  name: "Naema",
   color: "#1D4ED8",        // Blue
   accentColor: "#2563EB",
-  logo: "https://website.markasouqs.com/logo.png",
-  storeUrl: process.env.STORE_URL || "https://website.markasouqs.com",
-  supportEmail: process.env.SUPPORT_EMAIL || "support@markasouqs.com",
-  fromEmail: process.env.SMTP_FROM || "noreply@markasouqs.com",
-  fromName: process.env.SMTP_FROM_NAME || "MarkaSouq",
+  logo: "https://website.naemafoodstuff.com/logo.png",
+  storeUrl: process.env.STORE_URL || "https://website.naemafoodstuff.com",
+  supportEmail: process.env.SUPPORT_EMAIL || "support@naemafoodstuff.com",
+  fromEmail: process.env.SMTP_FROM || "noreply@naemafoodstuff.com",
+  fromName: process.env.SMTP_FROM_NAME || "Naema",
 };
 
 // ─── Price Formatter ─────────────────────────────────────────────────────────

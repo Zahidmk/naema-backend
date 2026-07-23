@@ -25,7 +25,7 @@ GET /store/pages/{slug}
 **Available slugs:**
 | Slug | Content |
 |------|---------|
-| `about` | About MarqaSouq |
+| `about` | About naema |
 | `privacy-policy` | Privacy Policy |
 | `terms-and-conditions` | Terms & Conditions |
 | `return-policy` | Return Policy |

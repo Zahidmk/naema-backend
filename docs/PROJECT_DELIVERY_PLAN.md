@@ -1,8 +1,8 @@
-# MarqaSouq — Project Delivery Plan
+# naema — Project Delivery Plan
 ## Odoo-Powered E-Commerce Platform
 
 > **Date**: March 3, 2026  
-> **Client**: MarqaSouq / Oskar LLC  
+> **Client**: naema / Oskar LLC  
 > **Stack**: Odoo ERP → MedusaJS 2.x Backend → Next.js Frontend  
 > **Server**: 72.61.240.40 (PM2 managed)
 
@@ -10,7 +10,7 @@
 
 ## 🎯 PROJECT VISION
 
-**Odoo is the single source of truth.** The client manages ALL product data (catalog, pricing, inventory, brands, images, variants) in Odoo. MarqaSouq website automatically reflects all changes via real-time sync + scheduled jobs.
+**Odoo is the single source of truth.** The client manages ALL product data (catalog, pricing, inventory, brands, images, variants) in Odoo. naema website automatically reflects all changes via real-time sync + scheduled jobs.
 
 ---
 
@@ -140,7 +140,7 @@
 ### PHASE 3: Order Flow & Customer Sync (Week 3)
 ### ══════════════════════════════════════════════
 
-**Goal**: Bidirectional order & customer sync between MarqaSouq and Odoo
+**Goal**: Bidirectional order & customer sync between naema and Odoo
 
 #### Task 3.1: Order Flow Perfection ⏱️ 2 days
 - [ ] Verify order → Odoo sale order creation (existing subscriber)
@@ -296,7 +296,7 @@
 ## ✅ CLIENT ACCEPTANCE CRITERIA
 
 ### Must-Have for Delivery
-- [ ] All Odoo products appear on MarqaSouq website within 5 minutes of publishing
+- [ ] All Odoo products appear on naema website within 5 minutes of publishing
 - [ ] Product images, brand, category, price, stock sync automatically
 - [ ] Variants (Color/Size) selectable on product page
 - [ ] Compare price shows with discount percentage

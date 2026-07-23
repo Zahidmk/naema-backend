@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ============================================
-# Marqa Souq - VPS Server Setup Script
+# naema - VPS Server Setup Script
 # Run this on your Hostinger VPS server
 # ============================================
 
@@ -14,7 +14,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 echo -e "${GREEN}============================================${NC}"
-echo -e "${GREEN}  Marqa Souq VPS Server Setup Script${NC}"
+echo -e "${GREEN}  naema VPS Server Setup Script${NC}"
 echo -e "${GREEN}============================================${NC}"
 
 # Check if running as root
@@ -109,7 +109,7 @@ echo -e "${GREEN}Firewall configured${NC}"
 # Step 8: Create Project Directory
 # ============================================
 echo -e "\n${YELLOW}Step 8: Creating project directory...${NC}"
-mkdir -p /var/www/marqa-souq
+mkdir -p /var/www/naema
 mkdir -p /var/log/pm2
 
 echo -e "${GREEN}Directories created${NC}"
@@ -136,7 +136,7 @@ echo "   sudo -i -u postgres"
 echo "   createdb marqa_souq_db"
 echo "   createuser --interactive --pwprompt marqa_user"
 echo ""
-echo "2. Upload your project files to /var/www/marqa-souq/"
+echo "2. Upload your project files to /var/www/naema/"
 echo ""
 echo "3. Configure environment variables"
 echo ""

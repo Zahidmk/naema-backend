@@ -1,8 +1,8 @@
-# MarqaSouq - Odoo Integration API Documentation
+# naema - Odoo Integration API Documentation
 
 ## 🔗 For Odoo Developer Integration
 
-**Base URL (Production):** `https://admin.markasouqs.com`  
+**Base URL (Production):** `https://admin.naemafoodstuff.com`  
 **Base URL (Development):** `http://localhost:9000`  
 **Last Updated:** February 28, 2026
 
@@ -69,7 +69,7 @@ x-odoo-api-key: YOUR_ODOO_API_KEY
 
 ```bash
 # On MedusaJS server
-cd /var/www/marqa-souq/backend/backend-medusa
+cd /var/www/naema/backend/backend-medusa
 npx medusa exec src/scripts/generate-odoo-api-key.ts
 ```
 
@@ -203,7 +203,7 @@ ODOO_WEBHOOK_URL=https://your-odoo-server.com/api/medusa/order-created
 ### 4.1 Get Orders (For Odoo to Pull)
 
 ```
-GET https://admin.markasouqs.com/odoo/orders
+GET https://admin.naemafoodstuff.com/odoo/orders
 ```
 
 **Headers:**
@@ -223,7 +223,7 @@ x-odoo-api-key: YOUR_API_KEY
 
 **Example:**
 ```bash
-curl -X GET "https://admin.markasouqs.com/odoo/orders?status=pending&date_from=2026-02-01T00:00:00Z&limit=20" \
+curl -X GET "https://admin.naemafoodstuff.com/odoo/orders?status=pending&date_from=2026-02-01T00:00:00Z&limit=20" \
   -H "x-odoo-api-key: YOUR_API_KEY"
 ```
 
@@ -271,13 +271,13 @@ curl -X GET "https://admin.markasouqs.com/odoo/orders?status=pending&date_from=2
 ### 4.2 Get Single Order
 
 ```
-GET https://admin.markasouqs.com/odoo/orders/{order_id}
+GET https://admin.naemafoodstuff.com/odoo/orders/{order_id}
 ```
 
 ### 4.3 Mark Order as Synced
 
 ```
-POST https://admin.markasouqs.com/odoo/orders/{order_id}/synced
+POST https://admin.naemafoodstuff.com/odoo/orders/{order_id}/synced
 ```
 
 **Request Body:**
@@ -293,7 +293,7 @@ POST https://admin.markasouqs.com/odoo/orders/{order_id}/synced
 ### 4.4 Get Customers (For Odoo to Pull)
 
 ```
-GET https://admin.markasouqs.com/odoo/customers
+GET https://admin.naemafoodstuff.com/odoo/customers
 ```
 
 **Query Parameters:**
@@ -342,7 +342,7 @@ GET https://admin.markasouqs.com/odoo/customers
 ### 4.5 Get Inventory (For Odoo to Pull)
 
 ```
-GET https://admin.markasouqs.com/odoo/inventory
+GET https://admin.naemafoodstuff.com/odoo/inventory
 ```
 
 **Query Parameters:**
@@ -388,7 +388,7 @@ GET https://admin.markasouqs.com/odoo/inventory
 ### 5.1 Create/Update Product
 
 ```
-POST https://admin.markasouqs.com/odoo/products
+POST https://admin.naemafoodstuff.com/odoo/products
 ```
 
 **Request Body:**
@@ -454,7 +454,7 @@ POST https://admin.markasouqs.com/odoo/products
 ### 5.2 Bulk Product Sync
 
 ```
-POST https://admin.markasouqs.com/odoo/products/bulk
+POST https://admin.naemafoodstuff.com/odoo/products/bulk
 ```
 
 **Request Body:**
@@ -496,7 +496,7 @@ POST https://admin.markasouqs.com/odoo/products/bulk
 ### 5.3 Delete Product
 
 ```
-DELETE https://admin.markasouqs.com/odoo/products/{sku}
+DELETE https://admin.naemafoodstuff.com/odoo/products/{sku}
 ```
 
 ---
@@ -506,7 +506,7 @@ DELETE https://admin.markasouqs.com/odoo/products/{sku}
 ### 6.1 Update Inventory (Single SKU)
 
 ```
-POST https://admin.markasouqs.com/odoo/inventory/update
+POST https://admin.naemafoodstuff.com/odoo/inventory/update
 ```
 
 **Request Body:**
@@ -521,7 +521,7 @@ POST https://admin.markasouqs.com/odoo/inventory/update
 ### 6.2 Bulk Inventory Update
 
 ```
-POST https://admin.markasouqs.com/odoo/inventory/bulk-update
+POST https://admin.naemafoodstuff.com/odoo/inventory/bulk-update
 ```
 
 **Request Body:**
@@ -560,7 +560,7 @@ POST https://admin.markasouqs.com/odoo/inventory/bulk-update
 ### 6.3 Reduce Stock (After Order Fulfilled in Odoo)
 
 ```
-POST https://admin.markasouqs.com/odoo/inventory/reduce
+POST https://admin.naemafoodstuff.com/odoo/inventory/reduce
 ```
 
 **Request Body:**
@@ -727,7 +727,7 @@ import base64
 
 class MedusaProductSync:
     def __init__(self):
-        self.base_url = 'https://admin.markasouqs.com'
+        self.base_url = 'https://admin.naemafoodstuff.com'
         self.api_key = 'YOUR_ODOO_API_KEY'
     
     def sync_product(self, product):
@@ -881,17 +881,17 @@ ODOO_WEBHOOK_SECRET=webhook_secret_key
 
 ```bash
 # Test authentication
-curl -X GET "https://admin.markasouqs.com/odoo/orders?limit=1" \
+curl -X GET "https://admin.naemafoodstuff.com/odoo/orders?limit=1" \
   -H "x-odoo-api-key: YOUR_API_KEY"
 
 # Test inventory update
-curl -X POST "https://admin.markasouqs.com/odoo/inventory/update" \
+curl -X POST "https://admin.naemafoodstuff.com/odoo/inventory/update" \
   -H "Content-Type: application/json" \
   -H "x-odoo-api-key: YOUR_API_KEY" \
   -d '{"sku": "TEST-SKU-001", "quantity": 100}'
 
 # Test product create
-curl -X POST "https://admin.markasouqs.com/odoo/products" \
+curl -X POST "https://admin.naemafoodstuff.com/odoo/products" \
   -H "Content-Type: application/json" \
   -H "x-odoo-api-key: YOUR_API_KEY" \
   -d '{
@@ -945,7 +945,7 @@ These are webhook endpoints that Odoo can call to push data INTO MedusaJS.
 
 **Endpoint:**
 ```
-POST https://admin.markasouqs.com/odoo/webhooks/products
+POST https://admin.naemafoodstuff.com/odoo/webhooks/products
 ```
 
 **When to Call:**
@@ -1015,7 +1015,7 @@ x-odoo-api-key: YOUR_API_KEY
 
 **Endpoint:**
 ```
-POST https://admin.markasouqs.com/odoo/webhooks/inventory
+POST https://admin.naemafoodstuff.com/odoo/webhooks/inventory
 ```
 
 **When to Call:**
@@ -1095,7 +1095,7 @@ POST https://admin.markasouqs.com/odoo/webhooks/inventory
 
 **Endpoint:**
 ```
-POST https://admin.markasouqs.com/odoo/webhooks/order-status
+POST https://admin.naemafoodstuff.com/odoo/webhooks/order-status
 ```
 
 **When to Call:**
@@ -1178,7 +1178,7 @@ POST https://admin.markasouqs.com/odoo/webhooks/order-status
 import requests
 import json
 
-MEDUSA_BASE_URL = "https://admin.markasouqs.com"
+MEDUSA_BASE_URL = "https://admin.naemafoodstuff.com"
 MEDUSA_API_KEY = "your_odoo_api_key"
 
 def sync_product_to_medusa(product):
@@ -1361,5 +1361,5 @@ For integration questions:
 - **Technical Support:** Contact MedusaJS development team
 - **API Access:** Request API keys from admin
 
-**Production Base URL:** `https://admin.markasouqs.com`  
-**Admin Dashboard:** `https://admin.markasouqs.com/app`
+**Production Base URL:** `https://admin.naemafoodstuff.com`  
+**Admin Dashboard:** `https://admin.naemafoodstuff.com/app`

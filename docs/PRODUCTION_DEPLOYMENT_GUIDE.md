@@ -1,5 +1,5 @@
 # Medusa v2 Production Deployment Guide
-## Marqa Souq - Quick Reference
+## naema - Quick Reference
 
 > **Last Updated:** January 2026  
 > **Medusa Version:** 2.10.3
@@ -15,8 +15,8 @@
 │                                                               │
 │  ┌─────────────────────────────────────────────────────────┐ │
 │  │                     NGINX (Reverse Proxy)                │ │
-│  │  api.marqasouq.com → localhost:9000                     │ │
-│  │  marqasouq.com → localhost:3000                         │ │
+│  │  api.naema.com → localhost:9000                     │ │
+│  │  naema.com → localhost:3000                         │ │
 │  └─────────────────────────────────────────────────────────┘ │
 │                           │                                   │
 │           ┌───────────────┴───────────────┐                  │
@@ -44,7 +44,7 @@
 ## 📁 Server Folder Structure
 
 ```
-/var/www/marqa-souq/
+/var/www/naema/
 ├── backend/
 │   └── my-medusa-store/
 │       ├── .env                    # Production environment
@@ -59,7 +59,7 @@
 │       └── static/uploads/         # User uploads
 │
 ├── frontend/
-│   └── markasouq-web/
+│   └── Naema-web/
 │       ├── .env.production.local   # Production environment
 │       └── .next/                  # Built Next.js
 │
@@ -73,7 +73,7 @@
 
 ### Deploy Backend Only
 ```bash
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 git pull origin main
 yarn install
 yarn build
@@ -86,7 +86,7 @@ pm2 restart medusa-backend
 
 ### Deploy Frontend Only
 ```bash
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 git pull origin main
 yarn install
 yarn build
@@ -95,7 +95,7 @@ pm2 restart nextjs-storefront
 
 ### Using Deployment Script
 ```bash
-cd /var/www/marqa-souq
+cd /var/www/naema
 ./scripts/production-deploy.sh backend    # Deploy backend only
 ./scripts/production-deploy.sh frontend   # Deploy frontend only
 ./scripts/production-deploy.sh all        # Deploy everything
@@ -189,7 +189,7 @@ pm2 startup
 **Solution:**
 ```bash
 # 1. Clean rebuild
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 rm -rf .medusa
 yarn build
 
@@ -207,7 +207,7 @@ yarn build 2>&1 | grep -i error
 
 **Solution:**
 ```bash
-cd /var/www/marqa-souq/backend/my-medusa-store/.medusa/server
+cd /var/www/naema/backend/my-medusa-store/.medusa/server
 yarn install --production
 pm2 restart medusa-backend
 ```
@@ -234,7 +234,7 @@ pm2 logs medusa-backend
 **Solution:**
 ```bash
 # 1. Verify client build
-cat /var/www/marqa-souq/backend/my-medusa-store/.medusa/client/index.html
+cat /var/www/naema/backend/my-medusa-store/.medusa/client/index.html
 
 # 2. Check CORS in .env
 grep ADMIN_CORS .env
@@ -257,20 +257,20 @@ JWT_SECRET=your-64-char-random-string
 COOKIE_SECRET=your-64-char-random-string
 
 # CORS
-STORE_CORS=https://marqasouq.com
-ADMIN_CORS=https://api.marqasouq.com
-AUTH_CORS=https://marqasouq.com,https://api.marqasouq.com
+STORE_CORS=https://naema.com
+ADMIN_CORS=https://api.naema.com
+AUTH_CORS=https://naema.com,https://api.naema.com
 
 # Backend
-BACKEND_URL=https://api.marqasouq.com
+BACKEND_URL=https://api.naema.com
 NODE_ENV=production
 PORT=9000
 ```
 
 ### Frontend `.env.production.local`
 ```bash
-NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://api.marqasouq.com
-NEXT_PUBLIC_BASE_URL=https://marqasouq.com
+NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://api.naema.com
+NEXT_PUBLIC_BASE_URL=https://naema.com
 ```
 
 ---
@@ -296,7 +296,7 @@ NEXT_PUBLIC_BASE_URL=https://marqasouq.com
 ```bash
 # Migrations are auto-run in deploy script
 # Or manually:
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 npx medusa db:migrate
 pm2 restart medusa-backend
 ```

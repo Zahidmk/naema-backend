@@ -1,8 +1,8 @@
 {
   "info": {
-    "name": "Marqa Souq - Mobile App API Collection",
-    "description": "Complete API collection for Flutter mobile app development.\n\n## Important Notes:\n- Products and inventory are synced from Odoo ERP\n- All prices are in smallest currency unit (baisa for OMR)\n- Always include x-publishable-api-key header\n- Include region_id for product pricing\n\n## Base URL:\n- Production: https://api.marqasouq.com\n- Development: http://localhost:9000",
-    "_postman_id": "marqa-souq-mobile-2026",
+    "name": "naema - Mobile App API Collection",
+    "description": "Complete API collection for Flutter mobile app development.\n\n## Important Notes:\n- Products and inventory are synced from Odoo ERP\n- All prices are in smallest currency unit (baisa for OMR)\n- Always include x-publishable-api-key header\n- Include region_id for product pricing\n\n## Base URL:\n- Production: https://api.naema.com\n- Development: http://localhost:9000",
+    "_postman_id": "naema-mobile-2026",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -1408,7 +1408,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"New Seller Store\",\n  \"email\": \"newseller@example.com\",\n  \"phone\": \"+96812345678\",\n  \"store_name\": \"My Store\",\n  \"message\": \"I would like to become a seller on Marqa Souq\",\n  \"documents_urls\": []\n}"
+              "raw": "{\n  \"name\": \"New Seller Store\",\n  \"email\": \"newseller@example.com\",\n  \"phone\": \"+96812345678\",\n  \"store_name\": \"My Store\",\n  \"message\": \"I would like to become a seller on naema\",\n  \"documents_urls\": []\n}"
             },
             "url": {
               "raw": "{{base_url}}/store/seller-register",

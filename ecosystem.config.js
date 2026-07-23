@@ -1,5 +1,5 @@
 /**
- * PM2 Ecosystem Configuration for Marqa Souq
+ * PM2 Ecosystem Configuration for naema
  * 
  * IMPORTANT: Medusa v2 Production Architecture
  * - Backend MUST run from .medusa/server/ directory (built output)
@@ -17,7 +17,7 @@ module.exports = {
     {
       name: 'medusa-backend',
       // CRITICAL: Run from the built server directory, NOT the source
-      cwd: '/var/www/marqa-souq/backend/my-medusa-store/.medusa/server',
+      cwd: '/var/www/naema/backend/my-medusa-store/.medusa/server',
       script: './node_modules/.bin/medusa',
       args: 'start',
       instances: 1,
@@ -41,7 +41,7 @@ module.exports = {
     },
     {
       name: 'nextjs-storefront',
-      cwd: '/var/www/marqa-souq/frontend/markasouq-web',
+      cwd: '/var/www/naema/frontend/Naema-web',
       script: 'node_modules/.bin/next',
       args: 'start -p 3000',
       instances: 1,

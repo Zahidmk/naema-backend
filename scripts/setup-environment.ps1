@@ -1,6 +1,6 @@
 # Setup Windows Environment for MedusaJS E-Commerce Development
 
-Write-Host "🚀 Setting up Marqa Souq E-Commerce Development Environment..." -ForegroundColor Green
+Write-Host "🚀 Setting up naema E-Commerce Development Environment..." -ForegroundColor Green
 
 # Check if Node.js is installed
 Write-Host "Checking Node.js installation..." -ForegroundColor Yellow

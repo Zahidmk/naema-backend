@@ -1,15 +1,15 @@
 #!/bin/bash
 # ============================================
-# Marqa Souq - Production Deployment Script
+# naema - Production Deployment Script
 # Medusa v2 Professional Deployment
 # ============================================
 
 set -e
 
 # Configuration
-PROJECT_ROOT="/var/www/marqa-souq"
+PROJECT_ROOT="/var/www/naema"
 BACKEND_DIR="$PROJECT_ROOT/backend/my-medusa-store"
-FRONTEND_DIR="$PROJECT_ROOT/frontend/markasouq-web"
+FRONTEND_DIR="$PROJECT_ROOT/frontend/Naema-web"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 LOG_FILE="$PROJECT_ROOT/logs/deploy-$TIMESTAMP.log"
 GIT_BRANCH="${GIT_BRANCH:-main}"
@@ -42,7 +42,7 @@ log_error() {
 print_header() {
     echo ""
     echo "============================================"
-    echo "  Marqa Souq Production Deployment"
+    echo "  naema Production Deployment"
     echo "  Timestamp: $TIMESTAMP"
     echo "  Branch: $GIT_BRANCH"
     echo "============================================"

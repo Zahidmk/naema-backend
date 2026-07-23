@@ -172,7 +172,7 @@ Example implementation notes (minimum viable)
 --------------------------------------------
 - Backend: add `homepage_sections` and `homepage_items` tables with columns matching data model. Provide a simple controller returning denormalized JSON (sections + items).
 - Admin: small CRUD page integrated into existing admin UI (reuse product picker).
-- Frontend: server-component for homepage that calls GET /storefront/homepage?locale available in `markasouq-web` and renders the top sections; components lazy-load heavy interactive pieces.
+- Frontend: server-component for homepage that calls GET /storefront/homepage?locale available in `Naema-web` and renders the top sections; components lazy-load heavy interactive pieces.
 
 Next steps & estimates (for single dev)
 ---------------------------------------

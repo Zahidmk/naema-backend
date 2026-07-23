@@ -27,7 +27,7 @@ export default defineConfig({
   admin: {
     vite: () => ({
       server: {
-        allowedHosts: ["admin.markasouqs.com", "localhost", "127.0.0.1"],
+        allowedHosts: ["admin.naemafoodstuff.com", "localhost", "127.0.0.1"],
       },
     }),
     path: "/app",
@@ -111,7 +111,7 @@ export default defineConfig({
                   options: {
                     channels: ["email"],
                     api_key: process.env.SENDGRID_API_KEY,
-                    from: process.env.SENDGRID_FROM || "noreply@markasouq.com",
+                    from: process.env.SENDGRID_FROM || "noreply@naemafoodstuff.com",
                   },
                 },
               ]

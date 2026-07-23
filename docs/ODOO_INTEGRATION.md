@@ -1,4 +1,4 @@
-# Odoo ERP Integration for Marqa Souq
+# Odoo ERP Integration for naema
 
 This document describes the Odoo ERP integration for syncing products and inventory to the MedusaJS e-commerce platform.
 

@@ -1,4 +1,4 @@
-# MarqaSouq - Complete Project Overview
+# naema - Complete Project Overview
 
 ## 🏗️ Architecture (Simple)
 
@@ -148,11 +148,11 @@ ssh root@your-vps-ip
 
 # 2. Clone repos
 git clone https://github.com/shakirva/backend-medusa.git
-git clone https://github.com/Zahidmk/markasouq-web.git
+git clone https://github.com/Zahidmk/Naema-web.git
 
 # 3. Install dependencies
 cd backend-medusa && npm install
-cd markasouq-web && npm install
+cd Naema-web && npm install
 
 # 4. Set environment variables (.env files)
 # 5. Build frontend: npm run build
@@ -160,13 +160,13 @@ cd markasouq-web && npm install
 pm2 start ecosystem.config.js
 
 # 7. Configure Nginx to proxy:
-#    admin.markasouqs.com → localhost:9000
-#    markasouqs.com → localhost:3000
+#    admin.naemafoodstuff.com → localhost:9000
+#    naemafoodstuff.com → localhost:3000
 ```
 
 **DNS Setup:**
-- `markasouqs.com` → VPS IP (frontend)
-- `admin.markasouqs.com` → VPS IP (backend/admin)
+- `naemafoodstuff.com` → VPS IP (frontend)
+- `admin.naemafoodstuff.com` → VPS IP (backend/admin)
 
 ---
 
@@ -218,7 +218,7 @@ pm2 start ecosystem.config.js
 ## 📁 Folder Structure (Simple)
 
 ```
-marqa-souq/medusa/
+naema/medusa/
 ├── backend/my-medusa-store/     ← MedusaJS Backend
 │   ├── src/
 │   │   ├── api/                 ← All API routes
@@ -232,7 +232,7 @@ marqa-souq/medusa/
 │   ├── static/uploads/          ← Product images (47 MB)
 │   └── .env                     ← Backend config
 │
-├── frontend/markasouq-web/      ← Next.js Frontend
+├── frontend/Naema-web/      ← Next.js Frontend
 │   ├── src/
 │   │   ├── app/[lang]/          ← All pages (homepage, products, cart, etc.)
 │   │   ├── components/          ← Reusable UI components

@@ -1,8 +1,8 @@
-# MarqaSouq - Complete Flutter API Integration Guide
+# naema - Complete Flutter API Integration Guide
 
 **Version:** 2.0.0  
 **Last Updated:** January 30, 2026  
-**Base URL:** `https://api.marqasouq.com` (Production) | `http://localhost:9000` (Development)
+**Base URL:** `https://api.naema.com` (Production) | `http://localhost:9000` (Development)
 
 ---
 
@@ -1341,7 +1341,7 @@ print('Cart total: ${cart['cart']['total']}');
 
 For API issues or questions, contact the development team.
 
-**API Base URL (Production):** `https://api.marqasouq.com`  
+**API Base URL (Production):** `https://api.naema.com`  
 **API Base URL (Development):** `http://localhost:9000`  
 **Publishable Key:** `pk_f8b6e5e814ea97ec6e132c556a380d0d28871bcd91a11e5e6008c58dddd3746b`  
 **Default Region ID (Kuwait):** `reg_01KFYZNTFQ4AGNEVR15206N3GN`

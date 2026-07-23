@@ -1,4 +1,4 @@
-# Odoo ERP Integration Requirements for Marqa Souq E-Commerce
+# Odoo ERP Integration Requirements for naema E-Commerce
 
 **Document Version:** 1.0  
 **Date:** January 7, 2026  
@@ -8,7 +8,7 @@
 
 ## 📋 Overview
 
-Our e-commerce platform (Marqa Souq) uses **MedusaJS** as the backend and **does NOT create products from our admin dashboard**. All products and inventory data come from the client's **Odoo ERP system**. 
+Our e-commerce platform (naema) uses **MedusaJS** as the backend and **does NOT create products from our admin dashboard**. All products and inventory data come from the client's **Odoo ERP system**. 
 
 This document outlines what APIs and data we need from the Odoo developer to complete the integration.
 
@@ -435,7 +435,7 @@ Please provide this document to the Odoo developer and request:
 
 ### Our Webhook Endpoint Base URL:
 ```
-https://api.marqasouq.com/webhooks/odoo/
+https://api.naema.com/webhooks/odoo/
 ```
 
 ### Environment We Support:
@@ -444,5 +444,5 @@ https://api.marqasouq.com/webhooks/odoo/
 
 ---
 
-**Document prepared for:** Marqa Souq E-Commerce Integration  
+**Document prepared for:** naema E-Commerce Integration  
 **Contact:** [Your Integration Team Email]

@@ -2,7 +2,7 @@
 # Quick test script for customer auth flow
 # Run: bash scripts/test-customer-auth.sh
 
-BASE_URL="https://admin.markasouqs.com"
+BASE_URL="https://admin.naemafoodstuff.com"
 API_KEY="pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b"
 
 echo "=== Step 1: Login ==="

@@ -1,29 +1,29 @@
-# 🎉 Marqa Souq Branding Complete!
+# 🎉 naema Branding Complete!
 
 ## ✅ **REBRANDING COMPLETED**
 
-Your MedusaJS e-commerce platform has been successfully rebranded from "Medusa Store" to **"Marqa Souq"**!
+Your MedusaJS e-commerce platform has been successfully rebranded from "Medusa Store" to **"naema"**!
 
 ### 🔄 **Changes Made**
 
 #### **Frontend Storefront Changes:**
-- ✅ **Navigation Header**: Now displays "MARQA SOUQ"
+- ✅ **Navigation Header**: Now displays "naema"
 - ✅ **Footer**: Company name and copyright updated
 - ✅ **Side Menu**: Mobile menu branding updated
-- ✅ **User Registration**: "Become a Marqa Souq Member"
+- ✅ **User Registration**: "Become a naema Member"
 - ✅ **Checkout Pages**: Branding in checkout flow
-- ✅ **Page Titles**: All browser tabs show "| Marqa Souq"
+- ✅ **Page Titles**: All browser tabs show "| naema"
 - ✅ **Account Pages**: Login and profile references updated
 - ✅ **Terms & Privacy**: Legal text references updated
 
 #### **Backend Configuration:**
 - ✅ **Package Names**: Backend and frontend package names updated
-- ✅ **Project Description**: Updated to reflect Marqa Souq branding
+- ✅ **Project Description**: Updated to reflect naema branding
 - ✅ **Site Configuration**: Centralized branding configuration added
 
 #### **SEO & Metadata:**
-- ✅ **Meta Titles**: All pages now show "| Marqa Souq"
-- ✅ **Meta Descriptions**: Updated to reference Marqa Souq
+- ✅ **Meta Titles**: All pages now show "| naema"
+- ✅ **Meta Descriptions**: Updated to reference naema
 - ✅ **Open Graph**: Social media sharing shows correct branding
 
 ---
@@ -45,7 +45,7 @@ yarn dev
 ### **Step 3: Create Admin User** (if not done)
 ```powershell
 cd "C:\Users\dulki\Desktop\v-2-medusa-ecommo\backend\my-medusa-store"
-yarn medusa user --email admin@marqasouq.com --password admin123
+yarn medusa user --email admin@naema.com --password admin123
 ```
 
 ### **Step 4: Seed Demo Products**
@@ -56,14 +56,14 @@ yarn seed
 
 ---
 
-## 🎯 **DEMO URLS - FULLY BRANDED AS MARQA SOUQ**
+## 🎯 **DEMO URLS - FULLY BRANDED AS naema**
 
 - **🛍️ Customer Storefront:** http://localhost:8000
 - **⚙️ Admin Dashboard:** http://localhost:9000/app
 - **🔌 Backend API:** http://localhost:9000
 
 ### **Admin Login:**
-- **Email:** admin@marqasouq.com
+- **Email:** admin@naema.com
 - **Password:** admin123
 
 ---
@@ -71,13 +71,13 @@ yarn seed
 ## 🎨 **WHAT YOUR PROJECT MANAGER WILL SEE**
 
 ### **Storefront Features (http://localhost:8000):**
-- ✅ **"MARQA SOUQ"** brand prominently displayed in header
+- ✅ **"naema"** brand prominently displayed in header
 - ✅ Professional navigation and footer with your branding
 - ✅ Product catalog (once seeded with demo data)
 - ✅ Shopping cart and checkout process
-- ✅ User registration: "Become a Marqa Souq Member"
+- ✅ User registration: "Become a naema Member"
 - ✅ Mobile-responsive design
-- ✅ All page titles show "Product Name | Marqa Souq"
+- ✅ All page titles show "Product Name | naema"
 
 ### **Admin Dashboard (http://localhost:9000/app):**
 - ✅ Full product management system
@@ -110,7 +110,7 @@ yarn seed
 
 ## 🎉 **READY FOR DEMO!**
 
-Your **Marqa Souq** e-commerce platform is now:
+Your **naema** e-commerce platform is now:
 - ✅ **Professionally branded** with your company name
 - ✅ **Fully functional** with real MedusaJS features
 - ✅ **Production-ready** architecture

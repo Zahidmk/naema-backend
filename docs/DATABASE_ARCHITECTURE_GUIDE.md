@@ -1,4 +1,4 @@
-# MarqaSouq — Database & Module Architecture Guide (For Beginners)
+# naema — Database & Module Architecture Guide (For Beginners)
 
 ## 📌 Quick Answer to Your Questions
 

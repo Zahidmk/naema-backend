@@ -63,9 +63,9 @@ sudo apt install nginx -y
 ## Directory Structure (Recommended)
 
 ```
-/var/www/marqa-souq/
+/var/www/naema/
 ├── backend/my-medusa-store/      # Medusa v2 API (port 9000)
-├── frontend/markasouq-web/       # Next.js (port 3000)
+├── frontend/Naema-web/       # Next.js (port 3000)
 └── .env files (managed separately per environment)
 ```
 
@@ -77,13 +77,13 @@ sudo apt install nginx -y
 
 ```bash
 cd /var/www
-git clone git@github.com:shakirva/medusa.git marqa-souq
-cd marqa-souq/backend/my-medusa-store
+git clone git@github.com:shakirva/medusa.git naema
+cd naema/backend/my-medusa-store
 ```
 
 ### Environment File
 
-Create `/var/www/marqa-souq/backend/my-medusa-store/.env`:
+Create `/var/www/naema/backend/my-medusa-store/.env`:
 
 ```env
 # Database
@@ -105,7 +105,7 @@ COOKIE_SECRET=your-super-secret-cookie-key
 ### Deployment Commands
 
 ```bash
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 
 # 1. Reset and pull latest code
 git reset --hard
@@ -128,14 +128,14 @@ pm2 save
 
 ### PM2 Ecosystem (Optional)
 
-Create `/var/www/marqa-souq/ecosystem.config.js`:
+Create `/var/www/naema/ecosystem.config.js`:
 
 ```javascript
 module.exports = {
   apps: [
     {
       name: 'backend',
-      cwd: '/var/www/marqa-souq/backend/my-medusa-store',
+      cwd: '/var/www/naema/backend/my-medusa-store',
       script: 'npm',
       args: 'run start',
       env: {
@@ -145,7 +145,7 @@ module.exports = {
     },
     {
       name: 'frontend',
-      cwd: '/var/www/marqa-souq/frontend/markasouq-web',
+      cwd: '/var/www/naema/frontend/Naema-web',
       script: 'npm',
       args: 'run start',
       env: {
@@ -163,7 +163,7 @@ module.exports = {
 
 ### Environment File
 
-Create `/var/www/marqa-souq/frontend/markasouq-web/tion`:
+Create `/var/www/naema/frontend/Naema-web/tion`:
 
 ```env
 NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://api.your-domain.com
@@ -173,7 +173,7 @@ NEXT_PUBLIC_BASE_URL=https://your-domain.com
 ### Deployment Commands
 
 ```bash
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 
 # 1. Pull latest code
 git pull origin main
@@ -253,15 +253,15 @@ sudo systemctl restart nginx
 
 ```bash
 #!/bin/bash
-# Save as: /var/www/marqa-souq/deploy.sh
+# Save as: /var/www/naema/deploy.sh
 
 set -e
 
-echo "=== DEPLOYING MARQA SOUQ ==="
+echo "=== DEPLOYING naema ==="
 
 # Backend
 echo ">>> Deploying Backend..."
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 git reset --hard
 git pull origin main
 rm -rf node_modules
@@ -272,7 +272,7 @@ pm2 restart backend || pm2 start npm --name "backend" -- run start
 
 # Frontend
 echo ">>> Deploying Frontend..."
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 git pull origin main
 rm -rf node_modules
 npm install
@@ -292,13 +292,13 @@ pm2 status
 Make executable:
 
 ```bash
-chmod +x /var/www/marqa-souq/deploy.sh
+chmod +x /var/www/naema/deploy.sh
 ```
 
 Run:
 
 ```bash
-/var/www/marqa-souq/deploy.sh
+/var/www/naema/deploy.sh
 ```
 
 ---
@@ -415,4 +415,4 @@ node -v
 | Build Backend | `npm run build` |
 | Run Migrations | `npx medusa migrations run` |
 | Build Frontend | `npm run build` |
-| Deploy All | `/var/www/marqa-souq/deploy.sh` |
+| Deploy All | `/var/www/naema/deploy.sh` |

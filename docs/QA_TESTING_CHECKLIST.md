@@ -1,4 +1,4 @@
-# 🧪 MarkaSouq QA Testing Checklist
+# 🧪 Naema QA Testing Checklist
 **Date:** 29 January 2026  
 **Status:** Ready for Client Delivery
 

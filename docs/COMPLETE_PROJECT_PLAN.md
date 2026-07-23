@@ -1,7 +1,7 @@
 # RunBazaar E-Commerce Platform - Complete Project Plan
 **Project Manager's Guide**
 
-**Project:** Marqa Souq - RunBazaar-style Marketplace  
+**Project:** naema - RunBazaar-style Marketplace  
 **Tech Stack:** MedusaJS v2, Next.js, PostgreSQL, Odoo ERP  
 **Start Date:** November 17, 2025  
 **Target:** Production-ready multi-vendor marketplace  
@@ -195,14 +195,14 @@ yarn dev
 
 # 3. Create Admin User (Terminal 3)
 cd backend/my-medusa-store
-yarn medusa user --email admin@marqasouq.com --password admin123
+yarn medusa user --email admin@naema.com --password admin123
 
 # 4. Seed Sample Data
 yarn seed
 
 # 5. Access Admin Dashboard
 # Open: http://localhost:9000/app
-# Login: admin@marqasouq.com / admin123
+# Login: admin@naema.com / admin123
 ```
 
 ### 4.2 Database Schema Planning
@@ -1204,8 +1204,8 @@ export default function SellerInfo({ seller }) {
 **File:** `backend/my-medusa-store-storefront/public/manifest.json`
 ```json
 {
-  "name": "Marqa Souq",
-  "short_name": "Marqa Souq",
+  "name": "naema",
+  "short_name": "naema",
   "description": "Premium Omani Marketplace",
   "start_url": "/",
   "display": "standalone",
@@ -1371,7 +1371,7 @@ Cloud Provider: AWS / DigitalOcean / Azure
 ### 10.2 Deployment Checklist
 
 ```
-□ Domain setup (marqasouq.com)
+□ Domain setup (naema.com)
 □ SSL certificate (Let's Encrypt/ACM)
 □ Database migration
 □ Environment variables configured
@@ -1422,7 +1422,7 @@ services:
   storefront:
     build: ../backend/my-medusa-store-storefront
     environment:
-      NEXT_PUBLIC_MEDUSA_BACKEND_URL: https://api.marqasouq.com
+      NEXT_PUBLIC_MEDUSA_BACKEND_URL: https://api.naema.com
     ports:
       - "3000:3000"
     restart: always
@@ -1464,7 +1464,7 @@ docker-compose -f docker-compose.prod.yml up -d
 docker-compose exec medusa-backend yarn medusa migrations run
 
 # Create admin user
-docker-compose exec medusa-backend yarn medusa user --email admin@marqasouq.com
+docker-compose exec medusa-backend yarn medusa user --email admin@naema.com
 
 # Monitor logs
 docker-compose logs -f
@@ -1582,7 +1582,7 @@ Week 15: [====] Deployment & Go-Live
 | **M4:** Frontend Beta | Week 10 | All pages implemented |
 | **M5:** Mobile APIs Ready | Week 12 | Push notifications working |
 | **M6:** QA Signoff | Week 14 | All tests passed |
-| **M7:** Production Launch | Week 15 | Live on marqasouq.com |
+| **M7:** Production Launch | Week 15 | Live on naema.com |
 
 ---
 
@@ -1733,7 +1733,7 @@ git push origin feature/brands-api
 2. ✅ Access admin dashboard
    ```
    URL: http://localhost:9000/app
-   Login: admin@marqasouq.com / admin123
+   Login: admin@naema.com / admin123
    ```
 
 3. ✅ Seed sample data
@@ -1795,10 +1795,10 @@ git push origin feature/brands-api
 ### Appendix D: Contact List
 
 ```
-Project Manager: [PM Name] - pm@marqasouq.com
-Tech Lead: [Lead Name] - lead@marqasouq.com
-Frontend Lead: [FE Lead] - frontend@marqasouq.com
-DevOps: [DevOps Name] - devops@marqasouq.com
+Project Manager: [PM Name] - pm@naema.com
+Tech Lead: [Lead Name] - lead@naema.com
+Frontend Lead: [FE Lead] - frontend@naema.com
+DevOps: [DevOps Name] - devops@naema.com
 ```
 
 ---
@@ -1806,8 +1806,8 @@ DevOps: [DevOps Name] - devops@marqasouq.com
 ## 📞 SUPPORT & QUESTIONS
 
 For questions during development:
-- **Slack:** #marqa-souq-dev
-- **Email:** dev@marqasouq.com
+- **Slack:** #naema-dev
+- **Email:** dev@naema.com
 - **Documentation:** /docs folder
 - **Wiki:** [Project Wiki URL]
 

@@ -219,7 +219,7 @@ const BrandCell = ({ name }: { name: string | null | undefined }) => {
           <img src={brand.logo_url} alt={brand.name} className="max-w-full max-h-full object-contain" />
         </div>
       ) : null}
-      <span className="text-sm">{name || "Markasouq"}</span>
+      <span className="text-sm">{name || "Naema"}</span>
     </div>
   )
 }
@@ -308,7 +308,7 @@ const MediaPage = () => {
         title: snap.title || file.name,
         title_ar: snap.title_ar || null,
         mime_type: file.type,
-        brand: snap.brand || 'Markasouq',
+        brand: snap.brand || 'Naema',
         views: snap.views || 0,
         display_order: snap.display_order || 0,
         is_featured: snap.is_featured || false,
@@ -361,7 +361,7 @@ const MediaPage = () => {
         body: JSON.stringify({
           title: editMedia.title || '',
           title_ar: editMedia.title_ar || null,
-          brand: editMedia.brand || 'Markasouq',
+          brand: editMedia.brand || 'Naema',
           views: editMedia.views || 0,
           display_order: editMedia.display_order || 0,
           is_featured: editMedia.is_featured || false,

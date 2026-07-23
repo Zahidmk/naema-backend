@@ -1,9 +1,9 @@
 #!/bin/bash
-# MarqaSouq VPS - Complete Security Hardening Script
+# naema VPS - Complete Security Hardening Script
 # Run this ON THE VPS after SSH keys are working
 
 echo "=============================================="
-echo "  MarqaSouq VPS - Security Hardening"
+echo "  naema VPS - Security Hardening"
 echo "=============================================="
 echo ""
 echo "⚠️  IMPORTANT: Make sure SSH key login works before running!"
@@ -160,7 +160,7 @@ cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup
 
 # Apply secure settings
 cat > /etc/ssh/sshd_config.d/99-security.conf << 'SSHCONF'
-# MarqaSouq SSH Security Configuration
+# naema SSH Security Configuration
 PasswordAuthentication no
 PermitRootLogin prohibit-password
 PubkeyAuthentication yes
@@ -273,7 +273,7 @@ echo "  1. Test SSH login in a NEW terminal before closing this session!"
 echo "     ssh root@72.61.240.40"
 echo ""
 echo "  2. Set up SSL certificate:"
-echo "     certbot --nginx -d marqasouq.com -d www.marqasouq.com"
+echo "     certbot --nginx -d naema.com -d www.naema.com"
 echo ""
 echo "  3. Schedule regular security scans:"
 echo "     Add to new crontab: 0 3 * * * /usr/bin/rkhunter --check --skip-keypress"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ============================================
-# Marqa Souq - Application Deployment Script
+# naema - Application Deployment Script
 # Run this after server setup is complete
 # ============================================
 
@@ -15,12 +15,12 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 # Configuration - UPDATE THESE VALUES
-PROJECT_DIR="/var/www/marqa-souq"
+PROJECT_DIR="/var/www/naema"
 BACKEND_DIR="$PROJECT_DIR/backend/my-medusa-store"
-FRONTEND_DIR="$PROJECT_DIR/frontend/markasouq-web"
+FRONTEND_DIR="$PROJECT_DIR/frontend/Naema-web"
 
 echo -e "${GREEN}============================================${NC}"
-echo -e "${GREEN}  Marqa Souq Deployment Script${NC}"
+echo -e "${GREEN}  naema Deployment Script${NC}"
 echo -e "${GREEN}============================================${NC}"
 
 # ============================================

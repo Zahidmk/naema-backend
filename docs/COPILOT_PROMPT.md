@@ -1,4 +1,4 @@
-# 🤖 Copilot Prompt for MarqaSouq Project
+# 🤖 Copilot Prompt for naema Project
 
 Copy-paste this prompt when starting a new Copilot session to give it full context:
 
@@ -7,7 +7,7 @@ Copy-paste this prompt when starting a new Copilot session to give it full conte
 ## THE PROMPT:
 
 ```
-I am working on MarqaSouq — an e-commerce marketplace for electronics in Kuwait.
+I am working on naema — an e-commerce marketplace for electronics in Kuwait.
 
 ## Tech Stack:
 - **Backend**: MedusaJS 2.x (Node.js, TypeScript) on port 9000
@@ -42,7 +42,7 @@ I am working on MarqaSouq — an e-commerce marketplace for electronics in Kuwai
 - Backend: backend/my-medusa-store/
   - APIs: src/api/store/ (17 routes), src/api/admin/ (17 routes), src/api/odoo/ (4 routes)
   - Modules: src/modules/ (blog, brands, media, odoo-sync, reviews, sellers, warranty, wishlist)
-- Frontend: frontend/markasouq-web/
+- Frontend: frontend/Naema-web/
   - Pages: src/app/[lang]/ (30+ pages)
   - Components: src/components/
   - API Client: src/lib/medusa.js
@@ -55,7 +55,7 @@ I am working on MarqaSouq — an e-commerce marketplace for electronics in Kuwai
 
 ## Git Repos:
 - Backend: https://github.com/shakirva/backend-medusa.git (main)
-- Frontend: https://github.com/Zahidmk/markasouq-web.git
+- Frontend: https://github.com/Zahidmk/Naema-web.git
 
 When I ask you to fix something, be direct and quick. Don't over-explain.
 Always use Knex syntax (?) for database queries, never $1/$2.
@@ -67,7 +67,7 @@ Keep code simple — this needs to launch in 3 days.
 ## SHORTER VERSION (if you need a quick context):
 
 ```
-MarqaSouq e-commerce: MedusaJS 2.x backend (port 9000) + Next.js frontend (port 3000) + PostgreSQL + Odoo ERP.
+naema e-commerce: MedusaJS 2.x backend (port 9000) + Next.js frontend (port 3000) + PostgreSQL + Odoo ERP.
 
 CRITICAL: PG_CONNECTION is Knex — use `.raw("...WHERE id = ?", [val])` not $1.
 Resolve: `req.scope.resolve(ContainerRegistrationKeys.PG_CONNECTION)`
@@ -78,5 +78,5 @@ Sales Channel: sc_01KAARXK1AS8RHX8SQ6Z8J520X
 Images: come from Odoo (no S3). Use safeImageFor() + unoptimized prop on <Image>.
 Target: Kuwait market (KWD currency). No S3 needed.
 Backend: backend/my-medusa-store/
-Frontend: frontend/markasouq-web/
+Frontend: frontend/Naema-web/
 ```

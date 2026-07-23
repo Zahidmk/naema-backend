@@ -1,8 +1,8 @@
-# MarqaSouq - Flutter API Documentation
+# naema - Flutter API Documentation
 
 > **All endpoints tested and verified on 4 March 2026**
 
-**Base URL (Production):** `https://admin.markasouqs.com`  
+**Base URL (Production):** `https://admin.naemafoodstuff.com`  
 **Base URL (Local Dev):** `http://localhost:9000`
 
 ---
@@ -25,7 +25,7 @@ Local Dev:   reg_01KFYZNTFQ4AGNEVR15206N3GN   (Kuwait — KWD)
 
 ---
 
-## ✅ PRODUCTION TEST STATUS (https://admin.markasouqs.com)
+## ✅ PRODUCTION TEST STATUS (https://admin.naemafoodstuff.com)
 
 | # | Endpoint | Production | Local | Notes |
 |---|----------|-----------|-------|-------|
@@ -269,7 +269,7 @@ Response:
 ```json
 {
   "pages": [
-    { "slug": "about", "title": "About MarqaSouq", "title_ar": "عن ماركة سوق" },
+    { "slug": "about", "title": "About naema", "title_ar": "عن ماركة سوق" },
     { "slug": "privacy-policy", "title": "Privacy Policy", "title_ar": "سياسة الخصوصية" },
     { "slug": "terms-and-conditions", "title": "Terms & Conditions", "title_ar": "الشروط والأحكام" },
     { "slug": "return-policy", "title": "Return Policy", "title_ar": "سياسة الإرجاع" },

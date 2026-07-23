@@ -1,4 +1,4 @@
-# 🚀 Marqa Souq - Complete Hostinger VPS Deployment Guide
+# 🚀 naema - Complete Hostinger VPS Deployment Guide
 
 ## Table of Contents
 
@@ -29,7 +29,7 @@
 
 ### What You'll Need
 - Hostinger VPS access (IP address, root password)
-- Domain name (e.g., marqasouq.com)
+- Domain name (e.g., naema.com)
 - SSH client (Terminal on Mac/Linux, PuTTY on Windows)
 - Your local project files
 
@@ -298,9 +298,9 @@ redis-cli ping
 
 ```bash
 # Create directory for your application
-sudo mkdir -p /var/www/marqa-souq
-sudo chown -R $USER:$USER /var/www/marqa-souq
-cd /var/www/marqa-souq
+sudo mkdir -p /var/www/naema
+sudo chown -R $USER:$USER /var/www/naema
+cd /var/www/naema
 ```
 
 ### Step 6.2: Upload Your Project Files
@@ -309,23 +309,23 @@ cd /var/www/marqa-souq
 
 ```bash
 # Clone your repository
-git clone https://github.com/YOUR_USERNAME/marqa-souq.git .
+git clone https://github.com/YOUR_USERNAME/naema.git .
 
 # Or if private repository
-git clone https://YOUR_TOKEN@github.com/YOUR_USERNAME/marqa-souq.git .
+git clone https://YOUR_TOKEN@github.com/YOUR_USERNAME/naema.git .
 ```
 
 **Option B: Using SCP (From your local machine)**
 
 ```bash
 # On your LOCAL machine, run:
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa
 
 # Upload backend
-scp -r backend marqa@YOUR_VPS_IP:/var/www/marqa-souq/
+scp -r backend marqa@YOUR_VPS_IP:/var/www/naema/
 
 # Upload frontend
-scp -r frontend marqa@YOUR_VPS_IP:/var/www/marqa-souq/
+scp -r frontend marqa@YOUR_VPS_IP:/var/www/naema/
 ```
 
 **Option C: Using rsync (Recommended for large files)**
@@ -336,15 +336,15 @@ rsync -avz --progress \
   --exclude 'node_modules' \
   --exclude '.next' \
   --exclude '.medusa' \
-  /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/ \
-  marqa@YOUR_VPS_IP:/var/www/marqa-souq/
+  /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/ \
+  marqa@YOUR_VPS_IP:/var/www/naema/
 ```
 
 ### Step 6.3: Set Up Medusa Backend
 
 ```bash
 # Navigate to backend directory
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 
 # Install dependencies
 yarn install
@@ -369,12 +369,12 @@ JWT_SECRET=your-super-secret-jwt-key-change-this-to-random-string-64chars
 COOKIE_SECRET=your-super-secret-cookie-key-change-this-to-random-string-64chars
 
 # CORS Configuration (replace with your actual domains)
-STORE_CORS=https://marqasouq.com,https://www.marqasouq.com
-ADMIN_CORS=https://admin.marqasouq.com,https://marqasouq.com
-AUTH_CORS=https://marqasouq.com,https://admin.marqasouq.com
+STORE_CORS=https://naema.com,https://www.naema.com
+ADMIN_CORS=https://admin.naema.com,https://naema.com
+AUTH_CORS=https://naema.com,https://admin.naema.com
 
 # Backend URL
-BACKEND_URL=https://api.marqasouq.com
+BACKEND_URL=https://api.naema.com
 
 # Node Environment
 NODE_ENV=production
@@ -434,7 +434,7 @@ yarn start
 
 ```bash
 # Navigate to frontend directory
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 
 # Install dependencies
 yarn install
@@ -447,8 +447,8 @@ nano .env.production.local
 
 ```bash
 # Add to .env.production.local
-NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://api.marqasouq.com
-NEXT_PUBLIC_BASE_URL=https://marqasouq.com
+NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://api.naema.com
+NEXT_PUBLIC_BASE_URL=https://naema.com
 
 # If you have publishable API key
 NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_your_publishable_key
@@ -495,7 +495,7 @@ sudo systemctl status nginx
 
 ```bash
 # Create config for API
-sudo nano /etc/nginx/sites-available/api.marqasouq.com
+sudo nano /etc/nginx/sites-available/api.naema.com
 ```
 
 Add the following configuration:
@@ -504,7 +504,7 @@ Add the following configuration:
 # Medusa Backend API Configuration
 server {
     listen 80;
-    server_name api.marqasouq.com;
+    server_name api.naema.com;
 
     # Redirect HTTP to HTTPS (after SSL setup)
     # return 301 https://$server_name$request_uri;
@@ -528,7 +528,7 @@ server {
 
     # Static files for uploads
     location /uploads {
-        alias /var/www/marqa-souq/backend/my-medusa-store/static/uploads;
+        alias /var/www/naema/backend/my-medusa-store/static/uploads;
         expires 30d;
         add_header Cache-Control "public, immutable";
     }
@@ -539,7 +539,7 @@ server {
 
 ```bash
 # Create config for frontend
-sudo nano /etc/nginx/sites-available/marqasouq.com
+sudo nano /etc/nginx/sites-available/naema.com
 ```
 
 Add the following configuration:
@@ -548,7 +548,7 @@ Add the following configuration:
 # Next.js Frontend Configuration
 server {
     listen 80;
-    server_name marqasouq.com www.marqasouq.com;
+    server_name naema.com www.naema.com;
 
     # Redirect HTTP to HTTPS (after SSL setup)
     # return 301 https://$server_name$request_uri;
@@ -573,7 +573,7 @@ server {
     }
 
     location /public {
-        alias /var/www/marqa-souq/frontend/markasouq-web/public;
+        alias /var/www/naema/frontend/Naema-web/public;
         expires 30d;
         add_header Cache-Control "public";
     }
@@ -587,8 +587,8 @@ server {
 
 ```bash
 # Create symbolic links to enable sites
-sudo ln -s /etc/nginx/sites-available/api.marqasouq.com /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/marqasouq.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/api.naema.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/naema.com /etc/nginx/sites-enabled/
 
 # Remove default site
 sudo rm /etc/nginx/sites-enabled/default
@@ -615,10 +615,10 @@ sudo apt install -y certbot python3-certbot-nginx
 
 ```bash
 # Get certificate for API domain
-sudo certbot --nginx -d api.marqasouq.com
+sudo certbot --nginx -d api.naema.com
 
 # Get certificate for frontend domain
-sudo certbot --nginx -d marqasouq.com -d www.marqasouq.com
+sudo certbot --nginx -d naema.com -d www.naema.com
 
 # Follow prompts:
 # - Enter email address
@@ -643,7 +643,7 @@ sudo certbot renew --dry-run
 
 ```bash
 # Navigate to project root
-cd /var/www/marqa-souq
+cd /var/www/naema
 
 # Create PM2 ecosystem file
 nano ecosystem.config.js
@@ -656,7 +656,7 @@ module.exports = {
   apps: [
     {
       name: 'medusa-backend',
-      cwd: '/var/www/marqa-souq/backend/my-medusa-store',
+      cwd: '/var/www/naema/backend/my-medusa-store',
       script: 'yarn',
       args: 'start:production',
       instances: 1,
@@ -674,7 +674,7 @@ module.exports = {
     },
     {
       name: 'nextjs-frontend',
-      cwd: '/var/www/marqa-souq/frontend/markasouq-web',
+      cwd: '/var/www/naema/frontend/Naema-web',
       script: 'yarn',
       args: 'start',
       instances: 1,
@@ -777,8 +777,8 @@ pm2 show medusa-backend
 
 ```bash
 # Check DNS propagation (from your local machine)
-dig marqasouq.com
-dig api.marqasouq.com
+dig naema.com
+dig api.naema.com
 
 # Or use online tool: https://dnschecker.org
 ```
@@ -844,7 +844,7 @@ pm2 logs medusa-backend --lines 100
 sudo lsof -i :9000
 
 # Manually test
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 yarn start
 ```
 
@@ -855,7 +855,7 @@ yarn start
 export NODE_OPTIONS="--max-old-space-size=4096"
 
 # Rebuild
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 rm -rf .next node_modules
 yarn install
 yarn build
@@ -878,7 +878,7 @@ sudo nginx -t
 
 ```bash
 # Update backend .env with correct CORS origins
-nano /var/www/marqa-souq/backend/my-medusa-store/.env
+nano /var/www/naema/backend/my-medusa-store/.env
 
 # Make sure STORE_CORS, ADMIN_CORS, AUTH_CORS include all your domains
 # Restart backend
@@ -943,7 +943,7 @@ pm2 flush
 
 ```bash
 # Pull latest code (if using Git)
-cd /var/www/marqa-souq
+cd /var/www/naema
 git pull origin main
 
 # Update backend
@@ -953,7 +953,7 @@ yarn build:production
 pm2 restart medusa-backend
 
 # Update frontend
-cd ../../frontend/markasouq-web
+cd ../../frontend/Naema-web
 yarn install
 yarn build
 pm2 restart nextjs-frontend
@@ -965,12 +965,12 @@ pm2 restart nextjs-frontend
 
 ```bash
 # Create backup script
-nano /var/www/marqa-souq/scripts/backup-db.sh
+nano /var/www/naema/scripts/backup-db.sh
 ```
 
 ```bash
 #!/bin/bash
-BACKUP_DIR="/var/backups/marqa-souq"
+BACKUP_DIR="/var/backups/naema"
 DATE=$(date +%Y%m%d_%H%M%S)
 mkdir -p $BACKUP_DIR
 
@@ -985,21 +985,21 @@ echo "Backup completed: db_backup_$DATE.sql"
 
 ```bash
 # Make executable
-chmod +x /var/www/marqa-souq/scripts/backup-db.sh
+chmod +x /var/www/naema/scripts/backup-db.sh
 
 # Add to crontab (daily backup at 2 AM)
 crontab -e
 
 # Add line:
-0 2 * * * /var/www/marqa-souq/scripts/backup-db.sh
+0 2 * * * /var/www/naema/scripts/backup-db.sh
 ```
 
 #### Files Backup
 
 ```bash
 # Backup uploads folder
-tar -czvf /var/backups/marqa-souq/uploads_$(date +%Y%m%d).tar.gz \
-  /var/www/marqa-souq/backend/my-medusa-store/static/uploads
+tar -czvf /var/backups/naema/uploads_$(date +%Y%m%d).tar.gz \
+  /var/www/naema/backend/my-medusa-store/static/uploads
 ```
 
 ---
@@ -1026,14 +1026,14 @@ pm2 logs
 sudo tail -f /var/log/nginx/error.log
 
 # Update and restart backend
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 git pull
 yarn install
 yarn build:production
 pm2 restart medusa-backend
 
 # Update and restart frontend
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 git pull
 yarn install
 yarn build
@@ -1067,10 +1067,10 @@ pm2 restart nextjs-frontend
 
 ---
 
-**Congratulations! 🎉** Your Marqa Souq application should now be deployed and running on your Hostinger VPS server.
+**Congratulations! 🎉** Your naema application should now be deployed and running on your Hostinger VPS server.
 
 **Next Steps:**
-1. Access your admin dashboard at `https://api.marqasouq.com/app`
+1. Access your admin dashboard at `https://api.naema.com/app`
 2. Create an admin user
 3. Configure your store settings
 4. Add products and start selling!

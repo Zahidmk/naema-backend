@@ -65,12 +65,12 @@ rsync -avz --progress \
   --exclude '.next' \
   --exclude '.medusa' \
   /path/to/medusa/ \
-  root@YOUR_VPS_IP:/var/www/marqa-souq/
+  root@YOUR_VPS_IP:/var/www/naema/
 ```
 
 ### 5️⃣ Configure Backend Environment
 ```bash
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 cp .env.production.template .env
 nano .env
 # Update DATABASE_URL, JWT_SECRET, COOKIE_SECRET, CORS settings
@@ -78,7 +78,7 @@ nano .env
 
 ### 6️⃣ Build & Deploy Backend
 ```bash
-cd /var/www/marqa-souq/backend/my-medusa-store
+cd /var/www/naema/backend/my-medusa-store
 yarn install
 yarn build:production
 npx medusa db:migrate
@@ -86,7 +86,7 @@ npx medusa db:migrate
 
 ### 7️⃣ Configure Frontend Environment
 ```bash
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 cp .env.production.template .env.production.local
 nano .env.production.local
 # Update NEXT_PUBLIC_MEDUSA_BACKEND_URL
@@ -94,7 +94,7 @@ nano .env.production.local
 
 ### 8️⃣ Build Frontend
 ```bash
-cd /var/www/marqa-souq/frontend/markasouq-web
+cd /var/www/naema/frontend/Naema-web
 yarn install
 export NODE_OPTIONS="--max-old-space-size=4096"
 yarn build
@@ -102,7 +102,7 @@ yarn build
 
 ### 9️⃣ Start with PM2
 ```bash
-cd /var/www/marqa-souq
+cd /var/www/naema
 pm2 start ecosystem.config.js
 pm2 save
 pm2 startup
@@ -111,8 +111,8 @@ pm2 startup
 ### 🔟 Configure Nginx & SSL
 ```bash
 # Copy nginx configs (see main documentation)
-sudo certbot --nginx -d api.marqasouq.com
-sudo certbot --nginx -d marqasouq.com -d www.marqasouq.com
+sudo certbot --nginx -d api.naema.com
+sudo certbot --nginx -d naema.com -d www.naema.com
 ```
 
 ---

@@ -73,7 +73,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       alt_text: m.alt_text || null,
       thumbnail: makeAbsolute(m.thumbnail_url || null),
       thumbnail_url: makeAbsolute(m.thumbnail_url || null),
-      brand: m.brand || 'Markasouq',
+      brand: m.brand || 'Naema',
       brand_logo_url: m.brand ? (brandLogoMap.get(m.brand) ?? null) : null,
       views: m.views || 0,
       display_order: m.display_order || 0,

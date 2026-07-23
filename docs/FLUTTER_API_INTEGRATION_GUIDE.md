@@ -5,7 +5,7 @@
 
 | Setting | Production Value |
 |---------|------------------|
-| **Base URL** | `https://admin.markasouqs.com` |
+| **Base URL** | `https://admin.naemafoodstuff.com` |
 | **Publishable API Key** | `pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b` |
 | **Region ID (Kuwait)** | `reg_01KAARY0EYGZY423VSZV7DVX25` |
 
@@ -55,15 +55,15 @@ headers['Authorization'] = 'Bearer $customerToken';
 
 ```bash
 # Test Products API
-curl -X GET "https://admin.markasouqs.com/store/products?limit=5&region_id=reg_01KAARY0EYGZY423VSZV7DVX25" \
+curl -X GET "https://admin.naemafoodstuff.com/store/products?limit=5&region_id=reg_01KAARY0EYGZY423VSZV7DVX25" \
   -H "x-publishable-api-key: pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b"
 
 # Test Regions API
-curl -X GET "https://admin.markasouqs.com/store/regions" \
+curl -X GET "https://admin.naemafoodstuff.com/store/regions" \
   -H "x-publishable-api-key: pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b"
 
 # Test Categories API
-curl -X GET "https://admin.markasouqs.com/store/product-categories" \
+curl -X GET "https://admin.naemafoodstuff.com/store/product-categories" \
   -H "x-publishable-api-key: pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b"
 ```
 
@@ -86,7 +86,7 @@ MedusaJS 2.x uses a **3-step registration process**:
 ### 2.1 Customer Registration (Step 1 of 3)
 
 ```
-POST https://admin.markasouqs.com/auth/customer/emailpass/register
+POST https://admin.naemafoodstuff.com/auth/customer/emailpass/register
 ```
 
 *Headers:*
@@ -115,7 +115,7 @@ x-publishable-api-key: pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628af
 ### 2.2 Create Customer Profile (Step 2 of 3) - REQUIRED AFTER REGISTRATION
 
 ```
-POST https://admin.markasouqs.com/store/customers
+POST https://admin.naemafoodstuff.com/store/customers
 ```
 
 *Headers:*
@@ -153,7 +153,7 @@ Authorization: Bearer <token_from_registration>
 ### 2.3 Customer Login (Step 3 of 3 OR for returning users)
 
 ```
-POST https://admin.markasouqs.com/auth/customer/emailpass
+POST https://admin.naemafoodstuff.com/auth/customer/emailpass
 ```
 
 *Headers:*
@@ -184,7 +184,7 @@ x-publishable-api-key: pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628af
 ### 2.4 Get Logged-in Customer
 
 ```
-GET https://admin.markasouqs.com/store/customers/me
+GET https://admin.naemafoodstuff.com/store/customers/me
 ```
 
 *Headers:*
@@ -215,7 +215,7 @@ Authorization: Bearer <token_from_login>
 
 ```dart
 class AuthService {
-  static const String baseUrl = 'https://admin.markasouqs.com';
+  static const String baseUrl = 'https://admin.naemafoodstuff.com';
   static const String publishableKey = 'pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b';
 
   /// Complete registration flow - call this for new user signup
@@ -311,7 +311,7 @@ class AuthService {
 ### 2.5 Update Customer Profile
 
 ```
-POST https://admin.markasouqs.com/store/customers/me
+POST https://admin.naemafoodstuff.com/store/customers/me
 ```
 
 *Headers:* Requires `Authorization: Bearer {token}`
@@ -332,7 +332,7 @@ POST https://admin.markasouqs.com/store/customers/me
 ### 3.1 List Products
 
 ```
-GET https://admin.markasouqs.com/store/products
+GET https://admin.naemafoodstuff.com/store/products
 ```
 
 *Query Parameters:*
@@ -348,7 +348,7 @@ GET https://admin.markasouqs.com/store/products
 
 *Example Request:*
 ```
-GET https://admin.markasouqs.com/store/products?limit=20&offset=0&region_id=reg_01KAARY0EYGZY423VSZV7DVX25
+GET https://admin.naemafoodstuff.com/store/products?limit=20&offset=0&region_id=reg_01KAARY0EYGZY423VSZV7DVX25
 ```
 
 *Response:*
@@ -360,11 +360,11 @@ GET https://admin.markasouqs.com/store/products?limit=20&offset=0&region_id=reg_
       "title": "Liberty Guard Intelligent Film Cutting Plotter 16-inch-Orange",
       "handle": "liberty-guard-intelligent-film-cutting-plotter",
       "description": "Professional film cutting plotter...",
-      "thumbnail": "https://admin.markasouqs.com/static/uploads/image.jpg",
+      "thumbnail": "https://admin.naemafoodstuff.com/static/uploads/image.jpg",
       "images": [
         {
           "id": "img_01ABC",
-          "url": "https://admin.markasouqs.com/static/uploads/image1.jpg"
+          "url": "https://admin.naemafoodstuff.com/static/uploads/image1.jpg"
         }
       ],
       "variants": [
@@ -405,7 +405,7 @@ GET https://admin.markasouqs.com/store/products?limit=20&offset=0&region_id=reg_
 ### 3.2 Get Single Product
 
 ```
-GET https://admin.markasouqs.com/store/products/{product_id}
+GET https://admin.naemafoodstuff.com/store/products/{product_id}
 ```
 
 *Query Parameters:*
@@ -416,7 +416,7 @@ GET https://admin.markasouqs.com/store/products/{product_id}
 
 *Example:*
 ```
-GET https://admin.markasouqs.com/store/products/prod_01KEVBHW78T3MQXDHP9ZVVSRCF?region_id=reg_01KAARY0EYGZY423VSZV7DVX25&fields=+variants.calculated_price
+GET https://admin.naemafoodstuff.com/store/products/prod_01KEVBHW78T3MQXDHP9ZVVSRCF?region_id=reg_01KAARY0EYGZY423VSZV7DVX25&fields=+variants.calculated_price
 ```
 
 *Response:*
@@ -427,7 +427,7 @@ GET https://admin.markasouqs.com/store/products/prod_01KEVBHW78T3MQXDHP9ZVVSRCF?
     "title": "Liberty Guard Intelligent Film Cutting Plotter",
     "handle": "liberty-guard-intelligent-film-cutting-plotter",
     "description": "Full product description...",
-    "thumbnail": "https://admin.markasouqs.com/static/uploads/thumb.jpg",
+    "thumbnail": "https://admin.naemafoodstuff.com/static/uploads/thumb.jpg",
     "images": [...],
     "variants": [...],
     "options": [
@@ -448,12 +448,12 @@ GET https://admin.markasouqs.com/store/products/prod_01KEVBHW78T3MQXDHP9ZVVSRCF?
 ### 3.3 Search Products
 
 ```
-GET https://admin.markasouqs.com/store/products?q={search_term}
+GET https://admin.naemafoodstuff.com/store/products?q={search_term}
 ```
 
 *Example:*
 ```
-GET https://admin.markasouqs.com/store/products?q=iPhone&limit=20&region_id=reg_01KAARY0EYGZY423VSZV7DVX25
+GET https://admin.naemafoodstuff.com/store/products?q=iPhone&limit=20&region_id=reg_01KAARY0EYGZY423VSZV7DVX25
 ```
 
 ---
@@ -463,7 +463,7 @@ GET https://admin.markasouqs.com/store/products?q=iPhone&limit=20&region_id=reg_
 ### 4.1 List All Categories
 
 ```
-GET https://admin.markasouqs.com/store/product-categories
+GET https://admin.naemafoodstuff.com/store/product-categories
 ```
 
 *Query Parameters:*
@@ -506,13 +506,13 @@ GET https://admin.markasouqs.com/store/product-categories
 ### 4.2 Get Single Category
 
 ```
-GET https://admin.markasouqs.com/store/product-categories/{category_id}
+GET https://admin.naemafoodstuff.com/store/product-categories/{category_id}
 ```
 
 ### 4.3 Get Products by Category
 
 ```
-GET https://admin.markasouqs.com/store/products?category_id={category_id}&region_id=reg_01KAARY0EYGZY423VSZV7DVX25
+GET https://admin.naemafoodstuff.com/store/products?category_id={category_id}&region_id=reg_01KAARY0EYGZY423VSZV7DVX25
 ```
 
 ---
@@ -522,7 +522,7 @@ GET https://admin.markasouqs.com/store/products?category_id={category_id}&region
 ### 5.1 List All Brands
 
 ```
-GET https://admin.markasouqs.com/store/brands
+GET https://admin.naemafoodstuff.com/store/brands
 ```
 
 *Query Parameters:*
@@ -560,12 +560,12 @@ GET https://admin.markasouqs.com/store/brands
 ### 5.2 Get Brand by Slug
 
 ```
-GET https://admin.markasouqs.com/store/brands/{slug}
+GET https://admin.naemafoodstuff.com/store/brands/{slug}
 ```
 
 *Example:*
 ```
-GET https://admin.markasouqs.com/store/brands/apple?region_id=reg_01KAARY0EYGZY423VSZV7DVX25
+GET https://admin.naemafoodstuff.com/store/brands/apple?region_id=reg_01KAARY0EYGZY423VSZV7DVX25
 ```
 
 *Response:*
@@ -598,7 +598,7 @@ GET https://admin.markasouqs.com/store/brands/apple?region_id=reg_01KAARY0EYGZY4
 ### 6.1 Create Cart
 
 ```
-POST https://admin.markasouqs.com/store/carts
+POST https://admin.naemafoodstuff.com/store/carts
 ```
 
 *Request Body:*
@@ -626,7 +626,7 @@ POST https://admin.markasouqs.com/store/carts
 ### 6.2 Get Cart
 
 ```
-GET https://admin.markasouqs.com/store/carts/{cart_id}
+GET https://admin.naemafoodstuff.com/store/carts/{cart_id}
 ```
 
 *Response:*
@@ -665,7 +665,7 @@ GET https://admin.markasouqs.com/store/carts/{cart_id}
 ### 6.3 Add Item to Cart
 
 ```
-POST https://admin.markasouqs.com/store/carts/{cart_id}/line-items
+POST https://admin.naemafoodstuff.com/store/carts/{cart_id}/line-items
 ```
 
 *Request Body:*
@@ -679,7 +679,7 @@ POST https://admin.markasouqs.com/store/carts/{cart_id}/line-items
 ### 6.4 Update Cart Item Quantity
 
 ```
-POST https://admin.markasouqs.com/store/carts/{cart_id}/line-items/{line_item_id}
+POST https://admin.naemafoodstuff.com/store/carts/{cart_id}/line-items/{line_item_id}
 ```
 
 *Request Body:*
@@ -692,13 +692,13 @@ POST https://admin.markasouqs.com/store/carts/{cart_id}/line-items/{line_item_id
 ### 6.5 Remove Item from Cart
 
 ```
-DELETE https://admin.markasouqs.com/store/carts/{cart_id}/line-items/{line_item_id}
+DELETE https://admin.naemafoodstuff.com/store/carts/{cart_id}/line-items/{line_item_id}
 ```
 
 ### 6.6 Add Shipping Address
 
 ```
-POST https://admin.markasouqs.com/store/carts/{cart_id}
+POST https://admin.naemafoodstuff.com/store/carts/{cart_id}
 ```
 
 *Request Body:*
@@ -719,7 +719,7 @@ POST https://admin.markasouqs.com/store/carts/{cart_id}
 ### 6.7 Select Shipping Option
 
 ```
-POST https://admin.markasouqs.com/store/carts/{cart_id}/shipping-methods
+POST https://admin.naemafoodstuff.com/store/carts/{cart_id}/shipping-methods
 ```
 
 *Request Body:*
@@ -732,7 +732,7 @@ POST https://admin.markasouqs.com/store/carts/{cart_id}/shipping-methods
 ### 6.8 Add Payment Session
 
 ```
-POST https://admin.markasouqs.com/store/carts/{cart_id}/payment-sessions
+POST https://admin.naemafoodstuff.com/store/carts/{cart_id}/payment-sessions
 ```
 
 *Request Body:*
@@ -749,7 +749,7 @@ POST https://admin.markasouqs.com/store/carts/{cart_id}/payment-sessions
 ### 7.1 Complete Cart (Place Order)
 
 ```
-POST https://admin.markasouqs.com/store/carts/{cart_id}/complete
+POST https://admin.naemafoodstuff.com/store/carts/{cart_id}/complete
 ```
 
 *Response:*
@@ -775,7 +775,7 @@ POST https://admin.markasouqs.com/store/carts/{cart_id}/complete
 ### 7.2 List Customer Orders
 
 ```
-GET https://admin.markasouqs.com/store/orders
+GET https://admin.naemafoodstuff.com/store/orders
 ```
 
 *Headers:* Requires `Authorization: Bearer {token}`
@@ -803,7 +803,7 @@ GET https://admin.markasouqs.com/store/orders
 ### 7.3 Get Single Order
 
 ```
-GET https://admin.markasouqs.com/store/orders/{order_id}
+GET https://admin.naemafoodstuff.com/store/orders/{order_id}
 ```
 
 ---
@@ -813,7 +813,7 @@ GET https://admin.markasouqs.com/store/orders/{order_id}
 ### 8.1 Get Customer Profile
 
 ```
-GET https://admin.markasouqs.com/store/customers/me
+GET https://admin.naemafoodstuff.com/store/customers/me
 ```
 
 *Headers:* Requires `Authorization: Bearer {token}`
@@ -821,7 +821,7 @@ GET https://admin.markasouqs.com/store/customers/me
 ### 8.2 Update Customer Profile
 
 ```
-POST https://admin.markasouqs.com/store/customers/me
+POST https://admin.naemafoodstuff.com/store/customers/me
 ```
 
 *Request Body:*
@@ -839,7 +839,7 @@ POST https://admin.markasouqs.com/store/customers/me
 ### 8.3 List Customer Addresses
 
 ```
-GET https://admin.markasouqs.com/store/customers/me/addresses
+GET https://admin.naemafoodstuff.com/store/customers/me/addresses
 ```
 
 *Response:*
@@ -863,7 +863,7 @@ GET https://admin.markasouqs.com/store/customers/me/addresses
 ### 8.4 Add New Address
 
 ```
-POST https://admin.markasouqs.com/store/customers/me/addresses
+POST https://admin.naemafoodstuff.com/store/customers/me/addresses
 ```
 
 *Request Body:*
@@ -882,13 +882,13 @@ POST https://admin.markasouqs.com/store/customers/me/addresses
 ### 8.5 Update Address
 
 ```
-POST https://admin.markasouqs.com/store/customers/me/addresses/{address_id}
+POST https://admin.naemafoodstuff.com/store/customers/me/addresses/{address_id}
 ```
 
 ### 8.6 Delete Address
 
 ```
-DELETE https://admin.markasouqs.com/store/customers/me/addresses/{address_id}
+DELETE https://admin.naemafoodstuff.com/store/customers/me/addresses/{address_id}
 ```
 
 ---
@@ -898,7 +898,7 @@ DELETE https://admin.markasouqs.com/store/customers/me/addresses/{address_id}
 ### 9.1 Get Wishlist
 
 ```
-GET https://admin.markasouqs.com/store/wishlist
+GET https://admin.naemafoodstuff.com/store/wishlist
 ```
 
 *Headers:* Requires `Authorization: Bearer {token}`
@@ -924,7 +924,7 @@ GET https://admin.markasouqs.com/store/wishlist
 ### 9.2 Add to Wishlist
 
 ```
-POST https://admin.markasouqs.com/store/wishlist/items
+POST https://admin.naemafoodstuff.com/store/wishlist/items
 ```
 
 *Request Body:*
@@ -938,7 +938,7 @@ POST https://admin.markasouqs.com/store/wishlist/items
 ### 9.3 Remove from Wishlist
 
 ```
-DELETE https://admin.markasouqs.com/store/wishlist/items/{item_id}
+DELETE https://admin.naemafoodstuff.com/store/wishlist/items/{item_id}
 ```
 
 ---
@@ -948,7 +948,7 @@ DELETE https://admin.markasouqs.com/store/wishlist/items/{item_id}
 ### 10.1 Get Homepage Data
 
 ```
-GET https://admin.markasouqs.com/store/homepage
+GET https://admin.naemafoodstuff.com/store/homepage
 ```
 
 *Response:*
@@ -960,7 +960,7 @@ GET https://admin.markasouqs.com/store/homepage
         "id": "banner_01ABC",
         "title": "Summer Sale",
         "subtitle": "Up to 50% off",
-        "image_url": "https://admin.markasouqs.com/static/uploads/hero-1.avif",
+        "image_url": "https://admin.naemafoodstuff.com/static/uploads/hero-1.avif",
         "link": "/collections/summer-sale",
         "display_order": 1
       }
@@ -975,7 +975,7 @@ GET https://admin.markasouqs.com/store/homepage
 ### 10.2 Get Hero Banners
 
 ```
-GET https://admin.markasouqs.com/store/media/banners?type=hero
+GET https://admin.naemafoodstuff.com/store/media/banners?type=hero
 ```
 
 *Response:*
@@ -986,8 +986,8 @@ GET https://admin.markasouqs.com/store/media/banners?type=hero
       "id": "banner_01ABC",
       "title": "New Arrivals",
       "subtitle": "Check out our latest products",
-      "image_url": "https://admin.markasouqs.com/static/uploads/hero-1.avif",
-      "mobile_image_url": "https://admin.markasouqs.com/static/uploads/hero-1-mobile.avif",
+      "image_url": "https://admin.naemafoodstuff.com/static/uploads/hero-1.avif",
+      "mobile_image_url": "https://admin.naemafoodstuff.com/static/uploads/hero-1-mobile.avif",
       "link": "/collections/new-arrivals",
       "is_active": true,
       "display_order": 1
@@ -999,13 +999,13 @@ GET https://admin.markasouqs.com/store/media/banners?type=hero
 ### 10.3 Get Single Banners
 
 ```
-GET https://admin.markasouqs.com/store/media/banners?type=single
+GET https://admin.naemafoodstuff.com/store/media/banners?type=single
 ```
 
 ### 10.4 Get Dual Banners
 
 ```
-GET https://admin.markasouqs.com/store/media/banners?type=dual
+GET https://admin.naemafoodstuff.com/store/media/banners?type=dual
 ```
 
 ---
@@ -1015,7 +1015,7 @@ GET https://admin.markasouqs.com/store/media/banners?type=dual
 ### 11.1 Get Media Items
 
 ```
-GET https://admin.markasouqs.com/store/media
+GET https://admin.naemafoodstuff.com/store/media
 ```
 
 *Query Parameters:*
@@ -1033,8 +1033,8 @@ GET https://admin.markasouqs.com/store/media
       "id": "media_01ABC",
       "title": "Product Demo Video",
       "type": "video",
-      "url": "https://admin.markasouqs.com/static/uploads/video.mp4",
-      "thumbnail_url": "https://admin.markasouqs.com/static/uploads/thumb.png",
+      "url": "https://admin.naemafoodstuff.com/static/uploads/video.mp4",
+      "thumbnail_url": "https://admin.naemafoodstuff.com/static/uploads/thumb.png",
       "views": 266,
       "is_active": true
     }
@@ -1046,7 +1046,7 @@ GET https://admin.markasouqs.com/store/media
 ### 11.2 Get Single Media
 
 ```
-GET https://admin.markasouqs.com/store/media/{media_id}
+GET https://admin.naemafoodstuff.com/store/media/{media_id}
 ```
 
 ---
@@ -1056,7 +1056,7 @@ GET https://admin.markasouqs.com/store/media/{media_id}
 ### 12.1 Get Product Reviews
 
 ```
-GET https://admin.markasouqs.com/store/products/{product_id}/reviews
+GET https://admin.naemafoodstuff.com/store/products/{product_id}/reviews
 ```
 
 *Response:*
@@ -1083,7 +1083,7 @@ GET https://admin.markasouqs.com/store/products/{product_id}/reviews
 ### 12.2 Submit Review
 
 ```
-POST https://admin.markasouqs.com/store/products/{product_id}/reviews
+POST https://admin.naemafoodstuff.com/store/products/{product_id}/reviews
 ```
 
 *Headers:* Requires `Authorization: Bearer {token}`
@@ -1104,7 +1104,7 @@ POST https://admin.markasouqs.com/store/products/{product_id}/reviews
 ### 13.1 List Regions
 
 ```
-GET https://admin.markasouqs.com/store/regions
+GET https://admin.naemafoodstuff.com/store/regions
 ```
 
 *Response:*
@@ -1135,7 +1135,7 @@ GET https://admin.markasouqs.com/store/regions
 ### 13.2 Get Shipping Options
 
 ```
-GET https://admin.markasouqs.com/store/shipping-options
+GET https://admin.naemafoodstuff.com/store/shipping-options
 ```
 
 *Query Parameters:*
@@ -1176,7 +1176,7 @@ GET https://admin.markasouqs.com/store/shipping-options
 ### 14.1 Check Warranty Status
 
 ```
-GET https://admin.markasouqs.com/store/warranty/{product_id}
+GET https://admin.naemafoodstuff.com/store/warranty/{product_id}
 ```
 
 *Response:*
@@ -1194,7 +1194,7 @@ GET https://admin.markasouqs.com/store/warranty/{product_id}
 ### 14.2 Register Warranty
 
 ```
-POST https://admin.markasouqs.com/store/warranty/register
+POST https://admin.naemafoodstuff.com/store/warranty/register
 ```
 
 *Headers:* Requires `Authorization: Bearer {token}`
@@ -1215,7 +1215,7 @@ POST https://admin.markasouqs.com/store/warranty/register
 ### 15.1 List Sellers
 
 ```
-GET https://admin.markasouqs.com/store/sellers
+GET https://admin.naemafoodstuff.com/store/sellers
 ```
 
 *Response:*
@@ -1226,7 +1226,7 @@ GET https://admin.markasouqs.com/store/sellers
       "id": "seller_01ABC",
       "name": "TechZone Kuwait",
       "description": "Premium electronics retailer",
-      "logo_url": "https://admin.markasouqs.com/static/uploads/techzone.png",
+      "logo_url": "https://admin.naemafoodstuff.com/static/uploads/techzone.png",
       "rating": 4.8,
       "total_products": 150
     }
@@ -1237,7 +1237,7 @@ GET https://admin.markasouqs.com/store/sellers
 ### 15.2 Get Seller Products
 
 ```
-GET https://admin.markasouqs.com/store/sellers/{seller_id}/products?region_id=reg_01KAARY0EYGZY423VSZV7DVX25
+GET https://admin.naemafoodstuff.com/store/sellers/{seller_id}/products?region_id=reg_01KAARY0EYGZY423VSZV7DVX25
 ```
 
 ---
@@ -1247,18 +1247,18 @@ GET https://admin.markasouqs.com/store/sellers/{seller_id}/products?region_id=re
 ### 16.1 Search Products
 
 ```
-GET https://admin.markasouqs.com/store/products?q={search_query}
+GET https://admin.naemafoodstuff.com/store/products?q={search_query}
 ```
 
 *Example:*
 ```
-GET https://admin.markasouqs.com/store/products?q=powerbank&limit=20&region_id=reg_01KAARY0EYGZY423VSZV7DVX25
+GET https://admin.naemafoodstuff.com/store/products?q=powerbank&limit=20&region_id=reg_01KAARY0EYGZY423VSZV7DVX25
 ```
 
 ### 16.2 Search Suggestions (Autocomplete)
 
 ```
-GET https://admin.markasouqs.com/store/products?q={partial_query}&limit=5&fields=id,title,thumbnail
+GET https://admin.naemafoodstuff.com/store/products?q={partial_query}&limit=5&fields=id,title,thumbnail
 ```
 
 ---
@@ -1309,7 +1309,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   // ✅ CORRECT PRODUCTION VALUES
-  static const String baseUrl = 'https://admin.markasouqs.com';
+  static const String baseUrl = 'https://admin.naemafoodstuff.com';
   static const String publishableKey = 'pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b';
   static const String regionId = 'reg_01KAARY0EYGZY423VSZV7DVX25';
   
@@ -1657,7 +1657,7 @@ void main() async {
 
 3. **Inventory**: Stock quantities are synced from Odoo ERP in real-time.
 
-4. **Images**: Product images are served from `https://admin.markasouqs.com/static/uploads/`
+4. **Images**: Product images are served from `https://admin.naemafoodstuff.com/static/uploads/`
 
 5. **RTL Support**: Arabic content is available. Check `metadata.title_ar` for Arabic titles.
 
@@ -1669,7 +1669,7 @@ void main() async {
 
 | Item | Value |
 |------|-------|
-| **Production Base URL** | `https://admin.markasouqs.com` |
+| **Production Base URL** | `https://admin.naemafoodstuff.com` |
 | **Development Base URL** | `http://localhost:9000` |
 | **Publishable API Key** | `pk_3971873a84ad4ec5ea711738227a4be2f078a2fd872f40125628afc860b9887b` |
 | **Region ID (Kuwait)** | `reg_01KAARY0EYGZY423VSZV7DVX25` |
@@ -1683,5 +1683,5 @@ void main() async {
 
 For API issues or questions, contact the development team.
 
-**Website:** https://website.markasouqs.com  
-**Admin Dashboard:** https://admin.markasouqs.com/app
+**Website:** https://website.naemafoodstuff.com  
+**Admin Dashboard:** https://admin.naemafoodstuff.com/app

@@ -84,7 +84,7 @@ psql -l | grep marqa_souq_dev
 
 Navigate to backend directory:
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 ```
 
 #### Check if .env file exists:
@@ -143,7 +143,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 ```bash
 # Make sure you're in backend directory
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 
 # Clear any old modules
 rm -rf node_modules
@@ -232,16 +232,16 @@ yarn install
 **Open a NEW terminal (keep backend running):**
 
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 
 # Create admin user
-yarn medusa user --email admin@marqasouq.com --password admin123
+yarn medusa user --email admin@naema.com --password admin123
 ```
 
 **Expected output:**
 ```
 ✔ User created successfully!
-Email: admin@marqasouq.com
+Email: admin@naema.com
 ```
 
 **Alternative: Interactive mode**
@@ -285,7 +285,7 @@ yarn seed
    ```
 
 2. **Login with:**
-   - Email: `admin@marqasouq.com`
+   - Email: `admin@naema.com`
    - Password: `admin123`
 
 3. **Verify you can access:**
@@ -315,7 +315,7 @@ yarn seed
 **Open a NEW terminal (keep backend running):**
 
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store-storefront
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store-storefront
 ```
 
 #### Check environment:
@@ -436,7 +436,7 @@ After completing all steps, verify:
 
 ### Admin Dashboard
 - [ ] Can access http://localhost:9000/app
-- [ ] Can login with admin@marqasouq.com
+- [ ] Can login with admin@naema.com
 - [ ] Dashboard loads successfully
 - [ ] Can see products list
 - [ ] Can create new product
@@ -481,7 +481,7 @@ info:    Admin dashboard: http://localhost:9000/app
 ### Browser Tab 1 (Admin):
 ```
 http://localhost:9000/app
-→ Logged in as admin@marqasouq.com
+→ Logged in as admin@naema.com
 → Can see dashboard with products
 ```
 
@@ -588,7 +588,7 @@ yarn seed
 cd backend/my-medusa-store
 
 # Create new admin user
-yarn medusa user --email admin@marqasouq.com --password admin123
+yarn medusa user --email admin@naema.com --password admin123
 
 # Or reset existing user (requires database access)
 psql -U marqa_user -d marqa_souq_dev
@@ -633,7 +633,7 @@ dropdb marqa_souq_dev
 createdb marqa_souq_dev
 
 # 4. Clean backend
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 rm -rf node_modules
 rm -rf .medusa
 yarn install
@@ -642,7 +642,7 @@ yarn install
 yarn medusa migrations run
 
 # 6. Create admin user
-yarn medusa user --email admin@marqasouq.com --password admin123
+yarn medusa user --email admin@naema.com --password admin123
 
 # 7. Seed data
 yarn seed
@@ -651,7 +651,7 @@ yarn seed
 yarn dev
 
 # 9. In new terminal, clean storefront
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store-storefront
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store-storefront
 rm -rf node_modules
 rm -rf .next
 yarn install
@@ -670,15 +670,15 @@ yarn dev
 
 ```bash
 # Terminal 1 - Backend
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 yarn dev
 
 # Terminal 2 - Storefront
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store-storefront
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store-storefront
 yarn dev
 
 # Terminal 3 - Commands
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 # Use for running commands like seed, migrations, etc.
 ```
 
@@ -688,7 +688,7 @@ cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-st
 - API: http://localhost:9000/store/products
 
 **Essential Credentials:**
-- Email: admin@marqasouq.com
+- Email: admin@naema.com
 - Password: admin123
 
 ---

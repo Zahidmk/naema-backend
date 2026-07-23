@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ============================================
-# MarqaSouq QUICK Frontend Deployment Script
+# naema QUICK Frontend Deployment Script
 # VPS: 72.61.240.40 (Hostinger)
 # Date: February 25, 2026
 # 
@@ -19,11 +19,11 @@ NC='\033[0m'
 
 echo ""
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║        MarqaSouq Quick Frontend Deployment                 ║${NC}"
+echo -e "${BLUE}║        naema Quick Frontend Deployment                 ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-FRONTEND_DIR="/var/www/marqa-souq/frontend/markasouq-web"
+FRONTEND_DIR="/var/www/naema/frontend/Naema-web"
 
 if [ ! -d "$FRONTEND_DIR" ]; then
     echo -e "${RED}✗ Frontend directory not found: $FRONTEND_DIR${NC}"
@@ -69,5 +69,5 @@ echo -e "${GREEN}╔════════════════════
 echo -e "${GREEN}║        Frontend Deployment Complete!                       ║${NC}"
 echo -e "${GREEN}╚════════════════════════════════════════════════════════════╝${NC}"
 echo ""
-echo "URL: https://website.markasouqs.com"
+echo "URL: https://website.naemafoodstuff.com"
 echo ""

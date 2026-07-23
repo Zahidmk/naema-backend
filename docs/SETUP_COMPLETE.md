@@ -14,7 +14,7 @@
 - **Status**: Configured and migrated ✅
 
 ### Admin User
-- **Email**: admin@marqasouq.com
+- **Email**: admin@naema.com
 - **Password**: admin123
 - **Status**: Created ✅
 
@@ -34,7 +34,7 @@ http://localhost:9000/app
 ```
 
 Login with:
-- Email: `admin@marqasouq.com`
+- Email: `admin@naema.com`
 - Password: `admin123`
 
 **Expected Result**: You should see the Medusa admin dashboard with sample products
@@ -58,7 +58,7 @@ curl http://localhost:9000/store/products
 Open a **NEW terminal** (keep backend running) and run:
 
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store-storefront
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store-storefront
 
 # Install dependencies
 yarn install
@@ -77,14 +77,14 @@ You need **2 terminals running**:
 
 ### Terminal 1: Backend (ALREADY RUNNING ✅)
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 yarn dev
 ```
 **Status**: ✅ Running on port 9000
 
 ### Terminal 2: Storefront (START THIS NEXT)
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store-storefront
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store-storefront
 yarn install
 yarn dev
 ```
@@ -109,7 +109,7 @@ lsof -i :9000
 ```
 
 ### Can't Login to Admin
-- Make sure you're using: `admin@marqasouq.com` / `admin123`
+- Make sure you're using: `admin@naema.com` / `admin123`
 - Clear browser cookies/cache
 - Try incognito/private window
 

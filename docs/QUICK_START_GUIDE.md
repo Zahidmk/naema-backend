@@ -14,7 +14,7 @@ Open 3 terminal windows:
 
 **Terminal 1 - Backend:**
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 yarn dev
 ```
 
@@ -22,7 +22,7 @@ yarn dev
 
 **Terminal 2 - Storefront:**
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store-storefront
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store-storefront
 yarn dev
 ```
 
@@ -30,10 +30,10 @@ yarn dev
 
 **Terminal 3 - Commands:**
 ```bash
-cd /Users/muhammedshakirva/Sygmetiv-works/marqa-souq/medusa/backend/my-medusa-store
+cd /Users/muhammedshakirva/Sygmetiv-works/naema/medusa/backend/my-medusa-store
 
 # Create admin user (if not done)
-yarn medusa user --email admin@marqasouq.com --password admin123
+yarn medusa user --email admin@naema.com --password admin123
 
 # Seed sample data
 yarn seed
@@ -43,7 +43,7 @@ yarn seed
 
 1. **Admin Dashboard:**
    - Open: http://localhost:9000/app
-   - Login: `admin@marqasouq.com` / `admin123`
+   - Login: `admin@naema.com` / `admin123`
    - Check: Can you see products, orders, customers?
 
 2. **Storefront:**
@@ -639,7 +639,7 @@ End of Day:
 
 - **MedusaJS Discord:** https://discord.gg/medusajs
 - **Documentation:** https://docs.medusajs.com
-- **Team Slack:** #marqa-souq-dev
+- **Team Slack:** #naema-dev
 - **Project Wiki:** [Your wiki link]
 
 ---
