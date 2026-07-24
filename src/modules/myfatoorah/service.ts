@@ -10,9 +10,9 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
 
   protected client: MyFatoorahClient
 
-  constructor(container: any) {
-    super(container)
-    this.client = new MyFatoorahClient()
+  constructor(container: any, options: any) {
+    super(container, options)
+    this.client = new MyFatoorahClient(options)
   }
 
   async getPaymentStatus(input: any): Promise<any> {

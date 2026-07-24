@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios"
-import config from "./config"
 import { MYFATOORAH_API } from "./constants"
 import {
   ExecutePaymentRequest,
@@ -13,11 +12,14 @@ import {
 export class MyFatoorahClient {
   private client: AxiosInstance
 
-  constructor() {
+  constructor(options?: { apiKey?: string; baseUrl?: string }) {
+    const apiKey = options?.apiKey || process.env.MYFATOORAH_API_KEY || ""
+    const baseUrl = options?.baseUrl || process.env.MYFATOORAH_API_URL || "https://apitest.myfatoorah.com"
+
     this.client = axios.create({
-      baseURL: config.baseUrl,
+      baseURL: baseUrl,
       headers: {
-        Authorization: `Bearer ${config.apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
     })

@@ -69,7 +69,10 @@ export default defineConfig({
           {
             resolve: "./src/modules/myfatoorah",
             id: "myfatoorah",
-            options: {},
+            options: {
+              apiKey: process.env.MYFATOORAH_API_KEY,
+              baseUrl: process.env.MYFATOORAH_API_URL || "https://apitest.myfatoorah.com",
+            },
           },
         ],
       },
