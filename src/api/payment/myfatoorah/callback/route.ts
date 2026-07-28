@@ -7,7 +7,7 @@ export async function GET(
   req: MedusaRequest,
   res: MedusaResponse
 ): Promise<void> {
-  const storeUrl = process.env.STORE_URL || "http://localhost:8000"
+  const storeUrl = process.env.STORE_URL || process.env.FRONTEND_URL || "https://naemafoodstuff.com"
   const { paymentId, Id, payment_id, invoiceId, invoice_id } = req.query
   
   const paymentRef = (paymentId || Id || payment_id) as string
@@ -72,4 +72,11 @@ export async function GET(
     console.error("[MyFatoorah Callback Error]", error.message || error)
     res.redirect(302, `${storeUrl}/checkout?error=payment_failed`)
   }
+}
+
+export async function POST(
+  req: MedusaRequest,
+  res: MedusaResponse
+): Promise<void> {
+  return GET(req, res)
 }
