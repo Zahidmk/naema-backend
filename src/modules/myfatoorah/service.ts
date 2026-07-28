@@ -45,16 +45,19 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
     const { amount, currency_code, context } = input
 
     try {
-      // Medusa sends amount in smallest units. KWD has 3 decimals.
+      // Canonical production architecture: DB amounts are stored in smallest currency units (Fils for KWD, Cents for USD).
+      const numAmount = Number(amount) || 0
       const is3Decimals = ["kwd", "bhd", "omr"].includes(currency_code?.toLowerCase())
       const divisor = is3Decimals ? 1000 : 100
-      const invoiceValue = Number(amount) / divisor
+      const invoiceValue = numAmount / divisor
 
+      const backendUrl = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
       const payload = {
+        PaymentMethodId: context?.payment_method_id || context?.data?.payment_method_id || 2,
         InvoiceValue: invoiceValue,
-        DisplayCurrencyIso: currency_code?.toUpperCase() || "USD",
-        CallBackUrl: context?.callback_url as string || "http://localhost:9000/api/payment/myfatoorah/callback",
-        ErrorUrl: context?.error_url as string || "http://localhost:9000/api/payment/myfatoorah/callback",
+        DisplayCurrencyIso: currency_code?.toUpperCase() || "KWD",
+        CallBackUrl: context?.callback_url as string || `${backendUrl}/api/payment/myfatoorah/callback`,
+        ErrorUrl: context?.error_url as string || `${backendUrl}/api/payment/myfatoorah/callback`,
         CustomerName: context?.customer?.first_name 
           ? `${context.customer.first_name} ${context.customer.last_name || ''}`.trim() 
           : "Guest",

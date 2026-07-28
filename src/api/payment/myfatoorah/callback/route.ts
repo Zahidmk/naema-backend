@@ -7,49 +7,69 @@ export async function GET(
   req: MedusaRequest,
   res: MedusaResponse
 ): Promise<void> {
-  const { paymentId, Id } = req.query
+  const storeUrl = process.env.STORE_URL || "http://localhost:8000"
+  const { paymentId, Id, payment_id, invoiceId, invoice_id } = req.query
   
-  const referenceId = (paymentId || Id) as string
+  const paymentRef = (paymentId || Id || payment_id) as string
+  const invoiceRef = (invoiceId || invoice_id) as string
 
-  if (!referenceId) {
-    res.redirect(302, `${process.env.STORE_URL}/checkout?error=missing_payment_id`)
+  if (!paymentRef && !invoiceRef) {
+    console.error("[MyFatoorah Callback] Missing paymentId or invoiceId in query params:", req.query)
+    res.redirect(302, `${storeUrl}/checkout?error=missing_payment_id`)
     return
   }
 
   try {
     const client = new MyFatoorahClient()
-    const statusData = await client.getPaymentStatus({
-      Key: referenceId,
-      KeyType: "PaymentId"
+    const statusData = paymentRef 
+      ? await client.getPaymentStatus({ Key: paymentRef, KeyType: "PaymentId" })
+      : await client.getPaymentStatus({ Key: invoiceRef, KeyType: "InvoiceId" })
+
+    console.log(`[MyFatoorah Callback] Status retrieved for Key=${paymentRef || invoiceRef}:`, {
+      InvoiceStatus: statusData.InvoiceStatus,
+      InvoiceId: statusData.InvoiceId,
+      UserDefinedField: statusData.UserDefinedField
     })
 
     const cartId = statusData.UserDefinedField
 
     if (!cartId) {
-      console.error("MyFatoorah Callback Error: Missing cart_id in UserDefinedField")
-      res.redirect(302, `${process.env.STORE_URL}/checkout?error=payment_failed_missing_cart`)
+      console.error("[MyFatoorah Callback Error] Missing cart_id in UserDefinedField:", statusData)
+      res.redirect(302, `${storeUrl}/checkout?error=payment_failed_missing_cart`)
       return
     }
 
     if (statusData.InvoiceStatus === "Paid") {
-      // In Medusa v2, payment providers generally update the session status when getPaymentStatus is called
-      // Since we just verified it manually via the client here, we can proceed to complete the cart.
-      // The completeCartWorkflow will validate that the cart is fully paid by calling authorizePayment internally if needed.
-      
-      const { result } = await completeCartWorkflow(req.scope).run({
-        input: { id: cartId },
-      })
+      try {
+        const { result } = await completeCartWorkflow(req.scope).run({
+          input: { id: cartId },
+        })
 
-      // The order should now be created
-      res.redirect(302, `${process.env.STORE_URL}/checkout?step=review&order_id=${result.id}`)
-      return
+        console.log(`[MyFatoorah Callback] Order created successfully: ${result.id}`)
+        res.redirect(302, `${storeUrl}/checkout?step=review&order_id=${result.id}`)
+        return
+      } catch (completeError: any) {
+        console.warn("[MyFatoorah Callback] completeCartWorkflow error (checking if cart already completed):", completeError.message)
+        
+        // Try looking up order for this cart
+        const orderService = req.scope.resolve(Modules.ORDER)
+        const [orders] = await orderService.listAndCountOrders({ cart_id: cartId } as any)
+        
+        if (orders && orders.length > 0) {
+          console.log(`[MyFatoorah Callback] Existing order found: ${orders[0].id}`)
+          res.redirect(302, `${storeUrl}/checkout?step=review&order_id=${orders[0].id}`)
+          return
+        }
+
+        throw completeError
+      }
     } else {
-      console.error("MyFatoorah Callback: Payment not paid", statusData)
-      res.redirect(302, `${process.env.STORE_URL}/checkout?error=payment_not_paid`)
+      console.error(`[MyFatoorah Callback] Payment status is not Paid: ${statusData.InvoiceStatus}`, statusData)
+      res.redirect(302, `${storeUrl}/checkout?error=payment_not_paid&status=${statusData.InvoiceStatus}`)
     }
 
-  } catch (error) {
-    console.error("MyFatoorah Callback Error:", error)
-    res.redirect(302, `${process.env.STORE_URL}/checkout?error=payment_failed`)
+  } catch (error: any) {
+    console.error("[MyFatoorah Callback Error]", error.message || error)
+    res.redirect(302, `${storeUrl}/checkout?error=payment_failed`)
   }
 }
