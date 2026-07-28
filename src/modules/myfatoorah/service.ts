@@ -45,20 +45,16 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
     const { amount, currency_code, context } = input
 
     try {
-      // In Medusa v2, cart amounts are stored in standard currency units (e.g. 2.5 KWD or 3.5 KWD).
-      // Handle both standard KWD amounts and legacy sub-unit amounts in fils.
-      const numAmount = Number(amount) || 0
-      const is3Decimals = ["kwd", "bhd", "omr"].includes(currency_code?.toLowerCase())
-      let invoiceValue = numAmount
-      if (is3Decimals) {
-        if (invoiceValue >= 100) {
-          invoiceValue = invoiceValue / 1000
-        }
-      } else {
-        if (invoiceValue >= 1000) {
-          invoiceValue = invoiceValue / 100
-        }
-      }
+      console.log("=== MyFatoorah Input ===");
+      console.log({
+        amount,
+        currency_code,
+      });
+
+      // In Medusa v2, payment amount is already in standard currency units (e.g. 2.5 KWD)
+      const invoiceValue = Number(amount) || 0
+
+      console.log("InvoiceValue sent to MyFatoorah:", invoiceValue);
 
       const backendUrl = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
       const payload = {
@@ -73,6 +69,8 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
         CustomerEmail: context?.customer?.email || context?.email || "guest@example.com",
         UserDefinedField: context?.resource_id || context?.cart_id || context?.id || "",
       }
+
+      console.log("=== MyFatoorah Payload ===", JSON.stringify(payload, null, 2))
 
       const response = await this.client.executePayment(payload)
 
