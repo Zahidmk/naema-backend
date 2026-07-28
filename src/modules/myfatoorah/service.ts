@@ -56,18 +56,36 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
 
       console.log("InvoiceValue sent to MyFatoorah:", invoiceValue);
 
+      // Extract cart_id from all possible Medusa input/context properties
+      const cartId = (
+        input.cart_id ||
+        context?.cart_id ||
+        context?.cart?.id ||
+        context?.resource_id ||
+        context?.id ||
+        input.id ||
+        ""
+      )
+
+      console.log("Resolved Cart ID for MyFatoorah:", cartId)
+
       const backendUrl = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
+      const baseCallback = context?.callback_url as string || `${backendUrl}/api/payment/myfatoorah/callback`
+      const callBackUrlWithCart = cartId 
+        ? (baseCallback.includes("?") ? `${baseCallback}&cart_id=${cartId}` : `${baseCallback}?cart_id=${cartId}`)
+        : baseCallback
+
       const payload = {
         PaymentMethodId: context?.payment_method_id || context?.data?.payment_method_id || 2,
         InvoiceValue: invoiceValue,
         DisplayCurrencyIso: currency_code?.toUpperCase() || "KWD",
-        CallBackUrl: context?.callback_url as string || `${backendUrl}/api/payment/myfatoorah/callback`,
-        ErrorUrl: context?.error_url as string || `${backendUrl}/api/payment/myfatoorah/callback`,
+        CallBackUrl: callBackUrlWithCart,
+        ErrorUrl: callBackUrlWithCart,
         CustomerName: context?.customer?.first_name 
           ? `${context.customer.first_name} ${context.customer.last_name || ''}`.trim() 
           : "Guest",
         CustomerEmail: context?.customer?.email || context?.email || "guest@example.com",
-        UserDefinedField: context?.resource_id || context?.cart_id || context?.id || "",
+        UserDefinedField: cartId,
       }
 
       console.log("=== MyFatoorah Payload ===", JSON.stringify(payload, null, 2))

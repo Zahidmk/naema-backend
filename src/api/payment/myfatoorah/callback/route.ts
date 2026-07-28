@@ -8,10 +8,13 @@ export async function GET(
   res: MedusaResponse
 ): Promise<void> {
   const storeUrl = process.env.STORE_URL || process.env.FRONTEND_URL || "https://naemafoodstuff.com"
-  const { paymentId, Id, payment_id, invoiceId, invoice_id } = req.query
+  const { paymentId, Id, payment_id, invoiceId, invoice_id, cart_id, cartId: cartIdQuery } = req.query
   
   const paymentRef = (paymentId || Id || payment_id) as string
   const invoiceRef = (invoiceId || invoice_id) as string
+
+  console.log("=== MyFatoorah Callback Received ===")
+  console.log("Query Parameters:", req.query)
 
   if (!paymentRef && !invoiceRef) {
     console.error("[MyFatoorah Callback] Missing paymentId or invoiceId in query params:", req.query)
@@ -25,38 +28,42 @@ export async function GET(
       ? await client.getPaymentStatus({ Key: paymentRef, KeyType: "PaymentId" })
       : await client.getPaymentStatus({ Key: invoiceRef, KeyType: "InvoiceId" })
 
-    console.log(`[MyFatoorah Callback] Status retrieved for Key=${paymentRef || invoiceRef}:`, {
+    console.log(`[MyFatoorah Callback] Payment Status Data:`, {
       InvoiceStatus: statusData.InvoiceStatus,
       InvoiceId: statusData.InvoiceId,
       UserDefinedField: statusData.UserDefinedField
     })
 
-    const cartId = statusData.UserDefinedField
+    const resolvedCartId = ((cart_id || cartIdQuery || statusData.UserDefinedField) as string)?.trim()
 
-    if (!cartId) {
-      console.error("[MyFatoorah Callback Error] Missing cart_id in UserDefinedField:", statusData)
+    console.log("Resolved Cart ID:", resolvedCartId)
+
+    if (!resolvedCartId) {
+      console.error("[MyFatoorah Callback Error] Missing cart_id in query params or UserDefinedField:", statusData)
       res.redirect(302, `${storeUrl}/checkout?error=payment_failed_missing_cart`)
       return
     }
 
     if (statusData.InvoiceStatus === "Paid") {
       try {
+        console.log(`Completing Medusa cart ${resolvedCartId}...`)
         const { result } = await completeCartWorkflow(req.scope).run({
-          input: { id: cartId },
+          input: { id: resolvedCartId },
         })
 
-        console.log(`[MyFatoorah Callback] Order created successfully: ${result.id}`)
-        res.redirect(302, `${storeUrl}/checkout?step=review&order_id=${result.id}`)
+        const orderId = result?.id || (result as any)?.order?.id
+        console.log(`[MyFatoorah Callback] Order created successfully: ${orderId}`)
+        res.redirect(302, `${storeUrl}/checkout?step=review&order_id=${orderId}`)
         return
       } catch (completeError: any) {
-        console.warn("[MyFatoorah Callback] completeCartWorkflow error (checking if cart already completed):", completeError.message)
+        console.warn("[MyFatoorah Callback] completeCartWorkflow notice (checking existing order):", completeError.message)
         
         // Try looking up order for this cart
         const orderService = req.scope.resolve(Modules.ORDER)
-        const [orders] = await orderService.listAndCountOrders({ cart_id: cartId } as any)
+        const [orders] = await orderService.listAndCountOrders({ cart_id: resolvedCartId } as any)
         
         if (orders && orders.length > 0) {
-          console.log(`[MyFatoorah Callback] Existing order found: ${orders[0].id}`)
+          console.log(`[MyFatoorah Callback] Existing order found for cart: ${orders[0].id}`)
           res.redirect(302, `${storeUrl}/checkout?step=review&order_id=${orders[0].id}`)
           return
         }
