@@ -1,7 +1,12 @@
 node_modules/
 .env
 .env.local
+.env.*
 dist/
 .build/
+build/
+.medusa/
+public/admin/
 uploads/
 *.sqlite
+
