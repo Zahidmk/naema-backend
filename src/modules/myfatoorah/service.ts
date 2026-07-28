@@ -45,11 +45,20 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
     const { amount, currency_code, context } = input
 
     try {
-      // Canonical production architecture: DB amounts are stored in smallest currency units (Fils for KWD, Cents for USD).
+      // In Medusa v2, cart amounts are stored in standard currency units (e.g. 2.5 KWD or 3.5 KWD).
+      // Handle both standard KWD amounts and legacy sub-unit amounts in fils.
       const numAmount = Number(amount) || 0
       const is3Decimals = ["kwd", "bhd", "omr"].includes(currency_code?.toLowerCase())
-      const divisor = is3Decimals ? 1000 : 100
-      const invoiceValue = numAmount / divisor
+      let invoiceValue = numAmount
+      if (is3Decimals) {
+        if (invoiceValue >= 100) {
+          invoiceValue = invoiceValue / 1000
+        }
+      } else {
+        if (invoiceValue >= 1000) {
+          invoiceValue = invoiceValue / 100
+        }
+      }
 
       const backendUrl = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
       const payload = {
