@@ -1,8 +1,8 @@
 {
-  "name": "marqa-souq-backend",
+  "name": "naema-backend",
   "version": "0.0.1",
-  "description": "Marqa Souq E-Commerce Backend - Built with MedusaJS",
-  "author": "Marqa Souq Team",
+  "description": "naema E-Commerce Backend - Built with MedusaJS",
+  "author": "naema Team",
   "license": "MIT",
   "keywords": [
     "sqlite",

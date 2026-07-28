@@ -76,7 +76,7 @@ You have the right to:
 
 **6. Contact Us**
 For privacy-related inquiries, contact us at:
-Email: privacy@markasouqs.com
+Email: privacy@naemafoodstuff.com
 Phone: +965 XXXX XXXX`,
             content_ar: "سياسة الخصوصية - ماركة سوق\n\nنحن نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية.",
             updated_at: "2026-01-01T00:00:00Z",
@@ -124,7 +124,7 @@ By using MarqaSouq, you agree to these terms and conditions. Please read them ca
 - Warranty claims should be directed to our customer service
 
 **8. Contact**
-Email: support@markasouqs.com
+Email: support@naemafoodstuff.com
 Phone: +965 XXXX XXXX`,
             content_ar: "الشروط والأحكام - ماركة سوق\n\nباستخدامك لماركة سوق، فإنك توافق على هذه الشروط والأحكام.",
             updated_at: "2026-01-01T00:00:00Z",
@@ -137,7 +137,7 @@ Phone: +965 XXXX XXXX`,
 
 - Returns accepted within 7 days of delivery
 - Product must be unused and in original packaging
-- Contact support@markasouqs.com to initiate a return
+- Contact support@naemafoodstuff.com to initiate a return
 - Refunds are processed within 5-7 business days
 - Shipping costs for returns are borne by the customer unless the product is defective`,
             content_ar: "سياسة الإرجاع - ماركة سوق",
@@ -163,7 +163,7 @@ Phone: +965 XXXX XXXX`,
             title_ar: "اتصل بنا",
             content: `**Contact MarqaSouq**
 
-Email: support@markasouqs.com
+Email: support@naemafoodstuff.com
 Phone: +965 XXXX XXXX
 WhatsApp: +965 XXXX XXXX
 

@@ -23,6 +23,7 @@ export async function GET(
   }
 
   try {
+    console.log("=== STEP 1: Calling getPaymentStatus ===")
     const client = new MyFatoorahClient()
     const statusData = paymentRef 
       ? await client.getPaymentStatus({ Key: paymentRef, KeyType: "PaymentId" })
@@ -40,43 +41,51 @@ export async function GET(
 
     if (!resolvedCartId) {
       console.error("[MyFatoorah Callback Error] Missing cart_id in query params or UserDefinedField:", statusData)
+      console.log("=== STEP 5: Redirecting to missing cart error ===")
       res.redirect(302, `${storeUrl}/checkout?error=payment_failed_missing_cart`)
       return
     }
 
     if (statusData.InvoiceStatus === "Paid") {
       try {
-        console.log(`Completing Medusa cart ${resolvedCartId}...`)
+        console.log(`=== STEP 2: Running completeCartWorkflow for cart ${resolvedCartId} ===`)
         const { result } = await completeCartWorkflow(req.scope).run({
           input: { id: resolvedCartId },
         })
 
         const orderId = result?.id || (result as any)?.order?.id
         console.log(`[MyFatoorah Callback] Order created successfully: ${orderId}`)
+        console.log("=== STEP 5: Redirecting to order success page ===")
         res.redirect(302, `${storeUrl}/checkout?step=review&order_id=${orderId}`)
         return
       } catch (completeError: any) {
-        console.warn("[MyFatoorah Callback] completeCartWorkflow notice (checking existing order):", completeError.message)
+        console.log("=== STEP 3: Inside catch (completeError) ===")
+        console.error("completeCartWorkflow Error Stack:", completeError.stack ?? completeError)
         
-        // Try looking up order for this cart
+        console.log("=== STEP 4: Calling listAndCountOrders ===")
         const orderService = req.scope.resolve(Modules.ORDER)
         const [orders] = await orderService.listAndCountOrders({ cart_id: resolvedCartId } as any)
         
         if (orders && orders.length > 0) {
           console.log(`[MyFatoorah Callback] Existing order found for cart: ${orders[0].id}`)
+          console.log("=== STEP 5: Redirecting to existing order success page ===")
           res.redirect(302, `${storeUrl}/checkout?step=review&order_id=${orders[0].id}`)
           return
         }
 
+        console.log("=== STEP 5: Throwing completeError to outer handler ===")
         throw completeError
       }
     } else {
       console.error(`[MyFatoorah Callback] Payment status is not Paid: ${statusData.InvoiceStatus}`, statusData)
+      console.log("=== STEP 5: Redirecting to payment not paid error ===")
       res.redirect(302, `${storeUrl}/checkout?error=payment_not_paid&status=${statusData.InvoiceStatus}`)
     }
 
   } catch (error: any) {
-    console.error("[MyFatoorah Callback Error]", error.message || error)
+    console.error("=== MyFatoorah Callback Outer Error Stack ===")
+    console.error(error.stack ?? error)
+    console.log("=== STEP 5: Redirecting to general payment failed error ===")
     res.redirect(302, `${storeUrl}/checkout?error=payment_failed`)
   }
 }
