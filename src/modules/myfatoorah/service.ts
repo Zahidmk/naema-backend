@@ -13,7 +13,11 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
 
   constructor(container: any, options: any) {
     super(container, options)
+
     this.container = container
+
+    console.log("Container keys:", Object.keys(this.container))
+
     this.client = new MyFatoorahClient(options)
   }
 
@@ -72,7 +76,10 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
         ""
       )
 
-      const sessionId = data?.session_id || context?.idempotency_key
+      console.log("session_id:", data?.session_id)
+      console.log("idempotency_key:", context?.idempotency_key)
+
+      const sessionId = data?.session_id
 
       if (!cartId && sessionId && this.container) {
         try {
@@ -81,6 +88,12 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
           const query = this.container[ContainerRegistrationKeys.QUERY] || 
                         this.container.query || 
                         (typeof this.container.resolve === "function" ? this.container.resolve(ContainerRegistrationKeys.QUERY) : this.container.__container__?.resolve(ContainerRegistrationKeys.QUERY))
+
+          console.log(
+            "Query service exists:",
+            !!this.container.query,
+            !!this.container.__container__
+          );
 
           if (query) {
             const { data: sessions } = await query.graph({
@@ -108,11 +121,17 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
               .select("payment_collection_id")
               .first()
 
+            console.log("Session row:");
+            console.dir(sessionRow, { depth: null });
+
             if (sessionRow?.payment_collection_id) {
               const linkRow = await pg("cart_payment_collection")
                 .where({ payment_collection_id: sessionRow.payment_collection_id })
                 .select("cart_id")
                 .first()
+
+              console.log("Cart link row:");
+              console.dir(linkRow, { depth: null });
 
               if (linkRow?.cart_id) {
                 cartId = linkRow.cart_id
