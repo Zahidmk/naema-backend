@@ -10,6 +10,7 @@ export interface ExecutePaymentRequest {
   ErrorUrl: string;
   Language?: string;
   CustomerReference?: string;
+  UserDefinedField?: string;
 }
 
 export interface ExecutePaymentResponse {

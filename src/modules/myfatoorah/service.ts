@@ -45,11 +45,23 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
     const { amount, currency_code, context } = input
 
     try {
-      console.log("=== MyFatoorah initiatePayment Started ===");
-      console.log("FULL INPUT:");
-      console.dir(input, { depth: null });
-      console.log("FULL CONTEXT:");
-      console.dir(context, { depth: null });
+      console.log("=================================");
+console.log("INITIATE PAYMENT");
+console.log("=================================");
+
+console.log("INPUT:");
+console.dir(input, { depth: null });
+
+console.log("CONTEXT:");
+console.dir(context, { depth: null });
+
+console.log("INPUT KEYS:", Object.keys(input));
+
+if (context) {
+  console.log("CONTEXT KEYS:", Object.keys(context));
+}
+
+console.log("=================================");
 
       // In Medusa v2, payment amount is stored in standard currency units or Fils
       const numAmount = Number(amount) || 0
