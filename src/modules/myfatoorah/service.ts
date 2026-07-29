@@ -57,6 +57,12 @@ console.dir(context, { depth: null });
 
 console.log("INPUT KEYS:", Object.keys(input));
 
+console.log("INPUT JSON");
+console.log(JSON.stringify(input, null, 2));
+
+console.log("CONTEXT JSON");
+console.log(JSON.stringify(context, null, 2));
+
 if (context) {
   console.log("CONTEXT KEYS:", Object.keys(context));
 }
