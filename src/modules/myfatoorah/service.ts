@@ -77,7 +77,11 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
       if (!cartId && sessionId && this.container) {
         try {
           const { ContainerRegistrationKeys } = await import("@medusajs/framework/utils")
-          const query = this.container.resolve(ContainerRegistrationKeys.QUERY) || this.container.resolve("query")
+          // In Awilix DI, constructor receives cradle proxy. Accessing cradle property directly resolves the service.
+          const query = this.container[ContainerRegistrationKeys.QUERY] || 
+                        this.container.query || 
+                        (typeof this.container.resolve === "function" ? this.container.resolve(ContainerRegistrationKeys.QUERY) : this.container.__container__?.resolve(ContainerRegistrationKeys.QUERY))
+
           if (query) {
             const { data: sessions } = await query.graph({
               entity: "payment_session",
@@ -94,7 +98,10 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
       if (!cartId && sessionId && this.container) {
         try {
           const { ContainerRegistrationKeys } = await import("@medusajs/framework/utils")
-          const pg = this.container.resolve(ContainerRegistrationKeys.PG_CONNECTION)
+          const pg = this.container[ContainerRegistrationKeys.PG_CONNECTION] || 
+                     this.container.pgConnection || 
+                     (typeof this.container.resolve === "function" ? this.container.resolve(ContainerRegistrationKeys.PG_CONNECTION) : this.container.__container__?.resolve(ContainerRegistrationKeys.PG_CONNECTION))
+
           if (pg) {
             const sessionRow = await pg("payment_session")
               .where({ id: sessionId })
