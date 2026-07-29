@@ -9,9 +9,11 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
   static identifier = MYFATOORAH_PROVIDER_ID
 
   protected client: MyFatoorahClient
+  protected container: any
 
   constructor(container: any, options: any) {
     super(container, options)
+    this.container = container
     this.client = new MyFatoorahClient(options)
   }
 
@@ -42,32 +44,15 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
   }
 
   async initiatePayment(input: any): Promise<any> {
-    const { amount, currency_code, context } = input
+    const { amount, currency_code, context, data } = input
 
     try {
       console.log("=================================");
-console.log("INITIATE PAYMENT");
-console.log("=================================");
-
-console.log("INPUT:");
-console.dir(input, { depth: null });
-
-console.log("CONTEXT:");
-console.dir(context, { depth: null });
-
-console.log("INPUT KEYS:", Object.keys(input));
-
-console.log("INPUT JSON");
-console.log(JSON.stringify(input, null, 2));
-
-console.log("CONTEXT JSON");
-console.log(JSON.stringify(context, null, 2));
-
-if (context) {
-  console.log("CONTEXT KEYS:", Object.keys(context));
-}
-
-console.log("=================================");
+      console.log("INITIATE PAYMENT");
+      console.log("=================================");
+      console.log("INPUT DATA:", JSON.stringify(data, null, 2));
+      console.log("CONTEXT:", JSON.stringify(context, null, 2));
+      console.log("=================================");
 
       // In Medusa v2, payment amount is stored in standard currency units or Fils
       const numAmount = Number(amount) || 0
@@ -75,8 +60,8 @@ console.log("=================================");
 
       console.log("InvoiceValue sent to MyFatoorah:", invoiceValue);
 
-      // Extract cart_id from all possible Medusa input/context properties
-      const cartId = (
+      // Extract cart_id from direct props or resolve via Medusa v2 PaymentSession / Remote Link graph
+      let cartId = (
         input.cart_id ||
         input.resource_id ||
         context?.cart_id ||
@@ -87,10 +72,56 @@ console.log("=================================");
         ""
       )
 
+      const sessionId = data?.session_id || context?.idempotency_key
+
+      if (!cartId && sessionId && this.container) {
+        try {
+          const { ContainerRegistrationKeys } = await import("@medusajs/framework/utils")
+          const query = this.container.resolve(ContainerRegistrationKeys.QUERY) || this.container.resolve("query")
+          if (query) {
+            const { data: sessions } = await query.graph({
+              entity: "payment_session",
+              fields: ["id", "payment_collection_id", "payment_collection.cart.id"],
+              filters: { id: sessionId },
+            })
+            cartId = sessions?.[0]?.payment_collection?.cart?.id || ""
+          }
+        } catch (err: any) {
+          console.warn("[MyFatoorah] Failed query graph lookup for session:", err?.message || err)
+        }
+      }
+
+      if (!cartId && sessionId && this.container) {
+        try {
+          const { ContainerRegistrationKeys } = await import("@medusajs/framework/utils")
+          const pg = this.container.resolve(ContainerRegistrationKeys.PG_CONNECTION)
+          if (pg) {
+            const sessionRow = await pg("payment_session")
+              .where({ id: sessionId })
+              .select("payment_collection_id")
+              .first()
+
+            if (sessionRow?.payment_collection_id) {
+              const linkRow = await pg("cart_payment_collection")
+                .where({ payment_collection_id: sessionRow.payment_collection_id })
+                .select("cart_id")
+                .first()
+
+              if (linkRow?.cart_id) {
+                cartId = linkRow.cart_id
+              }
+            }
+          }
+        } catch (err: any) {
+          console.warn("[MyFatoorah] Failed direct DB link lookup for session:", err?.message || err)
+        }
+      }
+
       console.log("Resolved Cart ID for MyFatoorah:", cartId)
 
       const backendUrl = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
-      const baseCallback = context?.callback_url as string || `${backendUrl}/api/payment/myfatoorah/callback`
+      // Medusa v2 mounts src/api/payment/myfatoorah/callback/route.ts at /payment/myfatoorah/callback (without /api)
+      const baseCallback = context?.callback_url as string || `${backendUrl}/payment/myfatoorah/callback`
       const callBackUrlWithCart = cartId 
         ? (baseCallback.includes("?") ? `${baseCallback}&cart_id=${cartId}` : `${baseCallback}?cart_id=${cartId}`)
         : baseCallback
