@@ -7,27 +7,35 @@ export async function GET(
   req: MedusaRequest,
   res: MedusaResponse
 ): Promise<void> {
+  console.log("========== [MyFatoorah] InitiatePayment Request ==========");
   try {
-    console.log("[MyFatoorah Methods Route] Incoming request");
-    const { amount, currency } = req.query
-    console.log("[MyFatoorah Methods Route] Query params:", { amount, currency });
+    const { amount, currency } = req.query;
+    console.log("[MyFatoorah] 1. Incoming Request Parameters:");
+    console.log("   - Amount:", amount);
+    console.log("   - Currency:", currency);
 
     if (!amount) {
-      console.error("[MyFatoorah Methods Route] Amount is missing from query params");
-      res.status(400).json({ message: "Amount is required" })
-      return
+      console.error("[MyFatoorah] Error: Amount is missing from query params");
+      res.status(400).json({ message: "Amount is required" });
+      return;
     }
 
-    const apiKey = process.env.MYFATOORAH_API_KEY || ""
-    const baseUrl = process.env.MYFATOORAH_API_URL || "https://apitest.myfatoorah.com"
+    const apiKey = process.env.MYFATOORAH_API_KEY || "";
+    const baseUrl = process.env.MYFATOORAH_API_URL || "https://apitest.myfatoorah.com";
+    
+    console.log("[MyFatoorah] 2. Configuration:");
+    console.log("   - Base API URL:", baseUrl);
+    console.log("   - API Key Exists:", apiKey ? `Yes (${apiKey.substring(0, 8)}...)` : "No");
 
     const payload = {
       InvoiceAmount: Number(amount),
       CurrencyIso: (currency as string) || "KWD",
-    }
-    console.log("[MyFatoorah Methods Route] Formatted Payload:", payload);
+    };
+    
+    console.log("[MyFatoorah] 3. Request Payload:");
+    console.dir(payload, { depth: null });
 
-    console.log(`[MyFatoorah Methods Route] Sending request to ${baseUrl}/v2/InitiatePayment`);
+    console.log(`[MyFatoorah] 4. Executing POST to ${baseUrl}/v2/InitiatePayment...`);
     const response = await axios.post(
       `${baseUrl}/v2/InitiatePayment`,
       payload,
@@ -37,20 +45,51 @@ export async function GET(
           "Content-Type": "application/json",
         },
       }
-    )
+    );
 
-    console.log("[MyFatoorah Methods Route] MyFatoorah Response Status:", response.status);
-    console.log("[MyFatoorah Methods Route] MyFatoorah Response Data:", JSON.stringify(response.data, null, 2));
+    console.log("[MyFatoorah] 5. Successful HTTP Response:");
+    console.log("   - HTTP Status:", response.status);
+    console.log("   - Complete Response Body:");
+    console.dir(response.data, { depth: null });
 
     if (response.data && response.data.IsSuccess) {
-      console.log("[MyFatoorah Methods Route] Success! Returning methods.");
-      res.status(200).json({ methods: response.data.Data.PaymentMethods })
+      console.log("[MyFatoorah] 6. Success! Returning PaymentMethods array.");
+      res.status(200).json({ methods: response.data.Data.PaymentMethods });
     } else {
-      console.error("[MyFatoorah Methods Route] MyFatoorah IsSuccess is false. Message:", response.data?.Message);
-      res.status(400).json({ message: response.data?.Message || "Failed to fetch payment methods" })
+      console.error("[MyFatoorah] 6. API Error (IsSuccess is false):");
+      console.error("   - Message:", response.data?.Message);
+      console.error("   - ValidationErrors:", response.data?.ValidationErrors);
+      
+      // Forward the exact error message and validation errors to the frontend
+      res.status(400).json({ 
+        message: response.data?.Message || "Failed to fetch payment methods",
+        validationErrors: response.data?.ValidationErrors
+      });
     }
   } catch (error: any) {
-    console.error("[MyFatoorah Methods Route] Axios/Network Error:", error.response?.data || error.message)
-    res.status(500).json({ message: error.message || "Internal Server Error" })
+    console.error("========== [MyFatoorah] Fetch Methods Error ==========");
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error("[MyFatoorah] HTTP Error Response Received:");
+      console.error("   - HTTP Status:", error.response.status);
+      console.error("   - Response Headers:", JSON.stringify(error.response.headers, null, 2));
+      console.error("   - Complete Response Body:");
+      console.dir(error.response.data, { depth: null });
+
+      // Return the actual MyFatoorah error response to the frontend
+      res.status(error.response.status).json({ 
+        message: error.response.data?.Message || error.message || "MyFatoorah API Error",
+        details: error.response.data
+      });
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error("[MyFatoorah] No response received from API:", error.request);
+      res.status(502).json({ message: "Bad Gateway - No response from MyFatoorah" });
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error("[MyFatoorah] Internal Request Setup Error:", error.message);
+      res.status(500).json({ message: error.message || "Internal Server Error" });
+    }
   }
 }
