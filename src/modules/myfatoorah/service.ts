@@ -76,72 +76,7 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
         ""
       )
 
-      console.log("session_id:", data?.session_id)
-      console.log("idempotency_key:", context?.idempotency_key)
-
-      const sessionId = data?.session_id
-
-      if (!cartId && sessionId && this.container) {
-        try {
-          const { ContainerRegistrationKeys } = await import("@medusajs/framework/utils")
-          // In Awilix DI, constructor receives cradle proxy. Accessing cradle property directly resolves the service.
-          const query = this.container[ContainerRegistrationKeys.QUERY] || 
-                        this.container.query || 
-                        (typeof this.container.resolve === "function" ? this.container.resolve(ContainerRegistrationKeys.QUERY) : this.container.__container__?.resolve(ContainerRegistrationKeys.QUERY))
-
-          console.log(
-            "Query service exists:",
-            !!this.container.query,
-            !!this.container.__container__
-          );
-
-          if (query) {
-            const { data: sessions } = await query.graph({
-              entity: "payment_session",
-              fields: ["id", "payment_collection_id", "payment_collection.cart.id"],
-              filters: { id: sessionId },
-            })
-            cartId = sessions?.[0]?.payment_collection?.cart?.id || ""
-          }
-        } catch (err: any) {
-          console.warn("[MyFatoorah] Failed query graph lookup for session:", err?.message || err)
-        }
-      }
-
-      if (!cartId && sessionId && this.container) {
-        try {
-          const { ContainerRegistrationKeys } = await import("@medusajs/framework/utils")
-          const pg = this.container[ContainerRegistrationKeys.PG_CONNECTION] || 
-                     this.container.pgConnection || 
-                     (typeof this.container.resolve === "function" ? this.container.resolve(ContainerRegistrationKeys.PG_CONNECTION) : this.container.__container__?.resolve(ContainerRegistrationKeys.PG_CONNECTION))
-
-          if (pg) {
-            const sessionRow = await pg("payment_session")
-              .where({ id: sessionId })
-              .select("payment_collection_id")
-              .first()
-
-            console.log("Session row:");
-            console.dir(sessionRow, { depth: null });
-
-            if (sessionRow?.payment_collection_id) {
-              const linkRow = await pg("cart_payment_collection")
-                .where({ payment_collection_id: sessionRow.payment_collection_id })
-                .select("cart_id")
-                .first()
-
-              console.log("Cart link row:");
-              console.dir(linkRow, { depth: null });
-
-              if (linkRow?.cart_id) {
-                cartId = linkRow.cart_id
-              }
-            }
-          }
-        } catch (err: any) {
-          console.warn("[MyFatoorah] Failed direct DB link lookup for session:", err?.message || err)
-        }
-      }
+      console.log("Cart ID before fallbacks:", cartId)
 
       console.log("Resolved Cart ID for MyFatoorah:", cartId)
 
