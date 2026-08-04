@@ -153,7 +153,7 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
         : baseCallback
 
       const payload = {
-        PaymentMethodId: context?.payment_method_id || context?.data?.payment_method_id || 2,
+        PaymentMethodId: data?.payment_method_id || context?.payment_method_id || context?.data?.payment_method_id || 2,
         InvoiceValue: invoiceValue,
         DisplayCurrencyIso: currency_code?.toUpperCase() || "KWD",
         CallBackUrl: callBackUrlWithCart,
