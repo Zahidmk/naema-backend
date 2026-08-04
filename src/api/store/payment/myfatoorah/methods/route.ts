@@ -23,10 +23,10 @@ export async function GET(
       CurrencyIso: (currency as string) || "KWD",
     }
 
-    // Call InitiateSession / InitiatePayment directly to fetch the methods
-    // MyFatoorah v2 InitiateSession gets payment methods based on invoice value
+    // Call InitiatePayment directly to fetch the methods
+    // MyFatoorah v2 InitiatePayment gets payment methods based on invoice value
     const response = await axios.post(
-      `${baseUrl}/v2/InitiateSession`,
+      `${baseUrl}/v2/InitiatePayment`,
       payload,
       {
         headers: {
