@@ -9,7 +9,20 @@ export async function GET(
 ): Promise<void> {
   console.log("========== [MyFatoorah] InitiatePayment Request ==========");
   try {
-    const { amount, currency } = req.query;
+    let amount = req.query.amount as string | undefined;
+    let currency = req.query.currency as string | undefined;
+
+    // Fallback if req.query is empty in this environment
+    if (!amount && req.url) {
+      try {
+        const urlObj = new URL(req.url, `http://${req.headers.host || "localhost"}`);
+        amount = urlObj.searchParams.get("amount") || undefined;
+        currency = urlObj.searchParams.get("currency") || currency;
+      } catch (e) {
+        // Ignore URL parsing errors
+      }
+    }
+
     console.log("[MyFatoorah] 1. Incoming Request Parameters:");
     console.log("   - Amount:", amount);
     console.log("   - Currency:", currency);
