@@ -53,14 +53,14 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
     const { amount, currency_code, context, data } = input
 
     try {
-      console.log("========== INPUT ==========")
-      console.dir(input, { depth: null })
+      console.log("========== FULL INPUT ==========");
+      console.dir(input, { depth: null });
 
-      console.log("========== CONTEXT ==========")
-      console.dir(context, { depth: null })
+      console.log("========== FULL CONTEXT ==========");
+      console.dir(context, { depth: null });
 
-      console.log("========== DATA ==========")
-      console.dir(data, { depth: null })
+      console.log("========== FULL DATA ==========");
+      console.dir(data, { depth: null });
 
       // In Medusa v2, payment amount is stored in standard currency units or Fils
       const numAmount = Number(amount) || 0
@@ -80,9 +80,8 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
         ""
       )
 
-      console.log("Cart ID before fallbacks:", cartId)
-
-      console.log("Resolved Cart ID for MyFatoorah:", cartId)
+      console.log("========== RESOLVED CART ID ==========");
+      console.log(cartId);
 
       const backendUrl = process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"
       // Medusa v2 mounts src/api/payment/myfatoorah/callback/route.ts at /payment/myfatoorah/callback (without /api)
