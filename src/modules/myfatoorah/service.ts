@@ -70,6 +70,7 @@ export class MyFatoorahProviderService extends AbstractPaymentProvider<any> {
 
       // Extract cart_id from direct props or resolve via Medusa v2 PaymentSession / Remote Link graph
       let cartId = (
+        input.data?.cart_id ||
         input.cart_id ||
         input.resource_id ||
         context?.cart_id ||
