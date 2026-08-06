@@ -8,6 +8,13 @@ export async function GET(
   res: MedusaResponse
 ): Promise<void> {
   console.log("========== [MyFatoorah] InitiatePayment Request ==========");
+  console.log("===== MYFATOORAH CONFIG =====");
+  console.log("API URL:", process.env.MYFATOORAH_API_URL);
+  console.log(
+    "API KEY:",
+    process.env.MYFATOORAH_API_KEY?.substring(0, 15) + "..."
+  );
+  console.log("=============================");
   try {
     let amount = req.query.amount as string | undefined;
     let currency = req.query.currency as string | undefined;
